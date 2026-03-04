@@ -131,12 +131,12 @@
     .about-wrap { border-top: 1px solid rgba(186,186,185,0.08); }
     .about-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
     .about-timeline { margin-top: 52px; }
-    .timeline-item { display: grid; grid-template-columns: 64px 1fr; gap: 0 20px; position: relative; padding-bottom: 32px; }
-    .timeline-item::before { content: ''; position: absolute; left: 30px; top: 30px; bottom: 0; width: 1px; background: rgba(186,186,185,0.12); }
+    .timeline-item { display: grid; grid-template-columns: 56px 36px 1fr; gap: 0; position: relative; padding-bottom: 32px; }
+    .timeline-item::before { content: ''; position: absolute; left: 83px; top: 20px; bottom: 0; width: 1px; background: rgba(186,186,185,0.12); }
     .timeline-item:last-child::before { display: none; }
-    .timeline-year { font-family: var(--sans); font-size: 10px; font-weight: 700; color: var(--gold); padding-top: 3px; text-align: right; }
-    .timeline-dot { position: absolute; left: 22px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid rgba(201,169,110,0.5); background: var(--navy); }
-    .timeline-milestone { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--gray); padding-left: 10px; }
+    .timeline-year { font-family: var(--sans); font-size: 10px; font-weight: 700; color: var(--gold); padding-top: 3px; text-align: right; padding-right: 12px; }
+    .timeline-dot { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid rgba(201,169,110,0.5); background: var(--navy); margin-top: 3px; margin-left: 10px; flex-shrink: 0; }
+    .timeline-milestone { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--gray); padding-left: 16px; }
     .timeline-milestone strong { color: var(--white); font-weight: 500; }
     .about-pillars { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
     .pillar { display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid rgba(186,186,185,0.1); }
@@ -384,15 +384,15 @@
         <h2 class="section-title">A decade of <em>extraordinary</em> growth.</h2>
         <p class="section-body">Founded in 2015 by Harry Morad and Joe Duncan, Pine Valley Investments has grown from a $30M startup into one of New Jersey's premier independent RIAs.</p>
         <div class="about-timeline">
-          <div class="timeline-item"><div class="timeline-year">2015</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px"><strong>PVI Founded</strong> — Harry Morad and Joe Duncan launch the firm, finishing year one with $30M AUM.</div></div></div>
-          <div class="timeline-item"><div class="timeline-year">2016</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px">Surpassed <strong>$100M AUM</strong>.</div></div></div>
-          <div class="timeline-item"><div class="timeline-year">2018</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px"><strong>Jon Markoe &amp; The Markoe Group</strong> join from Merrill Lynch.</div></div></div>
-          <div class="timeline-item"><div class="timeline-year">2020</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px">Surpassed <strong>$400M AUM</strong>.</div></div></div>
-          <div class="timeline-item"><div class="timeline-year">2021</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px"><strong>Kate Fay &amp; The Fay Group</strong> join from Girard Investment Partners.</div></div></div>
-          <div class="timeline-item"><div class="timeline-year">2022</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px">Launched <strong>PV Opportunity Fund, Series I</strong>. Chris O'Neill joins as CIO; Nick Lampone as CSO.</div></div></div>
-          <div class="timeline-item"><div class="timeline-year">2023</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px"><strong>Jim Vogt</strong> joins from Tower Bridge Advisors; <strong>Mark Magarian</strong> from Wells Fargo.</div></div></div>
-          <div class="timeline-item"><div class="timeline-year">2024</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px">Surpassed <strong>$1.5B AUM</strong>.</div></div></div>
-          <div class="timeline-item"><div class="timeline-year">2025</div><div style="position:relative"><div class="timeline-dot"></div><div class="timeline-milestone" style="padding-left:10px">Launched <strong>Magarian Fund, LP</strong>. Surpassed <strong>$2B AUM</strong>.</div></div></div>
+          <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>PVI Founded</strong> — Harry Morad and Joe Duncan launch the firm, finishing year one with $30M AUM.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2016</div><div class="timeline-dot"></div><div class="timeline-milestone">Surpassed <strong>$100M AUM</strong>.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2018</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>Jon Markoe &amp; The Markoe Group</strong> join from Merrill Lynch.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2020</div><div class="timeline-dot"></div><div class="timeline-milestone">Surpassed <strong>$400M AUM</strong>.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>Kate Fay &amp; The Fay Group</strong> join from Girard Investment Partners.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-dot"></div><div class="timeline-milestone">Launched <strong>PV Opportunity Fund, Series I</strong>. Chris O'Neill joins as CIO; Nick Lampone as CSO.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>Jim Vogt</strong> joins from Tower Bridge Advisors; <strong>Mark Magarian</strong> from Wells Fargo.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-dot"></div><div class="timeline-milestone">Surpassed <strong>$1.5B AUM</strong>.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-dot"></div><div class="timeline-milestone">Launched <strong>Magarian Fund, LP</strong>. Surpassed <strong>$2B AUM</strong>.</div></div>
         </div>
       </div>
       <div class="reveal reveal-delay-2">
@@ -543,13 +543,13 @@
       <h2 class="section-title">Let's discuss your<br><em>financial goals.</em></h2>
       <p class="section-body">Whether you're planning for retirement, managing a business transition, or building multigenerational wealth — we'd love to start the conversation.</p>
       <div class="cta-actions">
-        <a href="mailto:info@pinevalleyinvestments.com" class="btn-gold">Schedule a Consultation</a>
+        <a href="/cdn-cgi/l/email-protection#3851565e57784851565d4e5954545d4151564e5d4b4c555d564c4b165b5755" class="btn-gold">Schedule a Consultation</a>
         <a href="https://client.schwab.com" target="_blank" class="btn-outline">Client Login</a>
       </div>
       <div class="cta-contact">
         <div class="cta-contact-items">
           <a href="tel:8563348260" class="cta-contact-item"><span>📞</span> 856-334-8260</a>
-          <a href="mailto:info@pinevalleyinvestments.com" class="cta-contact-item"><span>✉</span> info@pinevalleyinvestments.com</a>
+          <a href="/cdn-cgi/l/email-protection#3e575058517e4e57505b485f52525b475750485b4d4a535b504a4d105d5153" class="cta-contact-item"><span>✉</span> <span class="__cf_email__" data-cfemail="bbd2d5ddd4fbcbd2d5decddad7d7dec2d2d5cddec8cfd6ded5cfc895d8d4d6">[email&#160;protected]</span></a>
           <a href="https://maps.google.com/?q=10+E+Stow+Rd+Suite+200+Marlton+NJ" target="_blank" class="cta-contact-item"><span>📍</span> 10 E Stow Rd, Suite 200, Marlton, NJ</a>
         </div>
       </div>
@@ -598,7 +598,7 @@
           <li><a href="#">Marlton, NJ 08053</a></li>
           <li><a href="tel:8563348260">856-334-8260</a></li>
           <li><a href="tel:8563562598">Fax: 856-356-2598</a></li>
-          <li><a href="mailto:info@pinevalleyinvestments.com">info@pinevalleyinvestments.com</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#b7ded9d1d8f7c7ded9d2c1d6dbdbd2ceded9c1d2c4c3dad2d9c3c499d4d8da"><span class="__cf_email__" data-cfemail="fb92959d94bb8b92959e8d9a97979e8292958d9e888f969e958f88d5989496">[email&#160;protected]</span></a></li>
           <li style="margin-top:12px"><a href="https://client.schwab.com" target="_blank">Client Login →</a></li>
         </ul>
       </div>
@@ -614,7 +614,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Nav scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
@@ -629,18 +629,4 @@
   });
   // Close mobile menu on link click
   mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      toggle.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+    link.addEventListener('click',
