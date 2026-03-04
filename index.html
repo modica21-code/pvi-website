@@ -37,26 +37,12 @@
       border-bottom: 1px solid rgba(186,186,185,0.1);
     }
     .nav-logo {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center;
       text-decoration: none;
     }
-    .nav-pine {
-      width: 42px; height: 42px;
-      border: 1.5px solid rgba(201,169,110,0.6);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-    }
-    .nav-wordmark {
-      display: flex; flex-direction: column; gap: 1px;
-    }
-    .nav-wordmark-top {
-      font-family: var(--sans); font-size: 11px; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase; color: var(--white);
-    }
-    .nav-wordmark-sub {
-      font-family: var(--sans); font-size: 8px; font-weight: 400;
-      letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+    .nav-logo img {
+      height: 44px;
+      width: auto;
     }
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
@@ -475,11 +461,7 @@
 <!-- ═══ NAV ═══ -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <div class="nav-pine">🌲</div>
-    <div class="nav-wordmark">
-      <div class="nav-wordmark-top">Pine Valley</div>
-      <div class="nav-wordmark-sub">Investments</div>
-    </div>
+    <img src="pviwhite.png" alt="Pine Valley Investments" />
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -496,7 +478,7 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-pine-watermark">🌲</div>
+  <div class="hero-pine-watermark"><img src="pviwhite.png" alt="" style="width:500px;opacity:0.04;" /></div>
 
   <div class="hero-content">
     <div class="hero-award">
@@ -912,13 +894,13 @@
       <h2 class="section-title">Let's discuss your<br><em>financial goals.</em></h2>
       <p class="section-body">Whether you're planning for retirement, managing a business transition, or building multigenerational wealth — we'd love to start the conversation.</p>
       <div class="cta-actions">
-        <a href="mailto:info@pinevalleyinvestments.com" class="btn-gold">Schedule a Consultation</a>
+        <a href="/cdn-cgi/l/email-protection#deb7b0b8b19eaeb7b0bba8bfb2b2bba7b7b0a8bbadaab3bbb0aaadf0bdb1b3" class="btn-gold">Schedule a Consultation</a>
         <a href="https://client.schwab.com" target="_blank" class="btn-outline">Client Login</a>
       </div>
       <div class="cta-contact">
         <div class="cta-contact-items">
           <a href="tel:8563348260" class="cta-contact-item"><span>📞</span> 856-334-8260</a>
-          <a href="mailto:info@pinevalleyinvestments.com" class="cta-contact-item"><span>✉</span> info@pinevalleyinvestments.com</a>
+          <a href="/cdn-cgi/l/email-protection#0d64636b624d7d6463687b6c6161687464637b687e79606863797e236e6260" class="cta-contact-item"><span>✉</span> <span class="__cf_email__" data-cfemail="a3cacdc5cce3d3cacdc6d5c2cfcfc6dacacdd5c6d0d7cec6cdd7d08dc0ccce">[email&#160;protected]</span></a>
           <a href="https://maps.google.com/?q=10+E+Stow+Rd+Suite+200+Marlton+NJ" target="_blank" class="cta-contact-item"><span>📍</span> 10 E Stow Rd, Suite 200, Marlton, NJ 08053</a>
         </div>
       </div>
@@ -931,13 +913,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="nav-logo">
-          <div class="nav-pine">🌲</div>
-          <div class="nav-wordmark">
-            <div class="nav-wordmark-top">Pine Valley</div>
-            <div class="nav-wordmark-sub">Investments</div>
-          </div>
-        </div>
+        <a href="#" class="nav-logo"><img src="pviwhite.png" alt="Pine Valley Investments" style="height:52px;width:auto;" /></a>
         <p>Independent. Fiduciary. Client-first.<br>Your private wealth partner since 2015.</p>
         <div class="footer-social">
           <a href="#" class="social-icon">in</a>
@@ -975,7 +951,7 @@
           <li><a href="#">Marlton, NJ 08053</a></li>
           <li><a href="tel:8563348260">856-334-8260</a></li>
           <li><a href="tel:8563562598">Fax: 856-356-2598</a></li>
-          <li><a href="mailto:info@pinevalleyinvestments.com">info@pinevalleyinvestments.com</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#244d4a424b64544d4a4152454848415d4d4a5241575049414a50570a474b49"><span class="__cf_email__" data-cfemail="7a13141c153a0a13141f0c1b16161f0313140c1f090e171f140e0954191517">[email&#160;protected]</span></a></li>
           <li style="margin-top:12px"><a href="https://client.schwab.com" target="_blank">Client Login →</a></li>
         </ul>
       </div>
@@ -993,18 +969,6 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Nav scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  });
-
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+  const n
