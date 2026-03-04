@@ -408,13 +408,13 @@
       <h2 class="section-title">Let's discuss your<br><em>financial goals.</em></h2>
       <p class="section-body">Whether you're planning for retirement, managing a business transition, or building multigenerational wealth — we'd love to start the conversation.</p>
       <div class="cta-actions">
-        <a href="/cdn-cgi/l/email-protection#137a7d757c53637a7d7665727f7f766a7a7d657660677e767d67603d707c7e" class="btn-gold">Schedule a Consultation</a>
-        <a href="#portals" class="btn-outline">Client Login</a>
+        <a href="mailto:info@pinevalleyinvestments.com" class="btn-gold">Schedule a Consultation</a>
+        <a href="https://client.schwab.com" target="_blank" class="btn-outline">Client Login</a>
       </div>
       <div class="cta-contact">
         <div class="cta-contact-items">
           <a href="tel:8563348260" class="cta-contact-item"><span>📞</span> 856-334-8260</a>
-          <a href="/cdn-cgi/l/email-protection#b1d8dfd7def1c1d8dfd4c7d0ddddd4c8d8dfc7d4c2c5dcd4dfc5c29fd2dedc" class="cta-contact-item"><span>✉</span> <span class="__cf_email__" data-cfemail="771e19111837071e191201161b1b120e1e19011204031a121903045914181a">[email&#160;protected]</span></a>
+          <a href="mailto:info@pinevalleyinvestments.com" class="cta-contact-item"><span>✉</span> info@pinevalleyinvestments.com</a>
           <a href="https://maps.google.com/?q=10+E+Stow+Rd+Suite+200+Marlton+NJ" target="_blank" class="cta-contact-item"><span>📍</span> 10 E Stow Rd, Suite 200, Marlton, NJ</a>
         </div>
       </div>
@@ -461,8 +461,8 @@
           <li><a href="#">Marlton, NJ 08053</a></li>
           <li><a href="tel:8563348260">856-334-8260</a></li>
           <li><a href="tel:8563562598">Fax: 856-356-2598</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#2e474048416e5e47404b584f42424b574740584b5d5a434b405a5d004d4143"><span class="__cf_email__" data-cfemail="3d54535b527d4d5453584b5c5151584454534b584e49505853494e135e5250">[email&#160;protected]</span></a></li>
-          <li style="margin-top:12px"><a href="#portals">Client Login →</a></li>
+          <li><a href="mailto:info@pinevalleyinvestments.com">info@pinevalleyinvestments.com</a></li>
+          <li style="margin-top:12px"><a href="https://client.schwab.com" target="_blank">Client Login →</a></li>
         </ul>
       </div>
     </div>
@@ -476,7 +476,7 @@
     </div>
   </div>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
   const toggle = document.getElementById('navToggle');
@@ -487,4 +487,16 @@
     document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
   });
   mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEv
+    link.addEventListener('click', () => {
+      toggle.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
