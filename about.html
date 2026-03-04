@@ -89,11 +89,23 @@
     @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
 
     .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
-    .timeline-item { display: flex; align-items: flex-start; position: relative; padding-bottom: 32px; }
-    .timeline-item::after { content: ''; position: absolute; left: 74px; top: 18px; bottom: 0; width: 1px; background: rgba(186,186,185,0.12); }
-    .timeline-item:last-child::after { display: none; }
-    .timeline-year { font-family: var(--sans); font-size: 10px; font-weight: 700; color: var(--gold); padding-top: 3px; text-align: right; min-width: 56px; flex-shrink: 0; }
-    .timeline-dot { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid rgba(201,169,110,0.5); background: var(--navy); margin: 3px 16px 0 12px; flex-shrink: 0; position: relative; z-index: 1; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 0; }
+    .timeline::before { content: ''; position: absolute; left: 68px; top: 10px; bottom: 10px; width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.35) 8%, rgba(201,169,110,0.35) 92%, transparent); }
+
+    .timeline-item { display: flex; align-items: flex-start; position: relative; padding-bottom: 28px; opacity: 0; transform: translateX(-18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .timeline-item.tl-visible { opacity: 1; transform: none; }
+
+    .timeline-year { font-family: var(--sans); font-size: 10px; font-weight: 700; color: var(--gold); padding-top: 4px; text-align: right; min-width: 48px; flex-shrink: 0; letter-spacing: 0.06em; }
+    .timeline-dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid rgba(201,169,110,0.5); background: var(--navy); margin: 4px 16px 0 10px; flex-shrink: 0; position: relative; z-index: 1; transition: border-color 0.3s, box-shadow 0.3s; }
+    .timeline-item:hover .timeline-dot { border-color: var(--gold); box-shadow: 0 0 8px rgba(201,169,110,0.4); }
+
+    /* AUM milestone — special treatment */
+    .timeline-item.is-aum .timeline-dot { background: rgba(201,169,110,0.15); border-color: var(--gold); }
+    .timeline-aum-num { font-size: 28px; font-weight: 300; color: var(--white); line-height: 1; display: block; margin-bottom: 2px; }
+    .timeline-aum-label { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+
     .timeline-milestone { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--gray); }
     .timeline-milestone strong { color: var(--white); font-weight: 500; }
     .pillar { display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid rgba(186,186,185,0.1); }
@@ -164,16 +176,16 @@
       <div class="section-label">Our Story</div>
       <h2 class="section-title">A decade of <em>extraordinary</em> growth.</h2>
       <p class="section-body" style="margin-bottom:40px;">Founded in 2015 by Harry Morad and Joe Duncan, Pine Valley Investments has grown from a $30M startup into one of New Jersey's premier independent RIAs.</p>
-      <div>
-        <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>PVI Founded</strong> — Harry Morad and Joe Duncan launch the firm with $30M AUM.</div></div>
-        <div class="timeline-item"><div class="timeline-year">2016</div><div class="timeline-dot"></div><div class="timeline-milestone">Surpassed <strong>$100M AUM</strong>.</div></div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>PVI Founded</strong> — Harry Morad and Joe Duncan launch the firm, finishing year one with $30M AUM.</div></div>
+        <div class="timeline-item is-aum"><div class="timeline-year">2016</div><div class="timeline-dot"></div><div class="timeline-milestone"><span class="timeline-aum-num">$100M</span><span class="timeline-aum-label">Assets Under Management</span></div></div>
         <div class="timeline-item"><div class="timeline-year">2018</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>Jon Markoe &amp; The Markoe Group</strong> join from Merrill Lynch.</div></div>
-        <div class="timeline-item"><div class="timeline-year">2020</div><div class="timeline-dot"></div><div class="timeline-milestone">Surpassed <strong>$400M AUM</strong>.</div></div>
+        <div class="timeline-item is-aum"><div class="timeline-year">2020</div><div class="timeline-dot"></div><div class="timeline-milestone"><span class="timeline-aum-num">$400M</span><span class="timeline-aum-label">Assets Under Management</span></div></div>
         <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>Kate Fay &amp; The Fay Group</strong> join from Girard Investment Partners.</div></div>
         <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-dot"></div><div class="timeline-milestone">Launched <strong>PV Opportunity Fund, Series I</strong>. Chris O'Neill joins as CIO; Nick Lampone as CSO.</div></div>
-        <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>Jim Vogt</strong> joins from Tower Bridge; <strong>Mark Magarian</strong> from Wells Fargo.</div></div>
-        <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-dot"></div><div class="timeline-milestone">Surpassed <strong>$1.5B AUM</strong>.</div></div>
-        <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-dot"></div><div class="timeline-milestone">Launched <strong>Magarian Fund, LP</strong>. Surpassed <strong>$2B AUM</strong>.</div></div>
+        <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-dot"></div><div class="timeline-milestone"><strong>Jim Vogt</strong> joins from Tower Bridge Advisors; <strong>Mark Magarian</strong> from Wells Fargo.</div></div>
+        <div class="timeline-item is-aum"><div class="timeline-year">2024</div><div class="timeline-dot"></div><div class="timeline-milestone"><span class="timeline-aum-num">$1.5B</span><span class="timeline-aum-label">Assets Under Management</span></div></div>
+        <div class="timeline-item is-aum"><div class="timeline-year">2025</div><div class="timeline-dot"></div><div class="timeline-milestone">Launched <strong>Magarian Fund, LP</strong>.<br><span class="timeline-aum-num" style="margin-top:8px;">$2B</span><span class="timeline-aum-label">Assets Under Management</span></div></div>
       </div>
     </div>
     <div class="reveal reveal-delay-2">
@@ -270,6 +282,19 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Staggered timeline animation
+  const tlItems = document.querySelectorAll('.timeline-item');
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = Array.from(tlItems).indexOf(e.target);
+        setTimeout(() => e.target.classList.add('tl-visible'), idx * 80);
+        tlObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  tlItems.forEach(el => tlObserver.observe(el));
 </script>
 </body>
 </html>
