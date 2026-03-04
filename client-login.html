@@ -89,11 +89,13 @@
     @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
 
     .portals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
-    .portal-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(186,186,185,0.08); padding: 48px 40px; transition: background 0.3s; text-align: center; }
+    .portal-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(186,186,185,0.08); padding: 40px 36px; transition: background 0.3s; }
     .portal-card:hover { background: rgba(41,77,107,0.2); }
-    .portal-icon { font-size: 40px; margin-bottom: 24px; }
-    .portal-name { font-size: 22px; font-weight: 500; color: var(--white); margin-bottom: 12px; }
-    .portal-desc { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--gray); margin-bottom: 32px; }
+    .portal-logo-wrap { height: 52px; display: flex; align-items: center; margin-bottom: 20px; }
+    .portal-logo-wrap img { max-height: 44px; max-width: 160px; width: auto; filter: brightness(0) invert(1); opacity: 0.85; transition: opacity 0.2s; }
+    .portal-card:hover .portal-logo-wrap img { opacity: 1; }
+    .portal-name { font-size: 18px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+    .portal-desc { font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--gray); margin-bottom: 24px; }
     .portal-btn { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 14px 32px; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
     .portal-btn:hover { opacity: 0.85; }
     .help-box { background: rgba(41,77,107,0.2); border: 1px solid rgba(186,186,185,0.1); padding: 48px; text-align: center; margin-top: 2px; }
@@ -136,24 +138,37 @@
   <p>Access your accounts, performance reports, and financial planning tools through our secure client portals below.</p>
 </div>
 <div class="section">
+  <div class="section">
   <div class="portals-grid">
     <div class="portal-card reveal reveal-delay-1">
-      <div class="portal-icon">🏦</div>
+      <div class="portal-logo-wrap"><img src="schwab-logo.svg" alt="Charles Schwab" /></div>
       <div class="portal-name">Charles Schwab</div>
       <div class="portal-desc">View account balances, statements, trade confirmations, and transaction history through your Schwab account.</div>
       <a href="https://client.schwab.com" target="_blank" class="portal-btn">Login to Schwab</a>
     </div>
     <div class="portal-card reveal reveal-delay-2">
-      <div class="portal-icon">📊</div>
+      <div class="portal-logo-wrap"><img src="tamarac-logo.svg" alt="Tamarac" /></div>
       <div class="portal-name">WealthView · Tamarac</div>
       <div class="portal-desc">Portfolio tracking, statements, tax forms, and performance reporting through PVI's dedicated Tamarac portal.</div>
       <a href="https://pinevalley.portal.tamaracinc.com" target="_blank" class="portal-btn">Login to Tamarac</a>
     </div>
     <div class="portal-card reveal reveal-delay-3">
-      <div class="portal-icon">📐</div>
+      <div class="portal-logo-wrap"><img src="emoney-logo.svg" alt="eMoney" /></div>
       <div class="portal-name">eMoney</div>
       <div class="portal-desc">Your holistic financial planning dashboard — goals, net worth, cash flow, and scenario modeling. Complimentary for all PVI clients.</div>
       <a href="https://wealth.emaplan.com/ema/SignIn?ema/ria/pinevalley" target="_blank" class="portal-btn">Login to eMoney</a>
+    </div>
+    <div class="portal-card reveal reveal-delay-1">
+      <div class="portal-logo-wrap"><img src="monarch-logo.svg" alt="Monarch Money" /></div>
+      <div class="portal-name">Monarch Money</div>
+      <div class="portal-desc">Personal budgeting and net worth tracking. Connect all your accounts in one place for a complete financial picture.</div>
+      <a href="https://app.monarchmoney.com" target="_blank" class="portal-btn">Login to Monarch</a>
+    </div>
+    <div class="portal-card reveal reveal-delay-2">
+      <div class="portal-logo-wrap"><img src="rightcapital-logo.svg" alt="RightCapital" /></div>
+      <div class="portal-name">RightCapital</div>
+      <div class="portal-desc">Comprehensive financial planning — retirement projections, tax planning, and estate analysis with your advisor.</div>
+      <a href="https://app.rightcapital.com" target="_blank" class="portal-btn">Login to RightCapital</a>
     </div>
   </div>
   <div class="help-box reveal">

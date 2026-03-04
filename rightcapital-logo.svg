@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" width="220" height="60">
+  <rect width="220" height="60" fill="none"/>
+  <circle cx="22" cy="30" r="18" fill="#1DB954" opacity="0.15"/>
+  <circle cx="22" cy="30" r="10" fill="#1DB954"/>
+  <text x="48" y="36" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#1a1a1a">RightCapital</text>
+</svg>
