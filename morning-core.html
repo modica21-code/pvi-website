@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Morning Core — Pine Valley Investments</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #03213d; --blue: #294d6b; --white: #ffffff;
+      --gray: #babab9; --gold: #c9a96e;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: var(--serif); overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; transition: background 0.4s, padding 0.4s; }
+    nav.scrolled { background: rgba(3,33,61,0.97); padding: 14px 56px; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(186,186,185,0.1); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-btn { color: var(--white) !important; border: 1px solid rgba(255,255,255,0.3); padding: 9px 22px; }
+    .nav-btn:hover { border-color: var(--gold) !important; color: var(--gold) !important; }
+    .nav-phone { color: var(--gold) !important; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 5px; }
+    .nav-dropdown > a::after { content: '▾'; font-size: 8px; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); min-width: 200px; padding: 8px 0; z-index: 200; }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 10px 20px; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; white-space: nowrap; transition: color 0.2s, background 0.2s; }
+    .dropdown-menu a:hover { color: var(--white); background: rgba(41,77,107,0.3); }
+    .dropdown-menu a.highlight { color: var(--gold) !important; }
+    .dropdown-divider { border: none; border-top: 1px solid rgba(186,186,185,0.1); margin: 6px 0; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--navy); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); text-decoration: none; }
+    .mobile-menu a:hover { color: var(--white); }
+    .mobile-cta { color: var(--navy) !important; background: var(--gold); padding: 14px 36px; margin-top: 16px; }
+    .mobile-phone { color: var(--gold) !important; }
+
+    /* HERO */
+    .mc-hero { min-height: 420px; background: linear-gradient(135deg, var(--navy) 0%, #07304f 60%, var(--blue) 100%); display: flex; align-items: center; padding: 120px 56px 80px; position: relative; overflow: hidden; }
+    .mc-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.06) 0%, transparent 65%); pointer-events: none; }
+    .mc-hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; }
+    .mc-hero-label { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+    .mc-hero-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+    .mc-hero h1 { font-size: clamp(48px, 7vw, 88px); font-weight: 300; line-height: 1; color: var(--white); margin-bottom: 6px; }
+    .mc-hero h1 span { font-style: italic; color: var(--gold); }
+    .mc-hero-sub { font-size: 17px; font-weight: 300; line-height: 1.7; color: var(--gray); margin-top: 20px; max-width: 480px; }
+    .mc-hero-sub strong { color: var(--white); font-weight: 500; }
+    .mc-author-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,169,110,0.2); padding: 32px 28px; text-align: center; min-width: 200px; flex-shrink: 0; }
+    .mc-author-photo { width: 96px; height: 96px; border-radius: 50%; background: var(--blue); margin: 0 auto 16px; overflow: hidden; border: 2px solid rgba(201,169,110,0.3); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 300; color: var(--gray); }
+    .mc-author-name { font-size: 18px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .mc-author-title { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .mc-author-firm { font-family: var(--sans); font-size: 9px; color: var(--gray); letter-spacing: 0.06em; }
+
+    /* TRUST BAR */
+    .trust-bar { background: rgba(41,77,107,0.4); border-top: 1px solid rgba(186,186,185,0.08); border-bottom: 1px solid rgba(186,186,185,0.08); }
+    .trust-bar-inner { max-width: 1200px; margin: 0 auto; padding: 18px 56px; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .trust-item { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 8px; }
+    .trust-item::before { content: '✓'; color: var(--gold); }
+
+    /* MAIN CONTENT */
+    .mc-body { max-width: 1200px; margin: 0 auto; padding: 72px 56px; display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: start; }
+    .mc-section-label { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+    .mc-section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+    .mc-section-title { font-size: clamp(28px, 3.5vw, 44px); font-weight: 300; line-height: 1.15; color: var(--white); margin-bottom: 20px; }
+    .mc-section-title em { font-style: italic; color: var(--gold); }
+    .mc-intro { font-size: 17px; font-weight: 300; line-height: 1.8; color: var(--gray); margin-bottom: 40px; }
+    .mc-features { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .mc-feature { padding: 20px 0; border-bottom: 1px solid rgba(186,186,185,0.08); }
+    .mc-feature:first-child { padding-top: 0; }
+    .mc-feature-title { font-size: 18px; font-weight: 500; color: var(--white); margin-bottom: 5px; }
+    .mc-feature-desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--gray); }
+
+    /* SUBSCRIBE FORM */
+    .mc-subscribe { position: sticky; top: 100px; }
+    .mc-form-card { background: rgba(41,77,107,0.2); border: 1px solid rgba(186,186,185,0.1); padding: 40px 36px; }
+    .mc-form-title { font-size: 26px; font-weight: 400; color: var(--white); margin-bottom: 6px; }
+    .mc-form-title em { font-style: italic; color: var(--gold); }
+    .mc-form-sub { font-size: 13px; font-weight: 300; line-height: 1.6; color: var(--gray); margin-bottom: 28px; }
+    .mc-form-group { margin-bottom: 16px; }
+    .mc-form-group label { display: block; font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); margin-bottom: 7px; }
+    .mc-form-group input, .mc-form-group select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(186,186,185,0.15); color: var(--white); font-family: var(--serif); font-size: 15px; padding: 12px 14px; outline: none; transition: border-color 0.2s; appearance: none; }
+    .mc-form-group input::placeholder { color: rgba(186,186,185,0.4); }
+    .mc-form-group input:focus, .mc-form-group select:focus { border-color: rgba(201,169,110,0.5); }
+    .mc-form-group select option { background: var(--navy); }
+    .mc-form-submit { width: 100%; background: var(--gold); color: var(--navy); font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; border: none; padding: 16px; cursor: pointer; margin-top: 8px; transition: opacity 0.2s; }
+    .mc-form-submit:hover { opacity: 0.88; }
+    .mc-form-note { font-family: var(--sans); font-size: 9px; color: rgba(186,186,185,0.4); margin-top: 12px; line-height: 1.6; text-align: center; }
+
+    /* SAMPLE ISSUE */
+    .mc-sample { max-width: 1200px; margin: 0 auto; padding: 0 56px 80px; }
+    .mc-sample-inner { background: rgba(255,255,255,0.02); border: 1px solid rgba(186,186,185,0.08); padding: 48px; }
+    .mc-sample-date { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .mc-sample-headline { font-size: 28px; font-weight: 400; color: var(--white); margin-bottom: 16px; border-bottom: 1px solid rgba(186,186,185,0.1); padding-bottom: 16px; }
+    .mc-sample-item { padding: 16px 0; border-bottom: 1px solid rgba(186,186,185,0.06); display: flex; gap: 20px; }
+    .mc-sample-item:last-child { border-bottom: none; }
+    .mc-sample-num { font-family: var(--sans); font-size: 9px; font-weight: 700; color: var(--gold); padding-top: 3px; flex-shrink: 0; width: 20px; }
+    .mc-sample-text { font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--gray); }
+    .mc-sample-text strong { color: var(--white); font-weight: 500; }
+
+    /* SHARED */
+    .btn-gold { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 15px 38px; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+    .btn-gold:hover { opacity: 0.88; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    .reveal-delay-1 { transition-delay:0.1s; } .reveal-delay-2 { transition-delay:0.2s; }
+
+    footer { background: rgba(0,0,0,0.35); border-top: 1px solid rgba(186,186,185,0.1); padding: 72px 56px 36px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 52px; margin-bottom: 52px; }
+    .footer-brand p { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--gray); margin-top: 18px; max-width: 270px; }
+    .footer-col-title { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); margin-bottom: 22px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a { font-size: 14px; font-weight: 300; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-social { display: flex; gap: 14px; margin-top: 22px; }
+    .social-icon { width: 34px; height: 34px; border: 1px solid rgba(186,186,185,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 10px; font-weight: 700; color: var(--gray); text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+    .social-icon:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(186,186,185,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-family: var(--sans); font-size: 9px; letter-spacing: 0.06em; color: rgba(186,186,185,0.4); max-width: 700px; line-height: 1.7; }
+    .footer-legal { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-legal a { font-family: var(--sans); font-size: 9px; letter-spacing: 0.08em; color: rgba(186,186,185,0.45); text-decoration: none; }
+    .footer-legal a:hover { color: var(--gray); }
+
+    @media (max-width: 900px) {
+      .mc-hero-inner { grid-template-columns: 1fr; }
+      .mc-author-card { display: none; }
+      .mc-body { grid-template-columns: 1fr; gap: 48px; }
+      .mc-subscribe { position: static; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; } nav.scrolled { padding: 12px 24px; }
+      .nav-logo img { height: 32px; } .nav-links { display: none; } .nav-toggle { display: flex; }
+      .mc-hero { padding: 110px 24px 60px; }
+      .mc-body { padding: 48px 24px; }
+      .mc-sample { padding: 0 24px 60px; }
+      .trust-bar-inner { gap: 24px; padding: 16px 24px; }
+      footer { padding: 56px 24px 32px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="pviwhite.png" alt="Pine Valley Investments" /></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About PVI</a></li>
+    <li><a href="team.html">Meet Your Team</a></li>
+    <li><a href="services.html">Our Services</a></li>
+    <li class="nav-dropdown">
+      <a href="tools.html">Tools &amp; Resources</a>
+      <div class="dropdown-menu">
+        <a href="tools.html">Financial Calculators</a>
+        <div class="dropdown-divider"></div>
+        <a href="morning-core.html" class="highlight">☀ The Morning Core</a>
+      </div>
+    </li>
+    <li><a href="announcements.html">Company Announcements</a></li>
+    <li><a href="client-login.html" class="nav-phone">Client Login</a></li>
+    <li><a href="tel:8563348260" class="nav-phone">856-334-8260</a></li>
+    <li><a href="contact.html" class="nav-btn">Schedule a Consultation</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About PVI</a>
+  <a href="team.html">Meet Your Team</a>
+  <a href="services.html">Our Services</a>
+  <a href="tools.html">Tools &amp; Resources</a>
+  <a href="morning-core.html" style="color: var(--gold);">☀ The Morning Core</a>
+  <a href="announcements.html">Company Announcements</a>
+  <a href="client-login.html">Client Login</a>
+  <a href="tel:8563348260" class="mobile-phone">856-334-8260</a>
+  <a href="contact.html" class="mobile-cta">Schedule a Consultation</a>
+</div>
+
+<!-- HERO -->
+<div class="mc-hero">
+  <div class="mc-hero-inner">
+    <div>
+      <div class="mc-hero-label">Market Intelligence</div>
+      <h1>The Morning <span>Core.</span></h1>
+      <p class="mc-hero-sub">Markets move quickly. Headlines move even faster.<br><strong>Perspective is what most investors are missing.</strong></p>
+      <a href="#subscribe" class="btn-gold" style="margin-top:32px;">Subscribe Free →</a>
+    </div>
+    <div class="mc-author-card">
+      <div class="mc-author-photo">NL</div>
+      <div class="mc-author-name">Nick Lampone</div>
+      <div class="mc-author-title">Chief Strategy Officer</div>
+      <div class="mc-author-firm">Pine Valley Investments</div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">Free — Always</div>
+    <div class="trust-item">Published Every Weekday</div>
+    <div class="trust-item">No Ads · No Data Selling</div>
+    <div class="trust-item">Written by a Registered Investment Advisor</div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="mc-body">
+  <div>
+    <div class="mc-section-label reveal">Start Your Day With Clarity</div>
+    <h2 class="mc-section-title reveal">A free weekday brief<br>built for <em>long-term investors.</em></h2>
+    <p class="mc-intro reveal">A free weekday market brief from Pine Valley Investments. The Morning Core is built for investors who want perspective — not panic. Each weekday, we deliver a concise, disciplined breakdown of what's really moving markets and what may matter most for long-term investors.</p>
+
+    <ul class="mc-features">
+      <li class="mc-feature reveal">
+        <div class="mc-feature-title">What You'll Get Each Morning</div>
+        <div class="mc-feature-desc">A concise summary of market activity, what moved, and why — in plain language, without the noise.</div>
+      </li>
+      <li class="mc-feature reveal reveal-delay-1">
+        <div class="mc-feature-title">A Clear Market Breakdown</div>
+        <div class="mc-feature-desc">Equities, fixed income, commodities — where things stand and what the data is actually saying.</div>
+      </li>
+      <li class="mc-feature reveal reveal-delay-1">
+        <div class="mc-feature-title">Key Economic Data to Watch</div>
+        <div class="mc-feature-desc">Important releases and developments, explained in context of the broader market cycle.</div>
+      </li>
+      <li class="mc-feature reveal reveal-delay-2">
+        <div class="mc-feature-title">What's Really Moving Markets</div>
+        <div class="mc-feature-desc">Sector shifts, leadership changes, and broader themes — without speculation or fear-based framing.</div>
+      </li>
+      <li class="mc-feature reveal reveal-delay-2">
+        <div class="mc-feature-title">Strategic Perspective</div>
+        <div class="mc-feature-desc">Insight grounded in discipline, not emotion. The kind of thinking we apply to every PVI client portfolio.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SUBSCRIBE FORM -->
+  <div class="mc-subscribe" id="subscribe">
+    <div class="mc-form-card reveal">
+      <div class="mc-form-title">Subscribe to <em>The Morning Core</em></div>
+      <div class="mc-form-sub">Free weekday market intelligence, delivered before the open.</div>
+      <div class="mc-form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="First name" />
+      </div>
+      <div class="mc-form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Last name" />
+      </div>
+      <div class="mc-form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com" />
+      </div>
+      <div class="mc-form-group">
+        <label>Your Relationship with PVI</label>
+        <select>
+          <option value="" disabled selected>Select one</option>
+          <option>Current PVI Client</option>
+          <option>Prospective Client</option>
+          <option>Financial Professional</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <button class="mc-form-submit">Subscribe — It's Free</button>
+      <p class="mc-form-note">We respect your inbox. Unsubscribe anytime. No spam, ever.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SAMPLE ISSUE -->
+<div class="mc-sample">
+  <div class="mc-section-label reveal" style="padding: 0 0 20px;">Sample Issue</div>
+  <div class="mc-sample-inner reveal">
+    <div class="mc-sample-date">Monday, March 3, 2026</div>
+    <div class="mc-sample-headline">The Morning Core — Markets Open Mixed as Fed Speakers Take Center Stage</div>
+    <div class="mc-sample-item">
+      <div class="mc-sample-num">01</div>
+      <div class="mc-sample-text"><strong>Equities:</strong> S&amp;P 500 futures are slightly lower ahead of the open, following a mixed Friday session. Tech continues to lead, while small caps lag on rate sensitivity concerns.</div>
+    </div>
+    <div class="mc-sample-item">
+      <div class="mc-sample-num">02</div>
+      <div class="mc-sample-text"><strong>Fixed Income:</strong> The 10-year Treasury yield ticked up to 4.42%. Fed speakers this week could clarify the path — markets are pricing in one cut by mid-year.</div>
+    </div>
+    <div class="mc-sample-item">
+      <div class="mc-sample-num">03</div>
+      <div class="mc-sample-text"><strong>What to Watch:</strong> ISM Manufacturing data drops this morning. Friday's jobs report is the week's main event — consensus expects 185K new jobs.</div>
+    </div>
+    <div class="mc-sample-item">
+      <div class="mc-sample-num">04</div>
+      <div class="mc-sample-text"><strong>Strategic Take:</strong> Volatility is noise for disciplined investors. The fundamentals that drive long-term returns — earnings growth, valuations, and cash flow — haven't changed.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><img src="pviwhite.png" alt="Pine Valley Investments" style="height:48px;width:auto;" /></a>
+        <p>Independent. Fiduciary. Client-first.<br>Your private wealth partner since 2015.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon">in</a>
+          <a href="#" class="social-icon">X</a>
+          <a href="#" class="social-icon">f</a>
+          <a href="#" class="social-icon">ig</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="services.html">Wealth Management</a></li>
+          <li><a href="services.html">Investment Advisory</a></li>
+          <li><a href="services.html">Trust &amp; Estate Planning</a></li>
+          <li><a href="services.html">Retirement Plans</a></li>
+          <li><a href="services.html">Investment Banking</a></li>
+          <li><a href="services.html">Network Opportunities</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Firm</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About PVI</a></li>
+          <li><a href="team.html">Meet the Team</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="client-login.html">Client Access</a></li>
+          <li><a href="announcements.html">Announcements</a></li>
+          <li><a href="morning-core.html">The Morning Core</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#">10 E Stow Rd, Suite 200</a></li>
+          <li><a href="#">Marlton, NJ 08053</a></li>
+          <li><a href="tel:8563348260">856-334-8260</a></li>
+          <li><a href="tel:8563562598">Fax: 856-356-2598</a></li>
+          <li><a href="mailto:info@pinevalleyinvestments.com">info@pinevalleyinvestments.com</a></li>
+          <li style="margin-top:12px"><a href="client-login.html">Client Login →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Pine Valley Investments, LLC. All rights reserved. Pine Valley Investments is a Registered Investment Advisor. Registration does not imply a certain level of skill or training.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy &amp; Form CRS</a>
+        <a href="https://adviserinfo.sec.gov" target="_blank">SEC Investment Advisor Review</a>
+        <a href="#">Form ADV 2A</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+  const toggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
