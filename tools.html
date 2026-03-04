@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tools & Resources — Pine Valley Investments</title>
+  <title>Financial Tools — Pine Valley Investments</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,19 +12,22 @@
       --gray: #babab9; --gold: #c9a96e;
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'Montserrat', Arial, sans-serif;
+      --green: #2d7a4f; --red: #c0392b;
     }
     html { scroll-behavior: smooth; }
     body { background: var(--navy); color: var(--white); font-family: var(--serif); overflow-x: hidden; }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--navy); }
     ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; transition: background 0.4s, padding 0.4s; }
-    nav.scrolled { background: rgba(3,33,61,0.97); padding: 14px 56px; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(186,186,185,0.1); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; transition: background 0.4s, padding 0.4s; background: rgba(3,33,61,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(186,186,185,0.1); }
     .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo img { height: 40px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--white); }
     .nav-btn { color: var(--white) !important; border: 1px solid rgba(255,255,255,0.3); padding: 9px 22px; }
     .nav-btn:hover { border-color: var(--gold) !important; color: var(--gold) !important; }
     .nav-phone { color: var(--gold) !important; }
@@ -39,23 +42,105 @@
     .mobile-menu a:hover { color: var(--white); }
     .mobile-cta { color: var(--navy) !important; background: var(--gold); padding: 14px 36px; margin-top: 16px; }
     .mobile-phone { color: var(--gold) !important; }
-    .page-hero { padding: 160px 56px 80px; max-width: 1200px; margin: 0 auto; }
+
+    /* PAGE HERO */
+    .page-hero { padding: 140px 56px 60px; max-width: 1200px; margin: 0 auto; }
     .page-hero-label { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
     .page-hero-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
-    .page-hero h1 { font-size: clamp(42px, 6vw, 80px); font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 24px; }
+    .page-hero h1 { font-size: clamp(40px, 5.5vw, 72px); font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 20px; }
     .page-hero h1 em { font-style: italic; color: var(--gold); }
-    .page-hero p { font-size: 18px; font-weight: 300; line-height: 1.8; color: var(--gray); max-width: 600px; }
+    .page-hero p { font-size: 17px; font-weight: 300; line-height: 1.8; color: var(--gray); max-width: 580px; }
+
+    /* TRUST BAR */
+    .trust-bar { background: rgba(41,77,107,0.25); border-top: 1px solid rgba(186,186,185,0.08); border-bottom: 1px solid rgba(186,186,185,0.08); padding: 18px 56px; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .trust-item { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 8px; }
+    .trust-item::before { content: '✓'; color: var(--gold); }
+
+    /* CALCULATOR GRID */
+    .calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 0; }
+    .calc-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(186,186,185,0.08); padding: 36px; cursor: pointer; transition: background 0.2s; position: relative; overflow: hidden; }
+    .calc-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .calc-card:hover { background: rgba(41,77,107,0.2); }
+    .calc-card:hover::after { transform: scaleX(1); }
+    .calc-card-num { font-family: var(--sans); font-size: 10px; font-weight: 700; color: rgba(201,169,110,0.35); margin-bottom: 16px; }
+    .calc-card-title { font-size: 20px; font-weight: 500; color: var(--white); margin-bottom: 10px; line-height: 1.2; }
+    .calc-card-desc { font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--gray); margin-bottom: 20px; }
+    .calc-card-link { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 6px; transition: gap 0.2s; }
+    .calc-card:hover .calc-card-link { gap: 12px; }
+
+    /* CALCULATOR PANELS */
     .section { max-width: 1200px; margin: 0 auto; padding: 80px 56px; }
-    .section-label { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
-    .section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
-    .section-title { font-size: clamp(30px, 4vw, 52px); font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 20px; }
-    .section-title em { font-style: italic; color: var(--gold); }
-    .section-body { font-size: 17px; font-weight: 300; line-height: 1.8; color: var(--gray); }
-    .btn-gold { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 15px 38px; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
-    .btn-gold:hover { opacity: 0.88; }
-    .btn-outline { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(255,255,255,0.3); padding: 15px 38px; text-decoration: none; display: inline-block; transition: border-color 0.2s; }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-    .divider { border: none; border-top: 1px solid rgba(186,186,185,0.08); }
+    .calc-panel { display: none; }
+    .calc-panel.active { display: block; }
+    .calc-back { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 40px; transition: color 0.2s; background: none; border: none; padding: 0; }
+    .calc-back:hover { color: var(--gold); }
+    .calc-title { font-size: clamp(32px, 4vw, 52px); font-weight: 300; color: var(--white); margin-bottom: 12px; line-height: 1.1; }
+    .calc-title em { font-style: italic; color: var(--gold); }
+    .calc-subtitle { font-size: 16px; font-weight: 300; color: var(--gray); margin-bottom: 52px; max-width: 560px; line-height: 1.7; }
+
+    /* CALC LAYOUT */
+    .calc-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .calc-inputs { background: rgba(255,255,255,0.02); border: 1px solid rgba(186,186,185,0.08); padding: 40px; }
+    .calc-results { background: rgba(41,77,107,0.15); border: 1px solid rgba(186,186,185,0.08); padding: 40px; }
+
+    /* INPUTS */
+    .input-group { margin-bottom: 28px; }
+    .input-label { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .input-label span { color: var(--gold); font-weight: 700; }
+    .slider { width: 100%; -webkit-appearance: none; height: 2px; background: rgba(186,186,185,0.2); outline: none; }
+    .slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--gold); cursor: pointer; border: 2px solid var(--navy); }
+    .slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--gold); cursor: pointer; border: 2px solid var(--navy); }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .text-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(186,186,185,0.15); padding: 12px 14px; color: var(--white); font-family: var(--sans); font-size: 13px; outline: none; transition: border-color 0.2s; }
+    .text-input:focus { border-color: rgba(201,169,110,0.5); }
+    .input-section-title { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); margin: 32px 0 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(186,186,185,0.1); }
+    .input-section-title:first-child { margin-top: 0; }
+
+    /* RESULTS */
+    .result-winner { background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.3); padding: 28px; margin-bottom: 24px; text-align: center; }
+    .result-winner-label { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .result-winner-name { font-size: 28px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .result-winner-amount { font-size: 42px; font-weight: 300; color: var(--gold); line-height: 1; }
+    .result-winner-desc { font-size: 13px; font-weight: 300; color: var(--gray); margin-top: 8px; }
+    .result-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 24px; }
+    .result-card { padding: 20px; border: 1px solid rgba(186,186,185,0.08); background: rgba(255,255,255,0.02); }
+    .result-card.winner-card { border-color: rgba(45,122,79,0.4); background: rgba(45,122,79,0.08); }
+    .result-card.loser-card { border-color: rgba(192,57,43,0.3); background: rgba(192,57,43,0.05); }
+    .result-card-label { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 6px; }
+    .result-card-value { font-size: 26px; font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 4px; }
+    .result-card-sub { font-size: 12px; font-weight: 300; color: var(--gray); }
+    .result-breakdown { margin-top: 24px; }
+    .result-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(186,186,185,0.07); font-size: 14px; font-weight: 300; }
+    .result-row:last-child { border-bottom: none; }
+    .result-row-label { color: var(--gray); }
+    .result-row-value { color: var(--white); font-weight: 500; }
+    .result-row-value.positive { color: #5cb85c; }
+    .result-row-value.negative { color: #e74c3c; }
+    .results-label { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-bottom: 16px; }
+
+    /* CHART */
+    .chart-wrap { margin-top: 24px; height: 180px; position: relative; }
+    .chart-bars { display: flex; align-items: flex-end; gap: 4px; height: 160px; padding: 0 4px; }
+    .chart-bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 4px; }
+    .chart-bar { width: 100%; transition: height 0.5s ease; border-radius: 1px 1px 0 0; min-height: 2px; }
+    .chart-bar.bar-a { background: var(--gold); opacity: 0.8; }
+    .chart-bar.bar-b { background: var(--blue); opacity: 0.8; }
+    .chart-label { font-family: var(--sans); font-size: 8px; color: var(--gray); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40px; }
+    .chart-legend { display: flex; gap: 16px; margin-top: 10px; justify-content: center; }
+    .chart-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--sans); font-size: 9px; color: var(--gray); }
+    .chart-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* AUTHOR BIO */
+    .author-bio { background: rgba(41,77,107,0.15); border: 1px solid rgba(186,186,185,0.08); padding: 32px 36px; display: flex; gap: 24px; align-items: flex-start; margin-top: 2px; }
+    .author-avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--navy)); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.6); flex-shrink: 0; border: 1px solid rgba(201,169,110,0.3); }
+    .author-name { font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .author-role { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .author-text { font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--gray); }
+
+    /* DISCLAIMER */
+    .disclaimer { font-family: var(--sans); font-size: 9px; color: rgba(186,186,185,0.4); line-height: 1.7; margin-top: 24px; padding: 16px; border: 1px solid rgba(186,186,185,0.06); }
+
+    /* FOOTER */
     footer { background: rgba(0,0,0,0.35); border-top: 1px solid rgba(186,186,185,0.1); padding: 72px 56px 36px; margin-top: 0; }
     .footer-inner { max-width: 1200px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 52px; margin-bottom: 52px; }
@@ -72,15 +157,22 @@
     .footer-legal { display: flex; gap: 22px; flex-wrap: wrap; }
     .footer-legal a { font-family: var(--sans); font-size: 9px; letter-spacing: 0.08em; color: rgba(186,186,185,0.45); text-decoration: none; }
     .footer-legal a:hover { color: var(--gray); }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
-    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity:1; transform:none; }
-    .reveal-delay-1 { transition-delay:0.1s; } .reveal-delay-2 { transition-delay:0.2s; } .reveal-delay-3 { transition-delay:0.3s; } .reveal-delay-4 { transition-delay:0.4s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .calc-layout { grid-template-columns: 1fr; }
+      .calc-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
-      nav { padding: 16px 24px; } nav.scrolled { padding: 12px 24px; }
-      .nav-logo img { height: 32px; } .nav-links { display: none; } .nav-toggle { display: flex; }
-      .page-hero { padding: 120px 24px 60px; }
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .page-hero { padding: 100px 24px 48px; }
+      .trust-bar { padding: 14px 24px; gap: 20px; }
       .section { padding: 60px 24px; }
+      .calc-grid { grid-template-columns: 1fr; }
+      .result-cards { grid-template-columns: 1fr; }
+      .input-row { grid-template-columns: 1fr; }
       footer { padding: 56px 24px 32px; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
       .footer-brand { grid-column: 1 / -1; }
@@ -88,19 +180,13 @@
     }
     @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
 
-    .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
-    .tool-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(186,186,185,0.08); padding: 40px 36px; transition: background 0.3s; }
-    .tool-card:hover { background: rgba(41,77,107,0.2); }
-    .tool-icon { font-size: 32px; margin-bottom: 20px; }
-    .tool-name { font-size: 20px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
-    .tool-desc { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--gray); margin-bottom: 24px; }
-    .tool-link { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: gap 0.2s; }
-    .tool-link:hover { gap: 14px; }
-    .portals-wrap { background: rgba(41,77,107,0.1); border-top: 1px solid rgba(186,186,185,0.08); }
-    @media (max-width: 768px) { .tools-grid { grid-template-columns: 1fr; } }
-</style>
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    .reveal-delay-1 { transition-delay:0.1s; } .reveal-delay-2 { transition-delay:0.2s; } .reveal-delay-3 { transition-delay:0.3s; }
+  </style>
 </head>
 <body>
+
 <nav id="nav">
   <a href="index.html" class="nav-logo"><img src="pviwhite.png" alt="Pine Valley Investments" /></a>
   <ul class="nav-links">
@@ -128,31 +214,808 @@
   <a href="contact.html" class="mobile-cta">Schedule a Consultation</a>
 </div>
 
-<div class="page-hero">
-  <div class="page-hero-label">Tools &amp; Resources</div>
-  <h1>Everything you need,<br><em>in one place.</em></h1>
-  <p>Access your accounts, educational resources, and planning tools — all designed to give you clarity and confidence over your financial life.</p>
-</div>
-<div class="section">
-  <div class="reveal"><div class="section-label">Client Portals</div><h2 class="section-title">Your financial picture,<br><em>anytime.</em></h2></div>
-  <div class="tools-grid">
-    <div class="tool-card reveal reveal-delay-1"><div class="tool-icon">🏦</div><div class="tool-name">Charles Schwab</div><div class="tool-desc">View account balances, statements, and transaction history directly through your Schwab account portal.</div><a href="https://client.schwab.com" target="_blank" class="tool-link">Access Portal →</a></div>
-    <div class="tool-card reveal reveal-delay-2"><div class="tool-icon">📊</div><div class="tool-name">WealthView · Tamarac</div><div class="tool-desc">Portfolio tracking, statements, tax forms, and performance reporting through PVI's dedicated Tamarac portal.</div><a href="https://pinevalley.portal.tamaracinc.com" target="_blank" class="tool-link">Access Portal →</a></div>
-    <div class="tool-card reveal reveal-delay-3"><div class="tool-icon">📐</div><div class="tool-name">eMoney</div><div class="tool-desc">Your holistic financial planning view — goals, net worth, cash flow, and scenario modeling. Complimentary for all PVI clients.</div><a href="https://wealth.emaplan.com/ema/SignIn?ema/ria/pinevalley" target="_blank" class="tool-link">Access Portal →</a></div>
+<!-- HUB VIEW -->
+<div id="hub-view">
+  <div class="page-hero">
+    <div class="page-hero-label">Tools &amp; Resources</div>
+    <h1>PVI Financial <em>Tools</em></h1>
+    <p>Institutional-grade financial analysis. Free. Built by Mike Modica, Partner at Pine Valley Investments — a Registered Investment Advisor.</p>
+  </div>
+
+  <div class="trust-bar">
+    <div class="trust-item">Built by a Registered Investment Advisor</div>
+    <div class="trust-item">No ads · No data selling</div>
+    <div class="trust-item">Math you can audit</div>
+    <div class="trust-item">Free forever</div>
+  </div>
+
+  <div class="section">
+    <div class="calc-grid">
+      <div class="calc-card reveal reveal-delay-1" onclick="openCalc('mortgage')">
+        <div class="calc-card-num">01</div>
+        <div class="calc-card-title">Mortgage Payoff vs Invest</div>
+        <div class="calc-card-desc">Should you make extra mortgage payments or invest that money instead?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-1" onclick="openCalc('rentvbuy')">
+        <div class="calc-card-num">02</div>
+        <div class="calc-card-title">Rent vs Buy</div>
+        <div class="calc-card-desc">Is it cheaper to rent or buy a home in your situation?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-1" onclick="openCalc('debt')">
+        <div class="calc-card-num">03</div>
+        <div class="calc-card-title">Debt Avalanche vs Snowball</div>
+        <div class="calc-card-desc">Which debt payoff strategy saves you the most money?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-2" onclick="openCalc('roth')">
+        <div class="calc-card-num">04</div>
+        <div class="calc-card-title">Roth vs Traditional IRA</div>
+        <div class="calc-card-desc">Should you contribute to a Roth or Traditional retirement account?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-2" onclick="openCalc('studentloans')">
+        <div class="calc-card-num">05</div>
+        <div class="calc-card-title">Student Loans vs Invest</div>
+        <div class="calc-card-desc">Is it better to aggressively pay off student loans or invest?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-2" onclick="openCalc('fire')">
+        <div class="calc-card-num">06</div>
+        <div class="calc-card-title">FIRE / Early Retirement</div>
+        <div class="calc-card-desc">How many years until you can retire early based on your savings rate?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-3" onclick="openCalc('compound')">
+        <div class="calc-card-num">07</div>
+        <div class="calc-card-title">Start Investing Now vs Later</div>
+        <div class="calc-card-desc">How much does delaying investing actually cost you?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-3" onclick="openCalc('car')">
+        <div class="calc-card-num">08</div>
+        <div class="calc-card-title">Buy vs Lease a Car</div>
+        <div class="calc-card-desc">Which is the smarter financial move for your situation?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-3" onclick="openCalc('hysa')">
+        <div class="calc-card-num">09</div>
+        <div class="calc-card-title">HYSA vs Investing</div>
+        <div class="calc-card-desc">When does a high-yield savings account beat investing — and when doesn't it?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+      <div class="calc-card reveal reveal-delay-3" onclick="openCalc('coastfire')">
+        <div class="calc-card-num">10</div>
+        <div class="calc-card-title">Coast FIRE Calculator</div>
+        <div class="calc-card-desc">Have you saved enough to let compound interest carry you to retirement?</div>
+        <div class="calc-card-link">Open Calculator →</div>
+      </div>
+    </div>
   </div>
 </div>
-<hr class="divider" />
-<div class="section">
-  <div class="reveal"><div class="section-label">Resources</div><h2 class="section-title">Financial <em>education</em> &amp; guides</h2></div>
-  <div class="tools-grid">
-    <div class="tool-card reveal reveal-delay-1"><div class="tool-icon">📋</div><div class="tool-name">What Is an RIA?</div><div class="tool-desc">Understand the difference between a Registered Investment Advisor and a broker-dealer, and why fiduciary advice matters for your financial future.</div><a href="#" class="tool-link">Read More →</a></div>
-    <div class="tool-card reveal reveal-delay-2"><div class="tool-icon">📈</div><div class="tool-name">Investment Philosophy</div><div class="tool-desc">Learn how PVI approaches portfolio construction, risk management, and long-term wealth building for our clients.</div><a href="#" class="tool-link">Read More →</a></div>
-    <div class="tool-card reveal reveal-delay-3"><div class="tool-icon">🏛️</div><div class="tool-name">Estate Planning Guide</div><div class="tool-desc">A practical overview of trusts, wills, beneficiary designations, and the steps families should take to protect their legacy.</div><a href="#" class="tool-link">Read More →</a></div>
-    <div class="tool-card reveal reveal-delay-1"><div class="tool-icon">💼</div><div class="tool-name">Business Owner Playbook</div><div class="tool-desc">From launch to exit — the key financial decisions every business owner should plan for at each stage of growth.</div><a href="#" class="tool-link">Read More →</a></div>
-    <div class="tool-card reveal reveal-delay-2"><div class="tool-icon">🎯</div><div class="tool-name">Retirement Planning 101</div><div class="tool-desc">Understanding contribution limits, Roth conversions, Social Security timing, and how to build a tax-efficient retirement income plan.</div><a href="#" class="tool-link">Read More →</a></div>
-    <div class="tool-card reveal reveal-delay-3"><div class="tool-icon">📰</div><div class="tool-name">Morning Core Newsletter</div><div class="tool-desc">PVI's weekly market and financial planning insights, delivered every Monday morning to help you stay informed.</div><a href="#" class="tool-link">Subscribe →</a></div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CALCULATOR PANELS                           -->
+<!-- ═══════════════════════════════════════════ -->
+
+<!-- 1. MORTGAGE PAYOFF VS INVEST -->
+<div id="calc-mortgage" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">Mortgage Payoff <em>vs</em> Invest</div>
+    <div class="calc-subtitle">Should you make extra mortgage payments or invest that money instead? This calculator shows the 10-year outcome of both strategies.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Your Mortgage</div>
+        <div class="input-group">
+          <div class="input-label">Mortgage Balance <span id="m-balance-val">$300,000</span></div>
+          <input type="range" class="slider" id="m-balance" min="50000" max="1000000" step="5000" value="300000" oninput="calcMortgage()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Interest Rate <span id="m-rate-val">6.5%</span></div>
+          <input type="range" class="slider" id="m-rate" min="2" max="12" step="0.1" value="6.5" oninput="calcMortgage()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Years Remaining <span id="m-years-val">25 years</span></div>
+          <input type="range" class="slider" id="m-years" min="5" max="30" step="1" value="25" oninput="calcMortgage()">
+        </div>
+        <div class="input-section-title">Your Extra Payment</div>
+        <div class="input-group">
+          <div class="input-label">Extra Monthly Amount <span id="m-extra-val">$500/mo</span></div>
+          <input type="range" class="slider" id="m-extra" min="100" max="3000" step="50" value="500" oninput="calcMortgage()">
+        </div>
+        <div class="input-section-title">If You Invested Instead</div>
+        <div class="input-group">
+          <div class="input-label">Expected Annual Return <span id="m-return-val">8%</span></div>
+          <input type="range" class="slider" id="m-return" min="3" max="15" step="0.5" value="8" oninput="calcMortgage()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Years to Compare <span id="m-horizon-val">10 years</span></div>
+          <input type="range" class="slider" id="m-horizon" min="5" max="30" step="1" value="10" oninput="calcMortgage()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Winner</div>
+          <div class="result-winner-name" id="m-winner-name">Investing</div>
+          <div class="result-winner-amount" id="m-winner-amount">$24,820 ahead</div>
+          <div class="result-winner-desc" id="m-winner-desc">over 10 years</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card" id="m-card-invest">
+            <div class="result-card-label">If You Invest</div>
+            <div class="result-card-value" id="m-invest-val">$91,473</div>
+            <div class="result-card-sub">portfolio value</div>
+          </div>
+          <div class="result-card" id="m-card-payoff">
+            <div class="result-card-label">If You Pay Off</div>
+            <div class="result-card-value" id="m-payoff-val">$66,653</div>
+            <div class="result-card-sub">interest saved</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Extra payment / month</span><span class="result-row-value" id="m-extra-display">$500</span></div>
+          <div class="result-row"><span class="result-row-label">Total invested over period</span><span class="result-row-value" id="m-total-invested">$60,000</span></div>
+          <div class="result-row"><span class="result-row-label">Investment growth</span><span class="result-row-value positive" id="m-growth">+$31,473</span></div>
+          <div class="result-row"><span class="result-row-label">Guaranteed return (mortgage rate)</span><span class="result-row-value" id="m-guaranteed">6.5%</span></div>
+        </div>
+        <div id="m-chart" class="chart-wrap"></div>
+        <div class="disclaimer">Not financial advice. Investing involves risk. Returns are not guaranteed. Consult a qualified financial advisor before making decisions.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments (a Registered Investment Advisor) and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making, stripping away guesswork to deliver clear, actionable answers.</div></div>
+    </div>
   </div>
 </div>
+
+<!-- 2. RENT VS BUY -->
+<div id="calc-rentvbuy" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">Rent <em>vs</em> Buy</div>
+    <div class="calc-subtitle">Compare the true total cost of renting versus buying over your time horizon, including opportunity cost of the down payment.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Buying Scenario</div>
+        <div class="input-group">
+          <div class="input-label">Home Price <span id="rvb-price-val">$450,000</span></div>
+          <input type="range" class="slider" id="rvb-price" min="100000" max="2000000" step="10000" value="450000" oninput="calcRentVBuy()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Down Payment <span id="rvb-down-val">20%</span></div>
+          <input type="range" class="slider" id="rvb-down" min="3" max="50" step="1" value="20" oninput="calcRentVBuy()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Mortgage Rate <span id="rvb-mrate-val">6.8%</span></div>
+          <input type="range" class="slider" id="rvb-mrate" min="3" max="12" step="0.1" value="6.8" oninput="calcRentVBuy()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Annual Home Appreciation <span id="rvb-appr-val">3%</span></div>
+          <input type="range" class="slider" id="rvb-appr" min="0" max="8" step="0.5" value="3" oninput="calcRentVBuy()">
+        </div>
+        <div class="input-section-title">Renting Scenario</div>
+        <div class="input-group">
+          <div class="input-label">Monthly Rent <span id="rvb-rent-val">$2,200/mo</span></div>
+          <input type="range" class="slider" id="rvb-rent" min="500" max="8000" step="100" value="2200" oninput="calcRentVBuy()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Annual Rent Increase <span id="rvb-rentinc-val">3%</span></div>
+          <input type="range" class="slider" id="rvb-rentinc" min="0" max="8" step="0.5" value="3" oninput="calcRentVBuy()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Investment Return on Down Payment <span id="rvb-invest-val">7%</span></div>
+          <input type="range" class="slider" id="rvb-invest" min="3" max="12" step="0.5" value="7" oninput="calcRentVBuy()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Years to Compare <span id="rvb-years-val">10 years</span></div>
+          <input type="range" class="slider" id="rvb-years" min="3" max="30" step="1" value="10" oninput="calcRentVBuy()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Winner</div>
+          <div class="result-winner-name" id="rvb-winner-name">Buying</div>
+          <div class="result-winner-amount" id="rvb-winner-amount">$48,200 ahead</div>
+          <div class="result-winner-desc" id="rvb-winner-desc">net wealth after 10 years</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card" id="rvb-card-buy">
+            <div class="result-card-label">Net Worth (Buy)</div>
+            <div class="result-card-value" id="rvb-buy-val">$312,400</div>
+            <div class="result-card-sub">home equity + appreciation</div>
+          </div>
+          <div class="result-card" id="rvb-card-rent">
+            <div class="result-card-label">Net Worth (Rent)</div>
+            <div class="result-card-value" id="rvb-rent-val">$264,200</div>
+            <div class="result-card-sub">invested down payment growth</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Down payment required</span><span class="result-row-value" id="rvb-downpmt">$90,000</span></div>
+          <div class="result-row"><span class="result-row-label">Monthly mortgage (P+I)</span><span class="result-row-value" id="rvb-monthly">$2,368</span></div>
+          <div class="result-row"><span class="result-row-label">Home value after period</span><span class="result-row-value" id="rvb-homeval">$604,500</span></div>
+          <div class="result-row"><span class="result-row-label">Total rent paid</span><span class="result-row-value negative" id="rvb-totalrent">-$298,700</span></div>
+        </div>
+        <div class="disclaimer">Excludes property taxes, insurance, HOA, maintenance (~1-2% annually). Not financial advice.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments (a Registered Investment Advisor) and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. DEBT AVALANCHE VS SNOWBALL -->
+<div id="calc-debt" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">Debt Avalanche <em>vs</em> Snowball</div>
+    <div class="calc-subtitle">The avalanche method (highest rate first) saves the most money. The snowball method (smallest balance first) provides psychological wins. See the difference.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Debt 1 (e.g. Credit Card)</div>
+        <div class="input-group">
+          <div class="input-label">Balance <span id="d1-bal-val">$8,000</span></div>
+          <input type="range" class="slider" id="d1-bal" min="500" max="50000" step="500" value="8000" oninput="calcDebt()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Interest Rate <span id="d1-rate-val">22%</span></div>
+          <input type="range" class="slider" id="d1-rate" min="1" max="35" step="0.5" value="22" oninput="calcDebt()">
+        </div>
+        <div class="input-section-title">Debt 2 (e.g. Car Loan)</div>
+        <div class="input-group">
+          <div class="input-label">Balance <span id="d2-bal-val">$12,000</span></div>
+          <input type="range" class="slider" id="d2-bal" min="500" max="50000" step="500" value="12000" oninput="calcDebt()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Interest Rate <span id="d2-rate-val">7%</span></div>
+          <input type="range" class="slider" id="d2-rate" min="1" max="35" step="0.5" value="7" oninput="calcDebt()">
+        </div>
+        <div class="input-section-title">Debt 3 (e.g. Student Loan)</div>
+        <div class="input-group">
+          <div class="input-label">Balance <span id="d3-bal-val">$22,000</span></div>
+          <input type="range" class="slider" id="d3-bal" min="0" max="100000" step="1000" value="22000" oninput="calcDebt()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Interest Rate <span id="d3-rate-val">5%</span></div>
+          <input type="range" class="slider" id="d3-rate" min="1" max="20" step="0.5" value="5" oninput="calcDebt()">
+        </div>
+        <div class="input-section-title">Payment</div>
+        <div class="input-group">
+          <div class="input-label">Total Monthly Payment <span id="d-payment-val">$1,200/mo</span></div>
+          <input type="range" class="slider" id="d-payment" min="300" max="5000" step="50" value="1200" oninput="calcDebt()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Winner (Money Saved)</div>
+          <div class="result-winner-name">Avalanche Method</div>
+          <div class="result-winner-amount" id="d-winner-amount">$1,840 saved</div>
+          <div class="result-winner-desc">in total interest vs snowball</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card winner-card">
+            <div class="result-card-label">Avalanche Interest</div>
+            <div class="result-card-value" id="d-aval-interest">$7,240</div>
+            <div class="result-card-sub" id="d-aval-months">paid off in 42 months</div>
+          </div>
+          <div class="result-card loser-card">
+            <div class="result-card-label">Snowball Interest</div>
+            <div class="result-card-value" id="d-snow-interest">$9,080</div>
+            <div class="result-card-sub" id="d-snow-months">paid off in 42 months</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Total debt</span><span class="result-row-value" id="d-total">$42,000</span></div>
+          <div class="result-row"><span class="result-row-label">Monthly payment</span><span class="result-row-value" id="d-monthly">$1,200</span></div>
+          <div class="result-row"><span class="result-row-label">Avalanche order</span><span class="result-row-value" id="d-aval-order">22% → 7% → 5%</span></div>
+          <div class="result-row"><span class="result-row-label">Snowball order</span><span class="result-row-value" id="d-snow-order">$8K → $12K → $22K</span></div>
+        </div>
+        <div class="disclaimer">Minimum payments assumed equal across debts. Same payoff timeline for both methods. Not financial advice.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. ROTH VS TRADITIONAL -->
+<div id="calc-roth" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">Roth <em>vs</em> Traditional IRA</div>
+    <div class="calc-subtitle">The right choice depends entirely on whether your tax rate is higher now or in retirement. This calculator does the math both ways.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Your Situation</div>
+        <div class="input-group">
+          <div class="input-label">Annual Contribution <span id="r-contrib-val">$7,000</span></div>
+          <input type="range" class="slider" id="r-contrib" min="1000" max="7000" step="500" value="7000" oninput="calcRoth()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Current Tax Rate <span id="r-curtax-val">24%</span></div>
+          <input type="range" class="slider" id="r-curtax" min="10" max="37" step="1" value="24" oninput="calcRoth()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Expected Retirement Tax Rate <span id="r-rettax-val">20%</span></div>
+          <input type="range" class="slider" id="r-rettax" min="10" max="37" step="1" value="20" oninput="calcRoth()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Expected Annual Return <span id="r-return-val">7%</span></div>
+          <input type="range" class="slider" id="r-return" min="3" max="12" step="0.5" value="7" oninput="calcRoth()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Years Until Retirement <span id="r-years-val">25 years</span></div>
+          <input type="range" class="slider" id="r-years" min="5" max="40" step="1" value="25" oninput="calcRoth()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Winner</div>
+          <div class="result-winner-name" id="r-winner-name">Roth IRA</div>
+          <div class="result-winner-amount" id="r-winner-amount">$32,400 more</div>
+          <div class="result-winner-desc">after-tax retirement value</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card" id="r-card-roth">
+            <div class="result-card-label">Roth IRA</div>
+            <div class="result-card-value" id="r-roth-val">$481,200</div>
+            <div class="result-card-sub">tax-free at retirement</div>
+          </div>
+          <div class="result-card" id="r-card-trad">
+            <div class="result-card-label">Traditional IRA</div>
+            <div class="result-card-value" id="r-trad-val">$448,800</div>
+            <div class="result-card-sub">after taxes in retirement</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Annual contribution</span><span class="result-row-value" id="r-contrib-display">$7,000</span></div>
+          <div class="result-row"><span class="result-row-label">Gross portfolio at retirement</span><span class="result-row-value" id="r-gross">$601,500</span></div>
+          <div class="result-row"><span class="result-row-label">Roth tax savings (tax-free growth)</span><span class="result-row-value positive" id="r-roth-savings">$120,300</span></div>
+          <div class="result-row"><span class="result-row-label">Traditional tax deduction value</span><span class="result-row-value positive" id="r-trad-deduction">$42,000</span></div>
+        </div>
+        <div class="disclaimer">2024 IRA contribution limit is $7,000 ($8,000 if 50+). Income limits apply to Roth IRA eligibility. Not financial advice.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. STUDENT LOANS VS INVEST -->
+<div id="calc-studentloans" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">Student Loans <em>vs</em> Invest</div>
+    <div class="calc-subtitle">If your student loan rate is lower than your expected investment return, investing wins. But risk matters too. See both scenarios.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Your Loan</div>
+        <div class="input-group">
+          <div class="input-label">Loan Balance <span id="sl-bal-val">$35,000</span></div>
+          <input type="range" class="slider" id="sl-bal" min="5000" max="200000" step="1000" value="35000" oninput="calcStudentLoans()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Loan Interest Rate <span id="sl-rate-val">5.5%</span></div>
+          <input type="range" class="slider" id="sl-rate" min="1" max="12" step="0.25" value="5.5" oninput="calcStudentLoans()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Standard Monthly Payment <span id="sl-min-val">$380/mo</span></div>
+          <input type="range" class="slider" id="sl-min" min="100" max="3000" step="25" value="380" oninput="calcStudentLoans()">
+        </div>
+        <div class="input-section-title">Extra Money Available</div>
+        <div class="input-group">
+          <div class="input-label">Extra Monthly Amount <span id="sl-extra-val">$400/mo</span></div>
+          <input type="range" class="slider" id="sl-extra" min="50" max="2000" step="50" value="400" oninput="calcStudentLoans()">
+        </div>
+        <div class="input-section-title">Investment Scenario</div>
+        <div class="input-group">
+          <div class="input-label">Expected Investment Return <span id="sl-return-val">8%</span></div>
+          <input type="range" class="slider" id="sl-return" min="3" max="14" step="0.5" value="8" oninput="calcStudentLoans()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Time Horizon <span id="sl-years-val">10 years</span></div>
+          <input type="range" class="slider" id="sl-years" min="3" max="20" step="1" value="10" oninput="calcStudentLoans()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Winner</div>
+          <div class="result-winner-name" id="sl-winner-name">Investing</div>
+          <div class="result-winner-amount" id="sl-winner-amount">$18,200 ahead</div>
+          <div class="result-winner-desc" id="sl-winner-desc">after 10 years</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card" id="sl-card-invest">
+            <div class="result-card-label">Invest the Extra</div>
+            <div class="result-card-value" id="sl-invest-val">$72,800</div>
+            <div class="result-card-sub">portfolio value</div>
+          </div>
+          <div class="result-card" id="sl-card-payoff">
+            <div class="result-card-label">Pay Off Early</div>
+            <div class="result-card-value" id="sl-payoff-val">$54,600</div>
+            <div class="result-card-sub">interest saved + freed cashflow</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Loan rate vs return spread</span><span class="result-row-value" id="sl-spread">+2.5%</span></div>
+          <div class="result-row"><span class="result-row-label">Interest saved (payoff path)</span><span class="result-row-value positive" id="sl-int-saved">$12,400</span></div>
+          <div class="result-row"><span class="result-row-label">Investment gains</span><span class="result-row-value positive" id="sl-gains">$24,800</span></div>
+        </div>
+        <div class="disclaimer">Always maintain emergency fund before extra investing. Not financial advice. Consider employer 401(k) match first — it's a guaranteed 100% return.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. FIRE CALCULATOR -->
+<div id="calc-fire" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">FIRE / Early <em>Retirement</em></div>
+    <div class="calc-subtitle">Financial Independence, Retire Early. Based on the 4% rule — your portfolio needs to be 25x your annual expenses to retire safely.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Your Finances</div>
+        <div class="input-group">
+          <div class="input-label">Current Portfolio Value <span id="f-portfolio-val">$180,000</span></div>
+          <input type="range" class="slider" id="f-portfolio" min="0" max="2000000" step="5000" value="180000" oninput="calcFIRE()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Annual Income <span id="f-income-val">$95,000</span></div>
+          <input type="range" class="slider" id="f-income" min="30000" max="500000" step="5000" value="95000" oninput="calcFIRE()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Annual Expenses <span id="f-expenses-val">$60,000</span></div>
+          <input type="range" class="slider" id="f-expenses" min="20000" max="300000" step="5000" value="60000" oninput="calcFIRE()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Annual Savings (beyond expenses) <span id="f-savings-val">$25,000</span></div>
+          <input type="range" class="slider" id="f-savings" min="1000" max="200000" step="1000" value="25000" oninput="calcFIRE()">
+        </div>
+        <div class="input-section-title">Assumptions</div>
+        <div class="input-group">
+          <div class="input-label">Expected Portfolio Return <span id="f-return-val">7%</span></div>
+          <input type="range" class="slider" id="f-return" min="3" max="12" step="0.5" value="7" oninput="calcFIRE()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Safe Withdrawal Rate <span id="f-swr-val">4%</span></div>
+          <input type="range" class="slider" id="f-swr" min="3" max="5" step="0.25" value="4" oninput="calcFIRE()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Years to FIRE</div>
+          <div class="result-winner-name" id="f-years-name">14 Years</div>
+          <div class="result-winner-amount" id="f-fire-number">FIRE Number: $1,500,000</div>
+          <div class="result-winner-desc" id="f-retire-age">Retire at age ~51</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card">
+            <div class="result-card-label">FIRE Number</div>
+            <div class="result-card-value" id="f-fire-val">$1,500,000</div>
+            <div class="result-card-sub">25× annual expenses</div>
+          </div>
+          <div class="result-card">
+            <div class="result-card-label">Current Savings Rate</div>
+            <div class="result-card-value" id="f-saverate">26%</div>
+            <div class="result-card-sub">of gross income</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Current portfolio</span><span class="result-row-value" id="f-curr-port">$180,000</span></div>
+          <div class="result-row"><span class="result-row-label">Gap to FIRE</span><span class="result-row-value" id="f-gap">$1,320,000</span></div>
+          <div class="result-row"><span class="result-row-label">Annual safe withdrawal</span><span class="result-row-value positive" id="f-withdrawal">$60,000</span></div>
+          <div class="result-row"><span class="result-row-label">Savings rate needed for 10yr FIRE</span><span class="result-row-value" id="f-needed-rate">~65%</span></div>
+        </div>
+        <div class="disclaimer">The 4% rule is a guideline, not a guarantee. Sequence of returns risk, inflation, and healthcare costs can impact real outcomes. Not financial advice.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. COMPOUND INTEREST -->
+<div id="calc-compound" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">Start Investing <em>Now vs Later</em></div>
+    <div class="calc-subtitle">Every year you delay costs you more than you think. See exactly what waiting 1, 5, or 10 years costs in final portfolio value.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Investment Details</div>
+        <div class="input-group">
+          <div class="input-label">Monthly Contribution <span id="ci-monthly-val">$500/mo</span></div>
+          <input type="range" class="slider" id="ci-monthly" min="50" max="5000" step="50" value="500" oninput="calcCompound()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Starting Balance <span id="ci-start-val">$10,000</span></div>
+          <input type="range" class="slider" id="ci-start" min="0" max="100000" step="1000" value="10000" oninput="calcCompound()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Annual Return <span id="ci-return-val">8%</span></div>
+          <input type="range" class="slider" id="ci-return" min="3" max="15" step="0.5" value="8" oninput="calcCompound()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Total Years to Invest <span id="ci-years-val">30 years</span></div>
+          <input type="range" class="slider" id="ci-years" min="10" max="50" step="1" value="30" oninput="calcCompound()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Delay (Years Waited) <span id="ci-delay-val">5 years</span></div>
+          <input type="range" class="slider" id="ci-delay" min="1" max="15" step="1" value="5" oninput="calcCompound()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Cost of Waiting</div>
+          <div class="result-winner-name" id="ci-cost-name">$187,400 Lost</div>
+          <div class="result-winner-amount" id="ci-cost-amount">by waiting 5 years</div>
+          <div class="result-winner-desc">that's the power of compounding</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card winner-card">
+            <div class="result-card-label">Start Now</div>
+            <div class="result-card-value" id="ci-now-val">$754,200</div>
+            <div class="result-card-sub" id="ci-now-sub">after 30 years</div>
+          </div>
+          <div class="result-card loser-card">
+            <div class="result-card-label">Start in 5 Years</div>
+            <div class="result-card-value" id="ci-later-val">$566,800</div>
+            <div class="result-card-sub" id="ci-later-sub">after 25 years</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Total contributed (start now)</span><span class="result-row-value" id="ci-contrib-now">$190,000</span></div>
+          <div class="result-row"><span class="result-row-label">Total contributed (delayed)</span><span class="result-row-value" id="ci-contrib-later">$160,000</span></div>
+          <div class="result-row"><span class="result-row-label">Growth difference</span><span class="result-row-value negative" id="ci-growth-diff">-$157,400</span></div>
+          <div class="result-row"><span class="result-row-label">% lost by waiting</span><span class="result-row-value negative" id="ci-pct-lost">-24.9%</span></div>
+        </div>
+        <div class="disclaimer">Assumes consistent monthly contributions and constant return rate. Markets are volatile and returns vary. Not financial advice.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 8. BUY VS LEASE CAR -->
+<div id="calc-car" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">Buy <em>vs</em> Lease a Car</div>
+    <div class="calc-subtitle">Leasing has lower monthly payments but you own nothing at the end. Buying costs more upfront but builds equity. See the true 5-year cost of each.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Buy Scenario</div>
+        <div class="input-group">
+          <div class="input-label">Vehicle Price <span id="car-price-val">$38,000</span></div>
+          <input type="range" class="slider" id="car-price" min="10000" max="150000" step="1000" value="38000" oninput="calcCar()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Down Payment <span id="car-down-val">$5,000</span></div>
+          <input type="range" class="slider" id="car-down" min="0" max="30000" step="500" value="5000" oninput="calcCar()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Loan Rate <span id="car-lrate-val">6%</span></div>
+          <input type="range" class="slider" id="car-lrate" min="1" max="15" step="0.25" value="6" oninput="calcCar()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Loan Term <span id="car-lterm-val">60 months</span></div>
+          <input type="range" class="slider" id="car-lterm" min="24" max="84" step="12" value="60" oninput="calcCar()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Annual Depreciation Rate <span id="car-depr-val">15%</span></div>
+          <input type="range" class="slider" id="car-depr" min="5" max="30" step="1" value="15" oninput="calcCar()">
+        </div>
+        <div class="input-section-title">Lease Scenario</div>
+        <div class="input-group">
+          <div class="input-label">Monthly Lease Payment <span id="car-lease-val">$420/mo</span></div>
+          <input type="range" class="slider" id="car-lease" min="150" max="2000" step="25" value="420" oninput="calcCar()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Lease Down Payment <span id="car-leasedown-val">$2,000</span></div>
+          <input type="range" class="slider" id="car-leasedown" min="0" max="10000" step="500" value="2000" oninput="calcCar()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results (5-Year Comparison)</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Winner</div>
+          <div class="result-winner-name" id="car-winner-name">Buying</div>
+          <div class="result-winner-amount" id="car-winner-amount">$8,400 better</div>
+          <div class="result-winner-desc">net cost after 5 years</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card" id="car-card-buy">
+            <div class="result-card-label">Buy — Net Cost</div>
+            <div class="result-card-value" id="car-buy-val">$18,200</div>
+            <div class="result-card-sub">total cost minus residual value</div>
+          </div>
+          <div class="result-card" id="car-card-lease">
+            <div class="result-card-label">Lease — Net Cost</div>
+            <div class="result-card-value" id="car-lease-val2">$26,600</div>
+            <div class="result-card-sub">total paid, own nothing</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Buy monthly payment (P+I)</span><span class="result-row-value" id="car-buy-monthly">$633</span></div>
+          <div class="result-row"><span class="result-row-label">Residual value after 5 years</span><span class="result-row-value positive" id="car-residual">$16,800</span></div>
+          <div class="result-row"><span class="result-row-label">Total lease payments</span><span class="result-row-value negative" id="car-total-lease">$25,200</span></div>
+          <div class="result-row"><span class="result-row-label">Total interest (buy)</span><span class="result-row-value negative" id="car-total-interest">$6,980</span></div>
+        </div>
+        <div class="disclaimer">Excludes insurance, taxes, registration, and maintenance. Lease mileage overages not included. Not financial advice.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 9. HYSA VS INVESTING -->
+<div id="calc-hysa" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">HYSA <em>vs</em> Investing</div>
+    <div class="calc-subtitle">A high-yield savings account is safe but earns less over time. Investing has higher expected returns but with risk. Find your break-even point.</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Your Savings</div>
+        <div class="input-group">
+          <div class="input-label">Initial Amount <span id="h-initial-val">$25,000</span></div>
+          <input type="range" class="slider" id="h-initial" min="1000" max="500000" step="1000" value="25000" oninput="calcHYSA()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Monthly Additions <span id="h-monthly-val">$300/mo</span></div>
+          <input type="range" class="slider" id="h-monthly" min="0" max="5000" step="100" value="300" oninput="calcHYSA()">
+        </div>
+        <div class="input-section-title">HYSA Details</div>
+        <div class="input-group">
+          <div class="input-label">HYSA APY <span id="h-hysa-val">4.5%</span></div>
+          <input type="range" class="slider" id="h-hysa" min="1" max="6" step="0.1" value="4.5" oninput="calcHYSA()">
+        </div>
+        <div class="input-section-title">Investment Details</div>
+        <div class="input-group">
+          <div class="input-label">Expected Investment Return <span id="h-invest-val">8%</span></div>
+          <input type="range" class="slider" id="h-invest" min="4" max="14" step="0.5" value="8" oninput="calcHYSA()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Time Horizon <span id="h-years-val">10 years</span></div>
+          <input type="range" class="slider" id="h-years" min="1" max="30" step="1" value="10" oninput="calcHYSA()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Winner</div>
+          <div class="result-winner-name" id="h-winner-name">Investing</div>
+          <div class="result-winner-amount" id="h-winner-amount">$28,400 more</div>
+          <div class="result-winner-desc">over 10 years</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card" id="h-card-invest">
+            <div class="result-card-label">Investing</div>
+            <div class="result-card-value" id="h-invest-val2">$121,600</div>
+            <div class="result-card-sub">expected portfolio value</div>
+          </div>
+          <div class="result-card" id="h-card-hysa">
+            <div class="result-card-label">HYSA</div>
+            <div class="result-card-value" id="h-hysa-val2">$93,200</div>
+            <div class="result-card-sub">guaranteed balance</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">HYSA rate vs investment spread</span><span class="result-row-value" id="h-spread">+3.5%</span></div>
+          <div class="result-row"><span class="result-row-label">Total contributions</span><span class="result-row-value" id="h-contrib">$61,000</span></div>
+          <div class="result-row"><span class="result-row-label">HYSA interest earned</span><span class="result-row-value positive" id="h-hysa-earned">$32,200</span></div>
+          <div class="result-row"><span class="result-row-label">Investment gains (estimated)</span><span class="result-row-value positive" id="h-invest-gains">$60,600</span></div>
+        </div>
+        <div class="disclaimer">HYSA rates are variable and may decrease. HYSA is FDIC insured; investments are not. Keep 3-6 months expenses in HYSA as emergency fund regardless. Not financial advice.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 10. COAST FIRE -->
+<div id="calc-coastfire" class="calc-panel">
+  <div class="section">
+    <button class="calc-back" onclick="closeCalc()">← Back to All Tools</button>
+    <div class="calc-title">Coast FIRE <em>Calculator</em></div>
+    <div class="calc-subtitle">Coast FIRE means you've saved enough that — even if you stop contributing today — compound growth will carry you to your retirement number. Have you hit it?</div>
+    <div class="calc-layout">
+      <div class="calc-inputs">
+        <div class="input-section-title">Your Situation</div>
+        <div class="input-group">
+          <div class="input-label">Current Portfolio Value <span id="cf-portfolio-val">$150,000</span></div>
+          <input type="range" class="slider" id="cf-portfolio" min="0" max="2000000" step="5000" value="150000" oninput="calcCoastFIRE()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Current Age <span id="cf-age-val">35</span></div>
+          <input type="range" class="slider" id="cf-age" min="20" max="65" step="1" value="35" oninput="calcCoastFIRE()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Target Retirement Age <span id="cf-retage-val">65</span></div>
+          <input type="range" class="slider" id="cf-retage" min="45" max="75" step="1" value="65" oninput="calcCoastFIRE()">
+        </div>
+        <div class="input-section-title">Retirement Goal</div>
+        <div class="input-group">
+          <div class="input-label">Annual Expenses in Retirement <span id="cf-expenses-val">$70,000</span></div>
+          <input type="range" class="slider" id="cf-expenses" min="20000" max="300000" step="5000" value="70000" oninput="calcCoastFIRE()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Safe Withdrawal Rate <span id="cf-swr-val">4%</span></div>
+          <input type="range" class="slider" id="cf-swr" min="3" max="5" step="0.25" value="4" oninput="calcCoastFIRE()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Expected Annual Return <span id="cf-return-val">7%</span></div>
+          <input type="range" class="slider" id="cf-return" min="3" max="12" step="0.5" value="7" oninput="calcCoastFIRE()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="results-label">Results</div>
+        <div class="result-winner">
+          <div class="result-winner-label">Coast FIRE Status</div>
+          <div class="result-winner-name" id="cf-status">Not Yet There</div>
+          <div class="result-winner-amount" id="cf-gap-display">$48,200 to go</div>
+          <div class="result-winner-desc" id="cf-desc">keep contributing</div>
+        </div>
+        <div class="result-cards">
+          <div class="result-card">
+            <div class="result-card-label">Coast FIRE Number</div>
+            <div class="result-card-value" id="cf-coast-num">$198,200</div>
+            <div class="result-card-sub">needed today to coast</div>
+          </div>
+          <div class="result-card">
+            <div class="result-card-label">FIRE Number</div>
+            <div class="result-card-value" id="cf-fire-num">$1,750,000</div>
+            <div class="result-card-sub">needed at retirement</div>
+          </div>
+        </div>
+        <div class="result-breakdown">
+          <div class="result-row"><span class="result-row-label">Current portfolio</span><span class="result-row-value" id="cf-curr">$150,000</span></div>
+          <div class="result-row"><span class="result-row-label">Projected at retirement (no contributions)</span><span class="result-row-value" id="cf-projected">$1,140,800</span></div>
+          <div class="result-row"><span class="result-row-label">Years until retirement</span><span class="result-row-value" id="cf-years-left">30 years</span></div>
+          <div class="result-row"><span class="result-row-label">Coverage of FIRE number</span><span class="result-row-value" id="cf-coverage">65%</span></div>
+        </div>
+        <div class="disclaimer">Coast FIRE assumes no additional contributions. Inflation and sequence of returns risk not modeled. Not financial advice. Consult a financial advisor.</div>
+      </div>
+    </div>
+    <div class="author-bio">
+      <div class="author-avatar">MM</div>
+      <div><div class="author-name">Mike Modica</div><div class="author-role">Partner, Pine Valley Investments</div><div class="author-text">Mike is a Partner at Pine Valley Investments and co-manager of the Magarian Fund. He brings institutional-grade financial analysis to personal decision-making.</div></div>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -167,14 +1030,13 @@
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Services</div>
+        <div class="footer-col-title">Calculators</div>
         <ul class="footer-links">
-          <li><a href="services.html">Wealth Management</a></li>
-          <li><a href="services.html">Investment Advisory</a></li>
-          <li><a href="services.html">Trust &amp; Estate Planning</a></li>
-          <li><a href="services.html">Retirement Plans</a></li>
-          <li><a href="services.html">Investment Banking</a></li>
-          <li><a href="services.html">Network Opportunities</a></li>
+          <li><a href="#" onclick="openCalc('mortgage');return false;">Mortgage vs Invest</a></li>
+          <li><a href="#" onclick="openCalc('rentvbuy');return false;">Rent vs Buy</a></li>
+          <li><a href="#" onclick="openCalc('roth');return false;">Roth vs Traditional</a></li>
+          <li><a href="#" onclick="openCalc('fire');return false;">FIRE Calculator</a></li>
+          <li><a href="#" onclick="openCalc('compound');return false;">Compound Interest</a></li>
         </ul>
       </div>
       <div>
@@ -184,7 +1046,6 @@
           <li><a href="team.html">Meet the Team</a></li>
           <li><a href="services.html">Our Services</a></li>
           <li><a href="client-login.html">Client Access</a></li>
-          <li><a href="announcements.html">Announcements</a></li>
         </ul>
       </div>
       <div>
@@ -193,43 +1054,512 @@
           <li><a href="#">10 E Stow Rd, Suite 200</a></li>
           <li><a href="#">Marlton, NJ 08053</a></li>
           <li><a href="tel:8563348260">856-334-8260</a></li>
-          <li><a href="tel:8563562598">Fax: 856-356-2598</a></li>
           <li><a href="mailto:info@pinevalleyinvestments.com">info@pinevalleyinvestments.com</a></li>
-          <li style="margin-top:12px"><a href="client-login.html">Client Login →</a></li>
+          <li style="margin-top:12px"><a href="contact.html">Schedule a Consultation →</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Pine Valley Investments, LLC. All rights reserved. Pine Valley Investments is a Registered Investment Advisor. Registration does not imply a certain level of skill or training.</div>
+      <div class="footer-copy">© 2026 Pine Valley Investments, LLC. All rights reserved. These tools are for informational purposes only and do not constitute financial advice. Pine Valley Investments is a Registered Investment Advisor. Past performance is not indicative of future results. Consult a qualified financial professional before making investment decisions.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy &amp; Form CRS</a>
+        <a href="#">Privacy Policy</a>
         <a href="https://adviserinfo.sec.gov" target="_blank">SEC Investment Advisor Review</a>
         <a href="#">Form ADV 2A</a>
       </div>
     </div>
   </div>
 </footer>
+
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
-  const toggle = document.getElementById('navToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  toggle.addEventListener('click', () => {
-    toggle.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+// ─── NAV ───
+const toggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    toggle.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
   });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      toggle.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+});
+
+// ─── REVEAL ───
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─── CALC NAVIGATION ───
+function openCalc(id) {
+  document.getElementById('hub-view').style.display = 'none';
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('calc-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+  // Trigger initial calc
+  const calcMap = {
+    mortgage: calcMortgage, rentvbuy: calcRentVBuy, debt: calcDebt,
+    roth: calcRoth, studentloans: calcStudentLoans, fire: calcFIRE,
+    compound: calcCompound, car: calcCar, hysa: calcHYSA, coastfire: calcCoastFIRE
+  };
+  if (calcMap[id]) calcMap[id]();
+}
+function closeCalc() {
+  document.getElementById('hub-view').style.display = 'block';
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  window.scrollTo(0, 0);
+}
+
+// ─── HELPERS ───
+const fmt = n => '$' + Math.round(n).toLocaleString();
+const fmtPct = n => n.toFixed(1) + '%';
+const slider = (id, suffix='') => {
+  const el = document.getElementById(id);
+  return parseFloat(el.value);
+};
+function setLabel(id, val) { document.getElementById(id).textContent = val; }
+
+function futureValue(pmt, r, n, pv=0) {
+  if (r === 0) return pv + pmt * n;
+  const monthly = r / 12;
+  return pv * Math.pow(1 + monthly, n) + pmt * (Math.pow(1 + monthly, n) - 1) / monthly;
+}
+
+// ─── 1. MORTGAGE ───
+function calcMortgage() {
+  const balance = slider('m-balance');
+  const rate = slider('m-rate') / 100;
+  const years = slider('m-years');
+  const extra = slider('m-extra');
+  const ret = slider('m-return') / 100;
+  const horizon = slider('m-horizon');
+
+  setLabel('m-balance-val', fmt(balance));
+  setLabel('m-rate-val', fmtPct(rate*100));
+  setLabel('m-years-val', years + ' years');
+  setLabel('m-extra-val', fmt(extra) + '/mo');
+  setLabel('m-return-val', fmtPct(ret*100));
+  setLabel('m-horizon-val', horizon + ' years');
+
+  // Interest saved by paying extra
+  const mr = rate / 12;
+  const n = years * 12;
+  const basePayment = balance * mr * Math.pow(1+mr,n) / (Math.pow(1+mr,n)-1);
+  let bal = balance, totalInterestExtra = 0, totalInterestBase = 0;
+  let balBase = balance;
+  for (let i = 0; i < horizon * 12; i++) {
+    const intExtra = bal * mr;
+    totalInterestExtra += intExtra;
+    bal = Math.max(0, bal + intExtra - basePayment - extra);
+    const intBase = balBase * mr;
+    totalInterestBase += intBase;
+    balBase = Math.max(0, balBase + intBase - basePayment);
+  }
+  const interestSaved = totalInterestBase - totalInterestExtra;
+
+  // Investment value
+  const investVal = futureValue(extra, ret, horizon * 12);
+
+  const winner = investVal > interestSaved ? 'Investing' : 'Paying Off Mortgage';
+  const diff = Math.abs(investVal - interestSaved);
+
+  document.getElementById('m-winner-name').textContent = winner;
+  document.getElementById('m-winner-amount').textContent = fmt(diff) + ' ahead';
+  document.getElementById('m-invest-val').textContent = fmt(investVal);
+  document.getElementById('m-payoff-val').textContent = fmt(interestSaved);
+  document.getElementById('m-extra-display').textContent = fmt(extra) + '/mo';
+  document.getElementById('m-total-invested').textContent = fmt(extra * horizon * 12);
+  document.getElementById('m-growth').textContent = '+' + fmt(investVal - extra * horizon * 12);
+  document.getElementById('m-guaranteed').textContent = fmtPct(rate*100);
+
+  const winInvest = investVal >= interestSaved;
+  document.getElementById('m-card-invest').className = 'result-card ' + (winInvest ? 'winner-card' : 'loser-card');
+  document.getElementById('m-card-payoff').className = 'result-card ' + (!winInvest ? 'winner-card' : 'loser-card');
+}
+
+// ─── 2. RENT VS BUY ───
+function calcRentVBuy() {
+  const price = slider('rvb-price');
+  const downPct = slider('rvb-down') / 100;
+  const mrate = slider('rvb-mrate') / 100;
+  const appr = slider('rvb-appr') / 100;
+  const rent = slider('rvb-rent');
+  const rentInc = slider('rvb-rentinc') / 100;
+  const investRet = slider('rvb-invest') / 100;
+  const years = slider('rvb-years');
+
+  setLabel('rvb-price-val', fmt(price));
+  setLabel('rvb-down-val', (downPct*100).toFixed(0) + '%');
+  setLabel('rvb-mrate-val', fmtPct(mrate*100));
+  setLabel('rvb-appr-val', fmtPct(appr*100));
+  setLabel('rvb-rent-val', fmt(rent) + '/mo');
+  setLabel('rvb-rentinc-val', fmtPct(rentInc*100));
+  setLabel('rvb-invest-val', fmtPct(investRet*100));
+  setLabel('rvb-years-val', years + ' years');
+
+  const down = price * downPct;
+  const loan = price - down;
+  const mr = mrate / 12;
+  const n = 30 * 12;
+  const mortgage = loan * mr * Math.pow(1+mr,n) / (Math.pow(1+mr,n)-1);
+  const horizonMonths = years * 12;
+
+  // Buy: equity at end
+  let bal = loan;
+  for (let i = 0; i < horizonMonths; i++) {
+    const interest = bal * mr;
+    bal = Math.max(0, bal + interest - mortgage);
+  }
+  const homeValue = price * Math.pow(1 + appr, years);
+  const equity = homeValue - bal;
+
+  // Rent: invested down payment
+  const investedDown = down * Math.pow(1 + investRet, years);
+  let totalRent = 0;
+  for (let i = 0; i < years; i++) totalRent += rent * 12 * Math.pow(1 + rentInc, i);
+
+  document.getElementById('rvb-winner-name').textContent = equity > investedDown ? 'Buying' : 'Renting';
+  document.getElementById('rvb-winner-amount').textContent = fmt(Math.abs(equity - investedDown)) + ' ahead';
+  document.getElementById('rvb-buy-val').textContent = fmt(equity);
+  document.getElementById('rvb-rent-val').textContent = fmt(investedDown);
+  document.getElementById('rvb-downpmt').textContent = fmt(down);
+  document.getElementById('rvb-monthly').textContent = fmt(mortgage);
+  document.getElementById('rvb-homeval').textContent = fmt(homeValue);
+  document.getElementById('rvb-totalrent').textContent = '-' + fmt(totalRent);
+
+  const buyWins = equity >= investedDown;
+  document.getElementById('rvb-card-buy').className = 'result-card ' + (buyWins ? 'winner-card' : 'loser-card');
+  document.getElementById('rvb-card-rent').className = 'result-card ' + (!buyWins ? 'winner-card' : 'loser-card');
+}
+
+// ─── 3. DEBT ───
+function calcDebt() {
+  const debts = [
+    { bal: slider('d1-bal'), rate: slider('d1-rate')/100 },
+    { bal: slider('d2-bal'), rate: slider('d2-rate')/100 },
+    { bal: slider('d3-bal'), rate: slider('d3-rate')/100 },
+  ].filter(d => d.bal > 0);
+  const payment = slider('d-payment');
+
+  setLabel('d1-bal-val', fmt(slider('d1-bal')));
+  setLabel('d1-rate-val', fmtPct(slider('d1-rate')));
+  setLabel('d2-bal-val', fmt(slider('d2-bal')));
+  setLabel('d2-rate-val', fmtPct(slider('d2-rate')));
+  setLabel('d3-bal-val', fmt(slider('d3-bal')));
+  setLabel('d3-rate-val', fmtPct(slider('d3-rate')));
+  setLabel('d-payment-val', fmt(payment) + '/mo');
+
+  function simulate(order) {
+    let balances = order.map(d => d.bal);
+    let totalInterest = 0, months = 0;
+    while (balances.some(b => b > 0) && months < 600) {
+      months++;
+      let extra = payment;
+      for (let i = 0; i < balances.length; i++) {
+        if (balances[i] <= 0) continue;
+        const interest = balances[i] * (order[i].rate / 12);
+        totalInterest += interest;
+        balances[i] += interest;
+      }
+      // Pay minimums first (simplified: proportional), then throw extra at target
+      const targetIdx = balances.findIndex(b => b > 0);
+      if (targetIdx >= 0) {
+        const pay = Math.min(extra, balances[targetIdx]);
+        balances[targetIdx] -= pay;
+        extra -= pay;
+      }
+    }
+    return { totalInterest, months };
+  }
+
+  const avalanche = [...debts].sort((a,b) => b.rate - a.rate);
+  const snowball = [...debts].sort((a,b) => a.bal - b.bal);
+
+  const aRes = simulate(avalanche);
+  const sRes = simulate(snowball);
+  const saved = sRes.totalInterest - aRes.totalInterest;
+
+  setLabel('d-winner-amount', fmt(Math.max(0,saved)) + ' saved');
+  document.getElementById('d-aval-interest').textContent = fmt(aRes.totalInterest);
+  document.getElementById('d-aval-months').textContent = 'paid off in ' + aRes.months + ' months';
+  document.getElementById('d-snow-interest').textContent = fmt(sRes.totalInterest);
+  document.getElementById('d-snow-months').textContent = 'paid off in ' + sRes.months + ' months';
+  document.getElementById('d-total').textContent = fmt(debts.reduce((s,d) => s+d.bal, 0));
+  document.getElementById('d-monthly').textContent = fmt(payment);
+  document.getElementById('d-aval-order').textContent = avalanche.map(d => (d.rate*100).toFixed(0)+'%').join(' → ');
+  document.getElementById('d-snow-order').textContent = snowball.map(d => fmt(d.bal)).join(' → ');
+}
+
+// ─── 4. ROTH ───
+function calcRoth() {
+  const contrib = slider('r-contrib');
+  const curTax = slider('r-curtax') / 100;
+  const retTax = slider('r-rettax') / 100;
+  const ret = slider('r-return') / 100;
+  const years = slider('r-years');
+
+  setLabel('r-contrib-val', fmt(contrib));
+  setLabel('r-curtax-val', fmtPct(curTax*100));
+  setLabel('r-rettax-val', fmtPct(retTax*100));
+  setLabel('r-return-val', fmtPct(ret*100));
+  setLabel('r-years-val', years + ' years');
+
+  const gross = futureValue(contrib/12, ret, years*12);
+  const rothAfterTax = gross; // tax-free
+  const tradAfterTax = gross * (1 - retTax);
+  const tradDeduction = contrib * years * curTax;
+
+  const rothTotal = rothAfterTax;
+  const tradTotal = tradAfterTax;
+  const winner = rothTotal > tradTotal ? 'Roth IRA' : 'Traditional IRA';
+
+  document.getElementById('r-winner-name').textContent = winner;
+  document.getElementById('r-winner-amount').textContent = fmt(Math.abs(rothTotal - tradTotal)) + ' more';
+  document.getElementById('r-roth-val').textContent = fmt(rothTotal);
+  document.getElementById('r-trad-val').textContent = fmt(tradTotal);
+  document.getElementById('r-contrib-display').textContent = fmt(contrib) + '/yr';
+  document.getElementById('r-gross').textContent = fmt(gross);
+  document.getElementById('r-roth-savings').textContent = fmt(gross * retTax);
+  document.getElementById('r-trad-deduction').textContent = fmt(tradDeduction);
+
+  const rothWins = rothTotal >= tradTotal;
+  document.getElementById('r-card-roth').className = 'result-card ' + (rothWins ? 'winner-card' : 'loser-card');
+  document.getElementById('r-card-trad').className = 'result-card ' + (!rothWins ? 'winner-card' : 'loser-card');
+}
+
+// ─── 5. STUDENT LOANS ───
+function calcStudentLoans() {
+  const bal = slider('sl-bal');
+  const rate = slider('sl-rate') / 100;
+  const minPay = slider('sl-min');
+  const extra = slider('sl-extra');
+  const ret = slider('sl-return') / 100;
+  const years = slider('sl-years');
+
+  setLabel('sl-bal-val', fmt(bal));
+  setLabel('sl-rate-val', fmtPct(rate*100));
+  setLabel('sl-min-val', fmt(minPay) + '/mo');
+  setLabel('sl-extra-val', fmt(extra) + '/mo');
+  setLabel('sl-return-val', fmtPct(ret*100));
+  setLabel('sl-years-val', years + ' years');
+
+  // Interest saved paying extra
+  const mr = rate / 12;
+  let loanBal = bal, totalIntExtra = 0;
+  let loanBase = bal, totalIntBase = 0;
+  for (let i = 0; i < years*12; i++) {
+    const iExtra = loanBal * mr; totalIntExtra += iExtra;
+    loanBal = Math.max(0, loanBal + iExtra - minPay - extra);
+    const iBase = loanBase * mr; totalIntBase += iBase;
+    loanBase = Math.max(0, loanBase + iBase - minPay);
+  }
+  const intSaved = totalIntBase - totalIntExtra;
+
+  // Freed cashflow after loan payoff (simplified: invest extra for full period)
+  const investVal = futureValue(extra, ret, years*12);
+
+  const winner = investVal > intSaved ? 'Investing' : 'Pay Off Early';
+  const spread = (ret - rate) * 100;
+
+  document.getElementById('sl-winner-name').textContent = winner;
+  document.getElementById('sl-winner-amount').textContent = fmt(Math.abs(investVal - intSaved)) + ' ahead';
+  document.getElementById('sl-invest-val').textContent = fmt(investVal);
+  document.getElementById('sl-payoff-val').textContent = fmt(intSaved);
+  document.getElementById('sl-spread').textContent = (spread >= 0 ? '+' : '') + fmtPct(spread);
+  document.getElementById('sl-int-saved').textContent = fmt(intSaved);
+  document.getElementById('sl-gains').textContent = fmt(investVal - extra*years*12);
+
+  const investWins = investVal >= intSaved;
+  document.getElementById('sl-card-invest').className = 'result-card ' + (investWins ? 'winner-card' : 'loser-card');
+  document.getElementById('sl-card-payoff').className = 'result-card ' + (!investWins ? 'winner-card' : 'loser-card');
+}
+
+// ─── 6. FIRE ───
+function calcFIRE() {
+  const portfolio = slider('f-portfolio');
+  const income = slider('f-income');
+  const expenses = slider('f-expenses');
+  const savings = slider('f-savings');
+  const ret = slider('f-return') / 100;
+  const swr = slider('f-swr') / 100;
+
+  setLabel('f-portfolio-val', fmt(portfolio));
+  setLabel('f-income-val', fmt(income));
+  setLabel('f-expenses-val', fmt(expenses));
+  setLabel('f-savings-val', fmt(savings));
+  setLabel('f-return-val', fmtPct(ret*100));
+  setLabel('f-swr-val', fmtPct(swr*100));
+
+  const fireNum = expenses / swr;
+  const saveRate = savings / income;
+
+  // Simulate years to FIRE
+  let p = portfolio, years = 0;
+  while (p < fireNum && years < 100) {
+    p = p * (1 + ret) + savings;
+    years++;
+  }
+
+  document.getElementById('f-years-name').textContent = years < 100 ? years + ' Years' : '100+ Years';
+  document.getElementById('f-fire-number').textContent = 'FIRE Number: ' + fmt(fireNum);
+  document.getElementById('f-retire-age').textContent = 'Retire at age ~' + (35 + years);
+  document.getElementById('f-fire-val').textContent = fmt(fireNum);
+  document.getElementById('f-saverate').textContent = fmtPct(saveRate*100);
+  document.getElementById('f-curr-port').textContent = fmt(portfolio);
+  document.getElementById('f-gap').textContent = fmt(Math.max(0, fireNum - portfolio));
+  document.getElementById('f-withdrawal').textContent = fmt(expenses);
+
+  // Years needed for 10yr FIRE
+  const neededSavings = (fireNum - portfolio * Math.pow(1+ret,10)) / ((Math.pow(1+ret,10)-1)/ret);
+  const neededRate = Math.max(0, neededSavings / income * 100);
+  document.getElementById('f-needed-rate').textContent = '~' + Math.round(neededRate) + '%';
+}
+
+// ─── 7. COMPOUND ───
+function calcCompound() {
+  const monthly = slider('ci-monthly');
+  const start = slider('ci-start');
+  const ret = slider('ci-return') / 100;
+  const years = slider('ci-years');
+  const delay = slider('ci-delay');
+
+  setLabel('ci-monthly-val', fmt(monthly) + '/mo');
+  setLabel('ci-start-val', fmt(start));
+  setLabel('ci-return-val', fmtPct(ret*100));
+  setLabel('ci-years-val', years + ' years');
+  setLabel('ci-delay-val', delay + ' years');
+
+  const nowVal = futureValue(monthly, ret, years*12, start);
+  const laterVal = futureValue(monthly, ret, (years-delay)*12, start * Math.pow(1+ret, delay));
+  const cost = nowVal - laterVal;
+
+  document.getElementById('ci-cost-name').textContent = fmt(cost) + ' Lost';
+  document.getElementById('ci-cost-amount').textContent = 'by waiting ' + delay + ' year' + (delay>1?'s':'');
+  document.getElementById('ci-now-val').textContent = fmt(nowVal);
+  document.getElementById('ci-now-sub').textContent = 'after ' + years + ' years';
+  document.getElementById('ci-later-val').textContent = fmt(laterVal);
+  document.getElementById('ci-later-sub').textContent = 'after ' + (years-delay) + ' years';
+  document.getElementById('ci-contrib-now').textContent = fmt(start + monthly*years*12);
+  document.getElementById('ci-contrib-later').textContent = fmt(start + monthly*(years-delay)*12);
+  document.getElementById('ci-growth-diff').textContent = '-' + fmt(cost);
+  document.getElementById('ci-pct-lost').textContent = '-' + (cost/nowVal*100).toFixed(1) + '%';
+}
+
+// ─── 8. CAR ───
+function calcCar() {
+  const price = slider('car-price');
+  const down = slider('car-down');
+  const lrate = slider('car-lrate') / 100;
+  const lterm = slider('car-lterm');
+  const depr = slider('car-depr') / 100;
+  const lease = slider('car-lease');
+  const leaseDown = slider('car-leasedown');
+
+  setLabel('car-price-val', fmt(price));
+  setLabel('car-down-val', fmt(down));
+  setLabel('car-lrate-val', fmtPct(lrate*100));
+  setLabel('car-lterm-val', lterm + ' months');
+  setLabel('car-depr-val', fmtPct(depr*100));
+  setLabel('car-lease-val', fmt(lease) + '/mo');
+  setLabel('car-leasedown-val', fmt(leaseDown));
+
+  const loan = price - down;
+  const mr = lrate / 12;
+  const monthlyPayment = loan * mr * Math.pow(1+mr,lterm) / (Math.pow(1+mr,lterm)-1);
+  const totalInterest = monthlyPayment * lterm - loan;
+  const horizon = 60; // 5 year comparison
+  const residual = price * Math.pow(1-depr, 5);
+  const totalBuyCost = down + monthlyPayment * Math.min(lterm, horizon) - residual;
+
+  const totalLeaseCost = leaseDown + lease * horizon;
+
+  const winner = totalBuyCost < totalLeaseCost ? 'Buying' : 'Leasing';
+  const diff = Math.abs(totalBuyCost - totalLeaseCost);
+
+  document.getElementById('car-winner-name').textContent = winner;
+  document.getElementById('car-winner-amount').textContent = fmt(diff) + ' better';
+  document.getElementById('car-buy-val').textContent = fmt(Math.max(0,totalBuyCost));
+  document.getElementById('car-lease-val2').textContent = fmt(totalLeaseCost);
+  document.getElementById('car-buy-monthly').textContent = fmt(monthlyPayment);
+  document.getElementById('car-residual').textContent = fmt(residual);
+  document.getElementById('car-total-lease').textContent = '-' + fmt(lease * horizon);
+  document.getElementById('car-total-interest').textContent = '-' + fmt(totalInterest);
+
+  const buyWins = totalBuyCost <= totalLeaseCost;
+  document.getElementById('car-card-buy').className = 'result-card ' + (buyWins ? 'winner-card' : 'loser-card');
+  document.getElementById('car-card-lease').className = 'result-card ' + (!buyWins ? 'winner-card' : 'loser-card');
+}
+
+// ─── 9. HYSA ───
+function calcHYSA() {
+  const initial = slider('h-initial');
+  const monthly = slider('h-monthly');
+  const hysaRate = slider('h-hysa') / 100;
+  const investRate = slider('h-invest') / 100;
+  const years = slider('h-years');
+
+  setLabel('h-initial-val', fmt(initial));
+  setLabel('h-monthly-val', fmt(monthly) + '/mo');
+  setLabel('h-hysa-val', fmtPct(hysaRate*100));
+  setLabel('h-invest-val', fmtPct(investRate*100));
+  setLabel('h-years-val', years + ' years');
+
+  const hysaVal = futureValue(monthly, hysaRate, years*12, initial);
+  const investVal = futureValue(monthly, investRate, years*12, initial);
+  const totalContrib = initial + monthly * years * 12;
+
+  document.getElementById('h-winner-name').textContent = investVal > hysaVal ? 'Investing' : 'HYSA';
+  document.getElementById('h-winner-amount').textContent = fmt(Math.abs(investVal - hysaVal)) + ' more';
+  document.getElementById('h-invest-val2').textContent = fmt(investVal);
+  document.getElementById('h-hysa-val2').textContent = fmt(hysaVal);
+  document.getElementById('h-spread').textContent = '+' + fmtPct((investRate-hysaRate)*100);
+  document.getElementById('h-contrib').textContent = fmt(totalContrib);
+  document.getElementById('h-hysa-earned').textContent = fmt(hysaVal - totalContrib);
+  document.getElementById('h-invest-gains').textContent = fmt(investVal - totalContrib);
+
+  const investWins = investVal >= hysaVal;
+  document.getElementById('h-card-invest').className = 'result-card ' + (investWins ? 'winner-card' : 'loser-card');
+  document.getElementById('h-card-hysa').className = 'result-card ' + (!investWins ? 'winner-card' : 'loser-card');
+}
+
+// ─── 10. COAST FIRE ───
+function calcCoastFIRE() {
+  const portfolio = slider('cf-portfolio');
+  const age = slider('cf-age');
+  const retAge = slider('cf-retage');
+  const expenses = slider('cf-expenses');
+  const swr = slider('cf-swr') / 100;
+  const ret = slider('cf-return') / 100;
+
+  setLabel('cf-portfolio-val', fmt(portfolio));
+  setLabel('cf-age-val', age);
+  setLabel('cf-retage-val', retAge);
+  setLabel('cf-expenses-val', fmt(expenses));
+  setLabel('cf-swr-val', fmtPct(swr*100));
+  setLabel('cf-return-val', fmtPct(ret*100));
+
+  const yearsLeft = retAge - age;
+  const fireNum = expenses / swr;
+  // Coast number: how much you need today so it grows to fireNum
+  const coastNum = fireNum / Math.pow(1 + ret, yearsLeft);
+  const projected = portfolio * Math.pow(1 + ret, yearsLeft);
+  const gap = Math.max(0, coastNum - portfolio);
+  const coverage = Math.min(100, (portfolio / coastNum * 100));
+  const hasCoasted = portfolio >= coastNum;
+
+  document.getElementById('cf-status').textContent = hasCoasted ? '✓ You\'ve Coasted!' : 'Not Yet There';
+  document.getElementById('cf-gap-display').textContent = hasCoasted ? 'You can stop contributing!' : fmt(gap) + ' to go';
+  document.getElementById('cf-desc').textContent = hasCoasted ? 'Compound growth covers the rest' : 'keep contributing';
+  document.getElementById('cf-coast-num').textContent = fmt(coastNum);
+  document.getElementById('cf-fire-num').textContent = fmt(fireNum);
+  document.getElementById('cf-curr').textContent = fmt(portfolio);
+  document.getElementById('cf-projected').textContent = fmt(projected);
+  document.getElementById('cf-years-left').textContent = yearsLeft + ' years';
+  document.getElementById('cf-coverage').textContent = coverage.toFixed(0) + '%';
+}
 </script>
 </body>
 </html>
