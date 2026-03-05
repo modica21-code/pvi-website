@@ -374,6 +374,22 @@
       });
     }
   });
+
+  // Nav dropdowns
+  document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+    var menu = dd.querySelector('.mega-menu, .dropdown-menu');
+    if (!menu) return;
+    var t;
+    dd.addEventListener('mouseenter', function() {
+      clearTimeout(t);
+      document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) { if (m !== menu) m.classList.remove('open'); });
+      menu.classList.add('open');
+    });
+    dd.addEventListener('mouseleave', function() { t = setTimeout(function() { menu.classList.remove('open'); }, 80); });
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-dropdown')) document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) { m.classList.remove('open'); });
+  });
 </script>
 </body>
 </html>
