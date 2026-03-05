@@ -29,49 +29,11 @@
     .nav-btn:hover { border-color: var(--gold) !important; color: var(--gold) !important; }
     .nav-phone { color: var(--gold) !important; }
     .nav-dropdown { position: relative; }
-    .nav-dropdown > a, .nav-dropdown > span { display: flex; align-items: center; gap: 5px; cursor: default; }
-    .nav-dropdown > a::after, .nav-dropdown > span::after { content: '▾'; font-size: 8px; margin-left: 2px; }
-    .mega-menu,
-    .dropdown-menu {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 500;
-      transition: opacity 0.18s ease, visibility 0.18s ease;
-    }
-    .mega-menu::before,
-    .dropdown-menu::before {
-      content: '';
-      position: absolute;
-      top: -12px;
-      left: 0;
-      right: 0;
-      height: 12px;
-    }
-    .nav-dropdown:hover .mega-menu,
-    .nav-dropdown:hover .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-    .mega-menu {
-      background: rgba(3,33,61,0.98);
-      border: 1px solid rgba(186,186,185,0.12);
-      backdrop-filter: blur(12px);
-      min-width: 520px;
-      padding: 24px;
-    }
-    .dropdown-menu {
-      background: rgba(3,33,61,0.98);
-      border: 1px solid rgba(186,186,185,0.12);
-      backdrop-filter: blur(12px);
-      min-width: 200px;
-      padding: 8px 0;
-    }
+    .nav-dropdown > a, .nav-dropdown > span { display: flex; align-items: center; gap: 4px; }
+    .mega-menu, .dropdown-menu { display: none !important; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 500; }
+    .mega-menu.open, .dropdown-menu.open { display: block !important; }
+    .mega-menu { background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); min-width: 520px; padding: 24px; }
+    .dropdown-menu { background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); min-width: 200px; padding: 8px 0; }
     .mega-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
     .mega-col-title { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,110,0.2); }
     .mega-col a { display: block; padding: 8px 0; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
@@ -363,6 +325,42 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Dropdown menus — JS controlled
+  document.querySelectorAll('.nav-dropdown').forEach(function(dropdown) {
+    var menu = dropdown.querySelector('.mega-menu, .dropdown-menu');
+    if (!menu) return;
+    var timer;
+    dropdown.addEventListener('mouseenter', function() {
+      clearTimeout(timer);
+      document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) {
+        if (m !== menu) m.classList.remove('open');
+      });
+      menu.classList.add('open');
+    });
+    dropdown.addEventListener('mouseleave', function() {
+      timer = setTimeout(function() { menu.classList.remove('open'); }, 80);
+    });
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-dropdown')) {
+      document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) { m.classList.remove('open'); });
+    }
+  });
+      menu.classList.add('open');
+    });
+    dropdown.addEventListener('mouseleave', function() {
+      timer = setTimeout(function() { menu.classList.remove('open'); }, 100);
+    });
+  });
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-dropdown')) {
+      document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) {
+        m.classList.remove('open');
+      });
+    }
+  });
 </script>
 </body>
 </html>
