@@ -39,9 +39,10 @@
     .mega-col:first-child { padding-left: 0; }
     .mega-col:last-child { border-right: none; padding-right: 0; }
     .mega-col-title { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,110,0.2); }
-    .mega-col a { display: block; padding: 8px 0; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .mega-col a, .dropdown-menu a { display: block; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+    .mega-col a { padding: 8px 0; letter-spacing: 0.1em; }
+    .dropdown-menu a { padding: 10px 20px; }
     .mega-col a:hover, .dropdown-menu a:hover { color: var(--white); }
-    .dropdown-menu a { display: block; padding: 10px 20px; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; white-space: nowrap; transition: color 0.2s; }
     .dropdown-divider { border: none; border-top: 1px solid rgba(186,186,185,0.1); margin: 6px 0; }
     .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
@@ -251,15 +252,29 @@
       <span style="font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);cursor:default;display:flex;align-items:center;gap:5px;">Client Login <span style="font-size:8px;">▾</span></span>
       <div class="mega-menu">
         <div class="mega-cols">
-          <div class="mega-col"><div class="mega-col-title">Custodians</div><a href="schwab.html">Charles Schwab</a><a href="altruist.html">Altruist</a></div>
-          <div class="mega-col"><div class="mega-col-title">Financial Planning</div><a href="emoney.html">eMoney</a><a href="rightcapital.html">RightCapital</a></div>
-          <div class="mega-col"><div class="mega-col-title">Data Aggregation</div><a href="tamarac.html">WealthView · Tamarac</a><a href="monarch.html">Monarch Money</a></div>
+          <div class="mega-col">
+            <div class="mega-col-title">Custodians</div>
+            <a href="schwab.html">Charles Schwab</a>
+            <a href="altruist.html">Altruist</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-col-title">Financial Planning</div>
+            <a href="emoney.html">eMoney</a>
+            <a href="rightcapital.html">RightCapital</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-col-title">Data Aggregation</div>
+            <a href="tamarac.html">WealthView · Tamarac</a>
+            <a href="monarch.html">Monarch Money</a>
+          </div>
         </div>
       </div>
     </li>
     <li><a href="tel:8563348260" class="nav-phone">856-334-8260</a></li>
     <li><a href="contact.html" class="nav-btn">Schedule a Consultation</a></li>
   </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="about.html">About PVI</a>
@@ -538,7 +553,7 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Nav dropdowns
+  // Nav dropdowns — JS controlled
   document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
     var menu = dd.querySelector('.mega-menu, .dropdown-menu');
     if (!menu) return;

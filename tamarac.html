@@ -21,12 +21,11 @@
     .nav-btn { color: var(--white) !important; border: 1px solid rgba(255,255,255,0.3); padding: 9px 22px; }
     .nav-btn:hover { border-color: var(--gold) !important; color: var(--gold) !important; }
     .nav-phone { color: var(--gold) !important; }
+    
     .nav-dropdown { position: relative; }
-    .nav-dropdown > a, .nav-dropdown > span { display: flex; align-items: center; gap: 4px; }
-    .mega-menu, .dropdown-menu { display: none !important; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 500; }
-    .mega-menu.open, .dropdown-menu.open { display: block !important; }
-    .mega-menu { background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); min-width: 520px; padding: 24px; }
-    .dropdown-menu { background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); min-width: 200px; padding: 8px 0; }
+    .nav-dropdown > span { font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);cursor:default;display:flex;align-items:center;gap:5px; }
+    .mega-menu { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); min-width: 520px; padding: 24px; z-index: 200; }
+    .nav-dropdown:hover .mega-menu { display: block; }
     .mega-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
     .mega-col-title { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,110,0.2); }
     .mega-col a { display: block; padding: 8px 0; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
@@ -34,9 +33,6 @@
     .mega-col { padding: 0 20px; border-right: 1px solid rgba(186,186,185,0.08); }
     .mega-col:first-child { padding-left: 0; }
     .mega-col:last-child { border-right: none; padding-right: 0; }
-    .dropdown-menu a { display: block; padding: 10px 20px; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; white-space: nowrap; transition: color 0.2s, background 0.2s; }
-    .dropdown-menu a:hover { color: var(--white); background: rgba(41,77,107,0.3); }
-    
 
     .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
@@ -349,43 +345,7 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Dropdown menus — JS controlled
-  document.querySelectorAll('.nav-dropdown').forEach(function(dropdown) {
-    var menu = dropdown.querySelector('.mega-menu, .dropdown-menu');
-    if (!menu) return;
-    var timer;
-    dropdown.addEventListener('mouseenter', function() {
-      clearTimeout(timer);
-      document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) {
-        if (m !== menu) m.classList.remove('open');
-      });
-      menu.classList.add('open');
-    });
-    dropdown.addEventListener('mouseleave', function() {
-      timer = setTimeout(function() { menu.classList.remove('open'); }, 80);
-    });
-  });
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.nav-dropdown')) {
-      document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) { m.classList.remove('open'); });
-    }
-  });
-      menu.classList.add('open');
-    });
-    dropdown.addEventListener('mouseleave', function() {
-      timer = setTimeout(function() { menu.classList.remove('open'); }, 100);
-    });
-  });
-  // Close on outside click
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.nav-dropdown')) {
-      document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) {
-        m.classList.remove('open');
-      });
-    }
-  });
-
-  // Nav dropdowns
+  // Nav dropdowns — JS controlled
   document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
     var menu = dd.querySelector('.mega-menu, .dropdown-menu');
     if (!menu) return;
