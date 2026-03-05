@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>eMoney — Pine Valley Investments</title>
+  <title>eMoney — Financial Planning Portal | Pine Valley Investments</title>
+  <link rel="icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --navy: #03213d; --blue: #294d6b; --white: #ffffff; --gray: #babab9; --gold: #c9a96e; --accent: #0077b6; --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Montserrat', Arial, sans-serif; }
+    :root { --navy: #03213d; --blue: #294d6b; --white: #ffffff; --gray: #babab9; --gold: #c9a96e; --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Montserrat', Arial, sans-serif; --em: #00529B; --em-light: #1a6dbf; }
     html { scroll-behavior: smooth; }
     body { background: var(--navy); color: var(--white); font-family: var(--serif); overflow-x: hidden; max-width: 100vw; }
     ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--navy); } ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
@@ -15,13 +16,12 @@
     nav.scrolled { background: rgba(3,33,61,0.97); padding: 14px 56px; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(186,186,185,0.1); }
     .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo img { height: 40px; width: auto; }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
     .nav-links a { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
     .nav-btn { color: var(--white) !important; border: 1px solid rgba(255,255,255,0.3); padding: 9px 22px; }
     .nav-btn:hover { border-color: var(--gold) !important; color: var(--gold) !important; }
     .nav-phone { color: var(--gold) !important; }
-    
     .nav-dropdown { position: relative; }
     .nav-dropdown > a, .nav-dropdown > span { display: flex; align-items: center; gap: 5px; }
     .mega-menu, .dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 500; background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); }
@@ -30,65 +30,101 @@
     .dropdown-menu { min-width: 200px; padding: 8px 0; }
     .mega-cols { display: grid; grid-template-columns: repeat(3, 1fr); }
     .mega-col { padding: 0 20px; border-right: 1px solid rgba(186,186,185,0.08); }
-    .mega-col:first-child { padding-left: 0; }
-    .mega-col:last-child { border-right: none; padding-right: 0; }
+    .mega-col:first-child { padding-left: 0; } .mega-col:last-child { border-right: none; padding-right: 0; }
     .mega-col-title { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,110,0.2); }
     .mega-col a, .dropdown-menu a { display: block; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
-    .mega-col a { padding: 8px 0; letter-spacing: 0.1em; }
-    .dropdown-menu a { padding: 10px 20px; }
+    .mega-col a { padding: 8px 0; letter-spacing: 0.1em; } .dropdown-menu a { padding: 10px 20px; }
     .mega-col a:hover, .dropdown-menu a:hover { color: var(--white); }
-    .mega-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
-    .mega-col-title { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,110,0.2); }
-    .mega-col a:hover { color: var(--white); }
-    .mega-col { padding: 0 20px; border-right: 1px solid rgba(186,186,185,0.08); }
-    .mega-col:first-child { padding-left: 0; }
-    .mega-col:last-child { border-right: none; padding-right: 0; }
-
     .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
     .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .nav-toggle.open span:nth-child(2) { opacity: 0; }
     .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--navy); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 28px; }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--navy); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 22px; overflow-y: auto; padding: 60px 24px; }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); text-decoration: none; }
-    .mobile-cta { color: var(--navy) !important; background: var(--gold); padding: 14px 36px; margin-top: 8px; }
+    .mobile-menu a { font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); text-decoration: none; }
+    .mobile-cta { color: var(--navy) !important; background: var(--gold); padding: 14px 36px; margin-top: 16px; }
+    .mobile-section-label { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border-top: 1px solid rgba(186,186,185,0.12); padding-top: 24px; margin-top: -8px; width: 100%; text-align: center; }
+    .mobile-sub { font-size: 11px !important; letter-spacing: 0.12em !important; color: rgba(186,186,185,0.7) !important; margin-top: -18px; }
+    .mobile-sub:hover { color: var(--white) !important; }
     .mobile-phone { color: var(--gold) !important; }
-    .hero { min-height: 380px; background: linear-gradient(135deg, var(--navy) 0%, #072a47 60%, var(--blue) 100%); display: flex; align-items: center; padding: 110px 56px 60px; }
-    .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .hero-breadcrumb { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .hero-breadcrumb a { color: var(--gold); text-decoration: none; opacity: 0.7; }
-    .hero-breadcrumb a:hover { opacity: 1; }
-    .hero-logo-wrap { margin-bottom: 24px; }
-    .hero-logo-wrap img { max-height: 52px; max-width: 200px; width: auto; object-fit: contain; background: white; padding: 10px 16px; border-radius: 8px; }
-    .hero-logo-wrap img.logo-icon { max-height: 52px; max-width: 52px; padding: 0; background: none; border-radius: 50%; }
-    .hero h1 { font-size: clamp(32px, 4vw, 54px); font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 16px; }
-    .hero h1 em { font-style: italic; color: var(--gold); }
-    .hero-desc { font-size: 16px; font-weight: 300; line-height: 1.8; color: var(--gray); margin-bottom: 32px; }
-    .btn-gold { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 16px 40px; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
-    .btn-gold:hover { opacity: 0.88; }
-    .btn-outline { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(255,255,255,0.3); padding: 16px 40px; text-decoration: none; display: inline-block; transition: border-color 0.2s; margin-left: 14px; }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-    .mock-screen { filter: drop-shadow(0 24px 48px rgba(0,0,0,0.5)); }
-    .body-section { max-width: 1200px; margin: 0 auto; padding: 72px 56px; }
+    .section { max-width: 1200px; margin: 0 auto; padding: 100px 56px; }
     .section-label { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
     .section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
-    .section-title { font-size: clamp(28px, 3.5vw, 44px); font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 40px; }
+    .section-title { font-size: clamp(28px, 3.5vw, 48px); font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 20px; }
     .section-title em { font-style: italic; color: var(--gold); }
-    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
-    .feature-item { display: flex; gap: 20px; padding: 24px 0; border-bottom: 1px solid rgba(186,186,185,0.07); }
-    .feature-item:nth-child(odd) { padding-right: 40px; border-right: 1px solid rgba(186,186,185,0.07); }
-    .feature-item:nth-child(even) { padding-left: 40px; border-right: none; }
-    .feature-num { font-family: var(--sans); font-size: 10px; font-weight: 700; color: var(--gold); flex-shrink: 0; padding-top: 2px; width: 22px; }
-    .feature-title { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
-    .feature-desc { font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--gray); }
-    .help-strip { background: rgba(41,77,107,0.25); border-top: 1px solid rgba(186,186,185,0.08); padding: 52px 56px; text-align: center; }
-    .help-strip-inner { max-width: 600px; margin: 0 auto; }
-    .help-strip h3 { font-size: 28px; font-weight: 300; color: var(--white); margin-bottom: 10px; }
-    .help-strip p { font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--gray); margin-bottom: 28px; }
-    .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+    .section-body { font-size: 17px; font-weight: 300; line-height: 1.85; color: var(--gray); }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity:1; transform:none; }
     .reveal-delay-1 { transition-delay:0.1s; } .reveal-delay-2 { transition-delay:0.2s; } .reveal-delay-3 { transition-delay:0.3s; }
+    .breadcrumb { max-width: 1200px; margin: 0 auto; padding: 100px 56px 0; }
+    .breadcrumb-inner { font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .breadcrumb-inner a { color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb-inner a:hover { color: var(--gold); }
+    .breadcrumb-inner span { color: rgba(186,186,185,0.35); }
+    .hero { position: relative; padding: 60px 0 0; overflow: hidden; background: var(--navy); }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 25% 60%, rgba(0,82,155,0.15) 0%, transparent 65%), radial-gradient(ellipse 50% 50% at 80% 20%, rgba(41,77,107,0.3) 0%, transparent 60%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(186,186,185,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(186,186,185,0.035) 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 20%, transparent 100%); }
+    .hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 56px 56px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .hero-eyebrow { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+    .hero-title { font-size: clamp(36px, 4.5vw, 64px); font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 10px; }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-tagline { font-size: 18px; font-weight: 300; font-style: italic; color: var(--gray); margin-bottom: 24px; }
+    .hero-desc { font-size: 15px; font-weight: 300; line-height: 1.85; color: rgba(186,186,185,0.85); margin-bottom: 36px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .btn-primary { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 14px 32px; text-decoration: none; display: inline-block; transition: opacity 0.2s, transform 0.2s; }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); border: 1px solid rgba(186,186,185,0.25); padding: 14px 32px; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { border-color: rgba(186,186,185,0.6); color: var(--white); }
+    .hero-visual { position: relative; align-self: flex-end; }
+    .hero-screen { background: #f5f6f8; border-radius: 10px 10px 0 0; overflow: hidden; box-shadow: 0 -8px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06); }
+    .hero-screen img { width: 100%; display: block; }
+    .hero-badge { position: absolute; top: 24px; right: -20px; background: var(--em); color: var(--white); padding: 16px 22px; border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); text-align: center; }
+    .hero-badge-num { font-size: 30px; font-weight: 300; line-height: 1; }
+    .hero-badge-label { font-family: var(--sans); font-size: 8px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-top: 4px; }
+    .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .what-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 44px; }
+    .what-stat { background: rgba(255,255,255,0.025); border: 1px solid rgba(186,186,185,0.08); padding: 24px 20px; }
+    .what-stat-num { font-size: 34px; font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 6px; }
+    .what-stat-num em { font-style: italic; color: var(--gold); }
+    .what-stat-label { font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); }
+    .what-img { border-radius: 8px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.4); }
+    .what-img img { width: 100%; display: block; }
+    .features-wrap { background: rgba(255,255,255,0.015); border-top: 1px solid rgba(186,186,185,0.08); }
+    .features-intro { max-width: 640px; margin-bottom: 64px; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .feature-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(186,186,185,0.08); padding: 40px 32px; position: relative; overflow: hidden; transition: background 0.3s; }
+    .feature-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--em); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+    .feature-card:hover { background: rgba(0,82,155,0.07); }
+    .feature-card:hover::after { transform: scaleX(1); }
+    .feature-icon { font-size: 26px; margin-bottom: 20px; }
+    .feature-title { font-size: 19px; font-weight: 500; color: var(--white); margin-bottom: 11px; line-height: 1.2; }
+    .feature-desc { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--gray); }
+    .screenshot-section { border-top: 1px solid rgba(186,186,185,0.08); }
+    .screenshot-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .screenshot-inner.reverse { direction: rtl; }
+    .screenshot-inner.reverse > * { direction: ltr; }
+    .screenshot-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.45); background: #f5f6f8; }
+    .screenshot-frame img { width: 100%; display: block; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .feature-list li { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--gray); display: flex; align-items: flex-start; gap: 12px; }
+    .feature-list li::before { content: '◦'; color: var(--gold); font-size: 18px; line-height: 1.2; flex-shrink: 0; }
+    .em-strip { background: linear-gradient(135deg, var(--em) 0%, var(--em-light) 100%); border-top: 1px solid rgba(255,255,255,0.1); }
+    .em-inner { max-width: 1200px; margin: 0 auto; padding: 80px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .em-img { border-radius: 12px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.4); }
+    .em-img img { width: 100%; display: block; }
+    .help-strip { background: rgba(255,255,255,0.025); border-top: 1px solid rgba(186,186,185,0.08); }
+    .help-inner { max-width: 1200px; margin: 0 auto; padding: 28px 56px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .help-text { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); }
+    .help-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .help-links a { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    .help-links a:hover { color: var(--white); }
+    .cta-wrap { border-top: 1px solid rgba(186,186,185,0.08); position: relative; overflow: hidden; }
+    .cta-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,82,155,0.2) 0%, transparent 70%); }
+    .cta-inner { position: relative; z-index: 1; text-align: center; }
+    .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 40px; }
     footer { background: rgba(0,0,0,0.35); border-top: 1px solid rgba(186,186,185,0.1); padding: 72px 56px 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 52px; margin-bottom: 52px; }
@@ -97,30 +133,13 @@
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
     .footer-links a { font-size: 14px; font-weight: 300; color: var(--gray); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--white); }
-    .footer-social { display: flex; gap: 14px; margin-top: 22px; }
-    .social-icon { width: 34px; height: 34px; border: 1px solid rgba(186,186,185,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--sans); font-size: 10px; font-weight: 700; color: var(--gray); text-decoration: none; transition: border-color 0.2s, color 0.2s; }
-    .social-icon:hover { border-color: var(--gold); color: var(--gold); }
     .footer-bottom { border-top: 1px solid rgba(186,186,185,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
     .footer-copy { font-family: var(--sans); font-size: 9px; letter-spacing: 0.06em; color: rgba(186,186,185,0.4); max-width: 700px; line-height: 1.7; }
     .footer-legal { display: flex; gap: 22px; flex-wrap: wrap; }
     .footer-legal a { font-family: var(--sans); font-size: 9px; letter-spacing: 0.08em; color: rgba(186,186,185,0.45); text-decoration: none; }
     .footer-legal a:hover { color: var(--gray); }
-    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .mock-screen { display: none; } }
-    @media (max-width: 768px) {
-      nav { padding: 16px 24px; } nav.scrolled { padding: 12px 24px; }
-      .nav-logo img { height: 32px; } .nav-links { display: none; } .nav-toggle { display: flex; }
-      .hero { padding: 100px 24px 48px; }
-      .body-section { padding: 48px 24px; }
-      .features-grid { grid-template-columns: 1fr; }
-      .feature-item:nth-child(odd) { padding-right: 0; border-right: none; }
-      .feature-item:nth-child(even) { padding-left: 0; }
-      .help-strip { padding: 48px 24px; }
-      footer { padding: 56px 24px 32px; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
-      .footer-brand { grid-column: 1 / -1; }
-      .footer-bottom { flex-direction: column; }
-    }
-    @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .hero-inner, .what-grid, .screenshot-inner, .em-inner { grid-template-columns: 1fr; } .screenshot-inner.reverse { direction: ltr; } .hero-badge { display: none; } }
+    @media (max-width: 768px) { nav { padding: 16px 24px; } .nav-links { display: none; } .nav-toggle { display: flex; } .section { padding: 72px 24px; } .breadcrumb { padding: 100px 24px 0; } .features-grid { grid-template-columns: 1fr; } .what-stats { grid-template-columns: 1fr 1fr; } .footer-top { grid-template-columns: 1fr; gap: 36px; } .em-inner { padding: 60px 24px; } .help-inner { flex-direction: column; align-items: flex-start; padding: 24px; } }
   </style>
 </head>
 <body>
@@ -132,151 +151,224 @@
     <li><a href="team.html">Meet Your Team</a></li>
     <li><a href="services.html">Our Services</a></li>
     <li class="nav-dropdown"><span style="font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);cursor:default;display:flex;align-items:center;gap:5px;">Tools &amp; Resources <span style="font-size:8px;">▾</span></span><div class="dropdown-menu"><a href="tools.html">Financial Calculators</a><a href="morning-core.html"><img src="morning-core-logo.png" alt="" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:5px;border-radius:50%;" />The Morning Core</a></div></li>
+    <li><a href="announcements.html">Company Announcements</a></li>
     <li class="nav-dropdown">
-      <span>Client Login <span style="font-size:8px;">▾</span></span>
+      <span style="font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);cursor:default;display:flex;align-items:center;gap:5px;">Client Login <span style="font-size:8px;">▾</span></span>
       <div class="mega-menu">
         <div class="mega-cols">
-          <div class="mega-col">
-            <div class="mega-col-title">Custodians</div>
-            <a href="schwab.html">Charles Schwab</a>
-            <a href="altruist.html">Altruist</a>
-          </div>
-          <div class="mega-col">
-            <div class="mega-col-title">Financial Planning</div>
-            <a href="emoney.html">eMoney</a>
-            <a href="rightcapital.html">RightCapital</a>
-          </div>
-          <div class="mega-col">
-            <div class="mega-col-title">Data Aggregation</div>
-            <a href="tamarac.html">WealthView · Tamarac</a>
-            <a href="monarch.html">Monarch Money</a>
-          </div>
+          <div class="mega-col"><div class="mega-col-title">Custodians</div><a href="schwab.html">Charles Schwab</a><a href="altruist.html">Altruist</a></div>
+          <div class="mega-col"><div class="mega-col-title">Financial Planning</div><a href="emoney.html">eMoney</a><a href="rightcapital.html">RightCapital</a></div>
+          <div class="mega-col"><div class="mega-col-title">Data Aggregation</div><a href="tamarac.html">WealthView · Tamarac</a><a href="monarch.html">Monarch Money</a></div>
         </div>
       </div>
     </li>
-    <li><a href="announcements.html">Company Announcements</a></li>
     <li><a href="tel:8563348260" class="nav-phone">856-334-8260</a></li>
     <li><a href="contact.html" class="nav-btn">Schedule a Consultation</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="about.html">About PVI</a>
-  <a href="team.html">Meet Your Team</a>
-  <a href="services.html">Our Services</a>
-  <a href="tools.html">Financial Calculators</a>
-  <a href="morning-core.html" style="color:var(--gold);"><img src="morning-core-logo.png" alt="" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:5px;border-radius:50%;" />The Morning Core</a>
-  <div class="mobile-section-label">Client Login</div>
+  <a href="index.html">Home</a><a href="about.html">About PVI</a><a href="team.html">Meet Your Team</a><a href="services.html">Our Services</a><a href="tools.html">Financial Calculators</a><a href="morning-core.html" style="color:var(--gold);"><img src="morning-core-logo.png" alt="" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:5px;border-radius:50%;" />The Morning Core</a><a href="announcements.html">Company Announcements</a><div class="mobile-section-label">Client Login</div>
   <a href="schwab.html" class="mobile-sub">Charles Schwab</a>
   <a href="altruist.html" class="mobile-sub">Altruist</a>
   <a href="emoney.html" class="mobile-sub">eMoney</a>
   <a href="rightcapital.html" class="mobile-sub">RightCapital</a>
   <a href="tamarac.html" class="mobile-sub">WealthView · Tamarac</a>
-  <a href="monarch.html" class="mobile-sub">Monarch Money</a>
-  <a href="schwab.html">→ Schwab</a>
-  <a href="altruist.html">→ Altruist</a>
-  <a href="emoney.html">→ eMoney</a>
-  <a href="rightcapital.html">→ RightCapital</a>
-  <a href="tamarac.html">→ Tamarac</a>
-  <a href="monarch.html">→ Monarch</a>
-  <a href="announcements.html">Company Announcements</a>
-  <a href="tel:8563348260" class="mobile-phone">856-334-8260</a>
-  <a href="contact.html" class="mobile-cta">Schedule a Consultation</a>
+  <a href="monarch.html" class="mobile-sub">Monarch Money</a><a href="tel:8563348260" class="mobile-phone">856-334-8260</a><a href="contact.html" class="mobile-cta">Schedule a Consultation</a>
 </div>
 
-<div class="hero">
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="client-login.html">Client Login</a>
+    <span>›</span><span>Financial Planning</span>
+    <span>›</span><span style="color:var(--white);">eMoney</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
   <div class="hero-inner">
-    <div class="reveal" style="opacity:1;transform:none;">
-      <div class="hero-breadcrumb"><a href="client-login.html">Client Login</a> <span>›</span> <span>eMoney</span> <span>›</span> <span>Financial Planning</span></div>
-      <div class="hero-logo-wrap"><img src="emoney-logo.jpg" alt="eMoney" class="" /></div>
-      <h1>Your complete financial picture, <em>in one place.</em></h1>
-      <p class="hero-desc">eMoney is PVI's complimentary financial planning platform — available to every client at no additional cost. It aggregates your entire financial life into one secure dashboard: investments, bank accounts, real estate, insurance, and more.</p>
-      <a href="https://wealth.emaplan.com/ema/SignIn?ema/ria/pinevalley" target="_blank" class="btn-gold">Login to eMoney →</a>
-      <a href="client-login.html" class="btn-outline">All Portals</a>
+    <div style="animation: fadeUp 0.8s 0.1s both;">
+      <div class="hero-eyebrow">Financial Planning Portal</div>
+      <h1 class="hero-title">Your complete financial life,<br><em>one secure view.</em></h1>
+      <p class="hero-tagline">Powered by eMoney</p>
+      <p class="hero-desc">eMoney is PVI's complimentary financial planning platform — included for every client at no additional cost. It aggregates your entire financial picture into one secure dashboard: investments, bank accounts, real estate, insurance, liabilities, and long-term projections, all in one place.</p>
+      <div class="hero-actions">
+        <a href="https://wealth.emaplan.com/ema/SignIn?ema/ria/pinevalley" target="_blank" class="btn-primary">Log In to eMoney →</a>
+        <a href="client-login.html" class="btn-ghost">All Portals</a>
+      </div>
     </div>
-    <div class="mock-screen reveal reveal-delay-2" style="opacity:1;transform:none;">
-      <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
-          <div style="background:#0077b6;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
-            <span style="color:white;font-family:sans-serif;font-weight:700;font-size:14px;">eMoney Advisor</span>
-            <span style="color:rgba(255,255,255,0.7);font-family:sans-serif;font-size:11px;">Complimentary for PVI Clients</span>
-          </div>
-          <div style="padding:20px;background:#f8fafc;">
-            <div style="background:white;border-radius:6px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-              <div style="font-size:10px;color:#666;font-family:sans-serif;font-weight:600;margin-bottom:10px;">NET WORTH SUMMARY</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <div><div style="font-size:10px;color:#999;font-family:sans-serif;">Total Assets</div><div style="font-size:18px;font-weight:700;color:#0077b6;font-family:sans-serif;">$2,140,800</div></div>
-                <div><div style="font-size:10px;color:#999;font-family:sans-serif;">Total Liabilities</div><div style="font-size:18px;font-weight:700;color:#ef4444;font-family:sans-serif;">$340,200</div></div>
-              </div>
-              <div style="margin-top:12px;padding-top:12px;border-top:1px solid #f0f0f0;"><div style="font-size:10px;color:#999;font-family:sans-serif;">Net Worth</div><div style="font-size:24px;font-weight:700;color:#16a34a;font-family:sans-serif;">$1,800,600</div></div>
-            </div>
-            <div style="background:white;border-radius:6px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-              <div style="font-size:10px;color:#666;font-family:sans-serif;font-weight:600;margin-bottom:8px;">RETIREMENT GOAL</div>
-              <div style="background:#e8f5e9;border-radius:4px;height:8px;margin-bottom:6px;"><div style="background:#16a34a;height:8px;border-radius:4px;width:78%;"></div></div>
-              <div style="display:flex;justify-content:space-between;font-family:sans-serif;font-size:10px;color:#666;"><span>78% on track</span><span>Target: $2.4M by 2038</span></div>
-            </div>
-          </div>
-        </div>
+    <div class="hero-visual" style="animation: fadeUp 0.8s 0.3s both;">
+      <div class="hero-screen">
+        <img src="emoney_1.png" alt="eMoney Client Portal" />
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">Free</div>
+        <div class="hero-badge-label">For all PVI clients</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What is eMoney -->
+<div style="border-top: 1px solid rgba(186,186,185,0.08);">
+  <div class="section what-grid">
+    <div>
+      <div class="section-label">About the Platform</div>
+      <h2 class="section-title">Your advisor sees <em>what you see</em></h2>
+      <p class="section-body">eMoney gives your Pine Valley advisor a real-time, shared view of your entire financial world — not just the accounts we manage. That means richer conversations, more accurate planning, and advice that accounts for your full picture. Mortgage, 401(k), savings, business interests — it's all there.</p>
+      <div class="what-stats">
+        <div class="what-stat reveal"><div class="what-stat-num">100<em>%</em></div><div class="what-stat-label">Complimentary for PVI clients</div></div>
+        <div class="what-stat reveal reveal-delay-1"><div class="what-stat-num">360<em>°</em></div><div class="what-stat-label">Full financial picture</div></div>
+        <div class="what-stat reveal reveal-delay-2"><div class="what-stat-num">Live</div><div class="what-stat-label">Real-time account sync</div></div>
+        <div class="what-stat reveal reveal-delay-3"><div class="what-stat-num">1<em>:1</em></div><div class="what-stat-label">Shared advisor view</div></div>
+      </div>
+    </div>
+    <div class="what-img reveal reveal-delay-1">
+      <img src="emoney_7.png" alt="eMoney Client Portal Dashboard" />
     </div>
   </div>
 </div>
 
-<div class="body-section">
-  <div class="section-label reveal">What You Can Do</div>
-  <h2 class="section-title reveal">Key features <em>available to you.</em></h2>
-  <div class="features-grid">
-    
-      <div class="feature-item reveal">
-        <div class="feature-num">01</div>
-        <div>
-          <div class="feature-title">Net Worth Dashboard</div>
-          <div class="feature-desc">See your complete financial picture — every asset and liability consolidated in real time, updated automatically.</div>
-        </div>
+<!-- Features -->
+<div class="features-wrap">
+  <div class="section">
+    <div class="features-intro reveal">
+      <div class="section-label">What You Can Do</div>
+      <h2 class="section-title">Everything you need to understand your <em>financial future</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🏦</div>
+        <div class="feature-title">Account Aggregation</div>
+        <p class="feature-desc">Connect every financial account — investments, bank accounts, credit cards, loans, real estate, and retirement plans — into one unified dashboard.</p>
       </div>
-      <div class="feature-item reveal reveal-delay-2">
-        <div class="feature-num">02</div>
-        <div>
-          <div class="feature-title">Cash Flow Analysis</div>
-          <div class="feature-desc">Track income and spending across all accounts. Understand where your money goes and plan accordingly.</div>
-        </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Net Worth Tracking</div>
+        <p class="feature-desc">See your complete balance sheet at a glance. Assets, liabilities, and net worth updated in real time as your accounts sync.</p>
       </div>
-      <div class="feature-item reveal reveal-delay-3">
-        <div class="feature-num">03</div>
-        <div>
-          <div class="feature-title">Goal Tracking</div>
-          <div class="feature-desc">Set retirement, education, and legacy goals. See probability-weighted projections updated with every plan change.</div>
-        </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">📈</div>
+        <div class="feature-title">Lifetime Portfolio Value</div>
+        <p class="feature-desc">Model how your portfolio could grow over time with scenario-based projections tied to your real financial data and planning assumptions.</p>
       </div>
-      <div class="feature-item reveal reveal-delay-1">
-        <div class="feature-num">04</div>
-        <div>
-          <div class="feature-title">Scenario Modeling</div>
-          <div class="feature-desc">Run what-if scenarios: What if I retire early? What if markets drop 30%? See the impact instantly.</div>
-        </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🗺️</div>
+        <div class="feature-title">Foundational Planning</div>
+        <p class="feature-desc">Work with your advisor on a living financial plan that covers retirement, income, expenses, and long-term goals — all modeled in eMoney.</p>
       </div>
-      <div class="feature-item reveal reveal-delay-2">
-        <div class="feature-num">05</div>
-        <div>
-          <div class="feature-title">Vault — Secure Document Storage</div>
-          <div class="feature-desc">Store and access important documents — wills, insurance policies, tax returns — in an encrypted vault.</div>
-        </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🎲</div>
+        <div class="feature-title">Monte Carlo Analysis</div>
+        <p class="feature-desc">Stress-test your plan against thousands of market scenarios to see your probability of success across different retirement strategies.</p>
       </div>
-      <div class="feature-item reveal reveal-delay-3">
-        <div class="feature-num">06</div>
-        <div>
-          <div class="feature-title">Account Aggregation</div>
-          <div class="feature-desc">Connect bank accounts, 401(k)s, mortgages, and credit cards for a truly complete financial picture.</div>
-        </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">Bank-Level Security</div>
+        <p class="feature-desc">256-bit encryption, read-only connections, and multi-factor authentication protect your aggregated financial data at every layer.</p>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Aggregation screenshot -->
+<div class="screenshot-section">
+  <div class="section screenshot-inner reverse">
+    <div class="screenshot-frame reveal">
+      <img src="emoney_2.jpg" alt="eMoney Account Aggregation" />
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="section-label">Account Aggregation</div>
+      <h2 class="section-title">Every account, <em>one dashboard</em></h2>
+      <p class="section-body">eMoney connects to thousands of financial institutions, pulling your balances, holdings, and transactions into a single organized view. Your advisor sees the same dashboard — enabling advice that accounts for your complete financial picture, not just what we manage.</p>
+      <ul class="feature-list">
+        <li>Connects to 11,000+ financial institutions automatically</li>
+        <li>Investment, banking, credit, and real estate all in one place</li>
+        <li>Shared real-time view with your Pine Valley advisor</li>
+        <li>Secure read-only connections — we never move money</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Lifetime Portfolio Value screenshot -->
+<div class="screenshot-section" style="background: rgba(255,255,255,0.015);">
+  <div class="section screenshot-inner">
+    <div class="reveal">
+      <div class="section-label">Long-Term Projections</div>
+      <h2 class="section-title">See your wealth grow <em>over a lifetime</em></h2>
+      <p class="section-body">Lifetime Portfolio Value modeling shows how your assets could perform across your full financial timeline — from today through retirement and beyond. Your advisor uses this to illustrate the long-term impact of every planning decision.</p>
+      <ul class="feature-list">
+        <li>Projected portfolio growth tied to your actual accounts</li>
+        <li>Scenario modeling for different savings and spending rates</li>
+        <li>Visualize the long-term impact of Roth conversions and distributions</li>
+        <li>Updated live as your plan and assumptions evolve</li>
+      </ul>
+    </div>
+    <div class="screenshot-frame reveal reveal-delay-1">
+      <img src="emoney_4.jpg" alt="eMoney Lifetime Portfolio Value" />
+    </div>
+  </div>
+</div>
+
+<!-- Plan Summary screenshot -->
+<div class="screenshot-section">
+  <div class="section screenshot-inner reverse">
+    <div class="screenshot-frame reveal">
+      <img src="emoney_6.jpg" alt="eMoney Plan Summary" />
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="section-label">Foundational Planning</div>
+      <h2 class="section-title">Your plan, <em>at a glance</em></h2>
+      <p class="section-body">The eMoney Plan Summary puts your financial health front and center — showing income, expenses, savings, and goal progress in one clear view. You and your advisor can quickly identify gaps and opportunities together, then act on them in the same session.</p>
+      <ul class="feature-list">
+        <li>At-a-glance financial health summary</li>
+        <li>Income, expense, and savings rate breakdown</li>
+        <li>Goal funding status across retirement, education, and more</li>
+        <li>Live updates as your advisor refines your plan</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Monte Carlo strip -->
+<div class="em-strip">
+  <div class="em-inner">
+    <div class="reveal">
+      <div class="section-label" style="color:rgba(255,255,255,0.6);">Monte Carlo Analysis</div>
+      <h2 class="section-title" style="color:var(--white);">Know your odds before <em style="color:rgba(255,255,255,0.8);">you retire</em></h2>
+      <p class="section-body" style="color:rgba(255,255,255,0.75); margin-bottom:32px;">eMoney's Monte Carlo engine runs thousands of market scenarios against your actual plan to calculate your probability of success. It's the same institutional analysis used by top advisory firms — built into your complimentary PVI client portal.</p>
+      <a href="https://wealth.emaplan.com/ema/SignIn?ema/ria/pinevalley" target="_blank" class="btn-primary" style="background:var(--white);color:var(--em);">Open eMoney →</a>
+    </div>
+    <div class="em-img reveal reveal-delay-1">
+      <img src="emoney_5.jpg" alt="eMoney Monte Carlo Analysis" />
+    </div>
   </div>
 </div>
 
 <div class="help-strip">
-  <div class="help-strip-inner reveal">
-    <h3>Need help getting in?</h3>
-    <p>If you're having trouble accessing your eMoney account, our team is happy to help you get set up.</p>
-    <a href="https://wealth.emaplan.com/ema/SignIn?ema/ria/pinevalley" target="_blank" class="btn-gold">Login to eMoney →</a>
-    <a href="contact.html" class="btn-outline">Contact PVI</a>
+  <div class="help-inner">
+    <div class="help-text">Need help accessing your eMoney account?</div>
+    <div class="help-links">
+      <a href="contact.html">Contact Your Advisor</a>
+      <a href="tel:8563348260">856-334-8260</a>
+      <a href="client-login.html">All Client Portals</a>
+    </div>
+  </div>
+</div>
+
+<div class="cta-wrap">
+  <div class="cta-bg"></div>
+  <div class="section cta-inner">
+    <div class="section-label" style="justify-content:center;">Get Started</div>
+    <h2 class="section-title" style="text-align:center;">Don't have an eMoney account yet?</h2>
+    <p class="section-body" style="text-align:center; max-width:520px; margin:0 auto;">Every Pine Valley client receives complimentary eMoney access. Your advisor sets it up and connects your accounts — reach out and we'll get you onboarded so your full financial picture is always at your fingertips.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn-primary">Schedule a Consultation</a>
+      <a href="tel:8563348260" class="btn-ghost">856-334-8260</a>
+    </div>
   </div>
 </div>
 
@@ -286,9 +378,15 @@
       <div class="footer-brand">
         <a href="index.html" class="nav-logo"><img src="pviwhite.png" alt="Pine Valley Investments" style="height:48px;width:auto;" /></a>
         <p>Independent. Fiduciary. Client-first.<br>Your private wealth partner since 2015.</p>
-        <div class="footer-social">
-          <a href="#" class="social-icon">in</a><a href="#" class="social-icon">X</a><a href="#" class="social-icon">f</a><a href="#" class="social-icon">ig</a>
-        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About PVI</a></li>
+          <li><a href="team.html">Meet Your Team</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="announcements.html">Announcements</a></li>
+        </ul>
       </div>
       <div>
         <div class="footer-col-title">Client Portals</div>
@@ -302,72 +400,37 @@
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Firm</div>
-        <ul class="footer-links">
-          <li><a href="about.html">About PVI</a></li>
-          <li><a href="team.html">Meet the Team</a></li>
-          <li><a href="services.html">Our Services</a></li>
-          <li><a href="announcements.html">Announcements</a></li>
-          <li><a href="morning-core.html">The Morning Core</a></li>
-        </ul>
-      </div>
-      <div>
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
-          <li><a href="#">10 E Stow Rd, Suite 200</a></li>
-          <li><a href="#">Marlton, NJ 08053</a></li>
           <li><a href="tel:8563348260">856-334-8260</a></li>
-          <li><a href="mailto:info@pinevalleyinvestments.com">info@pinevalleyinvestments.com</a></li>
+          <li><a href="contact.html">Schedule a Consultation</a></li>
+          <li><a href="morning-core.html">The Morning Core</a></li>
+          <li><a href="tools.html">Financial Calculators</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Pine Valley Investments, LLC. All rights reserved. Pine Valley Investments is a Registered Investment Advisor.</div>
-      <div class="footer-legal">
-        <a href="#">Privacy Policy &amp; Form CRS</a>
-        <a href="https://adviserinfo.sec.gov" target="_blank">SEC Investment Advisor Review</a>
-        <a href="#">Form ADV 2A</a>
-      </div>
+      <div class="footer-copy">© 2025 Pine Valley Investments. Investment advisory services offered through Pine Valley Investments, LLC, a registered investment adviser. eMoney is a third-party platform; PVI is not affiliated with eMoney Advisor.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">ADV Part 2</a><a href="contact.html">Contact</a></div>
     </div>
   </div>
 </footer>
+
 <script>
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
   const toggle = document.getElementById('navToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  toggle.addEventListener('click', () => {
-    toggle.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  const menu = document.getElementById('mobileMenu');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  toggle.addEventListener('click', () => { toggle.classList.toggle('open'); menu.classList.toggle('open'); document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : ''; });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); toggle.classList.remove('open'); document.body.style.overflow = ''; }));
+  document.querySelectorAll('.nav-dropdown').forEach(d => {
+    const m = d.querySelector('.mega-menu, .dropdown-menu');
+    if (!m) return;
+    d.addEventListener('mouseenter', () => m.classList.add('open'));
+    d.addEventListener('mouseleave', () => m.classList.remove('open'));
   });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      toggle.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.08 });
+  const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Nav dropdowns — JS controlled
-  document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
-    var menu = dd.querySelector('.mega-menu, .dropdown-menu');
-    if (!menu) return;
-    var t;
-    dd.addEventListener('mouseenter', function() {
-      clearTimeout(t);
-      document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) { if (m !== menu) m.classList.remove('open'); });
-      menu.classList.add('open');
-    });
-    dd.addEventListener('mouseleave', function() { t = setTimeout(function() { menu.classList.remove('open'); }, 80); });
-  });
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.nav-dropdown')) document.querySelectorAll('.mega-menu.open, .dropdown-menu.open').forEach(function(m) { m.classList.remove('open'); });
-  });
 </script>
 </body>
 </html>
