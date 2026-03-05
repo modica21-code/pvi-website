@@ -23,12 +23,22 @@
     .nav-phone { color: var(--gold) !important; }
     
     .nav-dropdown { position: relative; }
-    .nav-dropdown > span { font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);cursor:default;display:flex;align-items:center;gap:5px; }
-    .mega-menu { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); min-width: 520px; padding: 24px; z-index: 200; }
-    .nav-dropdown:hover .mega-menu { display: block; }
+    .nav-dropdown > a, .nav-dropdown > span { display: flex; align-items: center; gap: 5px; }
+    .mega-menu, .dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 500; background: rgba(3,33,61,0.98); border: 1px solid rgba(186,186,185,0.12); backdrop-filter: blur(12px); }
+    .mega-menu.open, .dropdown-menu.open { display: block; }
+    .mega-menu { min-width: 520px; padding: 24px; }
+    .dropdown-menu { min-width: 200px; padding: 8px 0; }
+    .mega-cols { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .mega-col { padding: 0 20px; border-right: 1px solid rgba(186,186,185,0.08); }
+    .mega-col:first-child { padding-left: 0; }
+    .mega-col:last-child { border-right: none; padding-right: 0; }
+    .mega-col-title { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,110,0.2); }
+    .mega-col a, .dropdown-menu a { display: block; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+    .mega-col a { padding: 8px 0; letter-spacing: 0.1em; }
+    .dropdown-menu a { padding: 10px 20px; }
+    .mega-col a:hover, .dropdown-menu a:hover { color: var(--white); }
     .mega-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
     .mega-col-title { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,110,0.2); }
-    .mega-col a { display: block; padding: 8px 0; font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
     .mega-col a:hover { color: var(--white); }
     .mega-col { padding: 0 20px; border-right: 1px solid rgba(186,186,185,0.08); }
     .mega-col:first-child { padding-left: 0; }
@@ -121,14 +131,7 @@
     <li><a href="about.html">About PVI</a></li>
     <li><a href="team.html">Meet Your Team</a></li>
     <li><a href="services.html">Our Services</a></li>
-    <li class="nav-dropdown">
-      <span>Tools &amp; Resources <span style="font-size:8px;">▾</span></span>
-      <div class="mega-menu" style="--type:tools;">
-        <div class="mega-cols" style="grid-template-columns:1fr 1fr;">
-          <div class="mega-col"><div class="mega-col-title">Tools</div><a href="tools.html">Financial Calculators</a><a href="morning-core.html">☀ The Morning Core</a></div>
-        </div>
-      </div>
-    </li>
+    <li class="nav-dropdown"><span style="font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);cursor:default;display:flex;align-items:center;gap:5px;">Tools &amp; Resources <span style="font-size:8px;">▾</span></span><div class="dropdown-menu"><a href="tools.html">Financial Calculators</a><a href="morning-core.html">☀ The Morning Core</a></div></li>
     <li class="nav-dropdown">
       <span>Client Login <span style="font-size:8px;">▾</span></span>
       <div class="mega-menu">
