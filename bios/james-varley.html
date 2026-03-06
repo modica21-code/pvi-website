@@ -52,8 +52,31 @@
     .bio-hero-text { color: var(--white); }
     .bio-name { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; }
     .bio-title { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
-    .bio-contact-btn { display: inline-block; padding: 0.9rem 2.5rem; background: var(--gold); color: var(--navy); font-family: 'Montserrat', Arial, sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; }
+    .bio-contact-btn { display: inline-block; padding: 0.9rem 2.5rem; background: var(--gold); color: var(--navy); font-family: 'Montserrat', Arial, sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; cursor: pointer; border: none; }
     .bio-contact-btn:hover { background: var(--white); color: var(--navy); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+
+    /* CONTACT MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(3,33,61,0.85); z-index: 1000; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--blue); border-radius: 4px; width: 100%; max-width: 560px; padding: 2.5rem; position: relative; }
+    .modal-close { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: rgba(255,255,255,0.5); font-size: 1.4rem; cursor: pointer; line-height: 1; }
+    .modal-close:hover { color: white; }
+    .modal-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.6rem; font-weight: 600; color: white; margin-bottom: 1.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 1rem; }
+    .form-group label { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; }
+    .form-group input, .form-group textarea { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 2px; padding: 0.75rem 1rem; color: white; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1rem; outline: none; transition: border-color 0.2s; resize: vertical; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { min-height: 120px; }
+    .form-submit { width: 100%; padding: 1rem; background: var(--gold); color: var(--navy); font-family: 'Montserrat', Arial, sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; }
+    .form-submit:hover { background: #dfc080; }
+    .form-success { text-align: center; padding: 2rem 0; color: white; }
+    .form-success .check { font-size: 2.5rem; margin-bottom: 1rem; }
+    .form-success h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .form-success p { color: rgba(255,255,255,0.7); font-size: 1rem; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
 
     /* BIO BODY */
     .bio-body { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem; display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: start; }
@@ -120,7 +143,7 @@
       <div class="bio-hero-text">
         <div class="bio-name">James Varley, AAMS®</div>
         <div class="bio-title">Client Support Specialist, Braatz Wealth Advisors</div>
-        <a href="mailto:jvarley@pinevalleyinvestments.com" class="bio-contact-btn">Contact James</a>
+        <button class="bio-contact-btn" onclick="document.getElementById('contactModal').classList.add('open')">Contact James</button>
       </div>
     </div>
   </section>
@@ -129,7 +152,7 @@
   <section class="bio-body">
     <aside class="bio-sidebar">
       <div class="bio-sidebar-label">Contact</div>
-      <a href="mailto:jvarley@pinevalleyinvestments.com" class="bio-email-link">✉ jvarley@pinevalleyinvestments.com</a>
+      <a href="#" onclick="document.getElementById('contactModal').classList.add('open');return false;" class="bio-email-link">✉ jvarley@pinevalleyinvestments.com</a>
       <div class="bio-divider"></div>
       <a href="/pvi-website/team.html" class="back-to-team">Meet the Full Team</a>
     </aside>
@@ -154,6 +177,83 @@
     <div>© 2025 Pine Valley Investments. All rights reserved.</div>
     <div class="footer-disc">Pine Valley Investments is an SEC-registered investment advisory firm. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results.</div>
   </footer>
+
+
+  <!-- CONTACT MODAL -->
+  <div class="modal-overlay" id="contactModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">×</button>
+      <div class="modal-title">Contact James</div>
+
+      <form id="contactForm" action="https://formspree.io/f/mjgavepv" method="POST">
+        <input type="hidden" name="_subject" value="New message for James Varley via PVI website" />
+        <input type="hidden" name="advisor" value="James Varley" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone (Optional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="(856) 555-0000" />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="How can James help you?"></textarea>
+        </div>
+
+        <input type="text" name="_gotcha" style="display:none" />
+        <button type="submit" class="form-submit">Send Message →</button>
+      </form>
+
+      <div class="form-success" id="formSuccess" style="display:none">
+        <div class="check">✓</div>
+        <h3>Message Sent</h3>
+        <p>Thank you — James will be in touch shortly.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Error — try again';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Error — try again';
+        btn.disabled = false;
+      }
+    });
+  </script>
 
 </body>
 </html>
