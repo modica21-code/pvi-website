@@ -291,26 +291,66 @@
     <div class="mc-form-card reveal">
       <div class="mc-form-title">Subscribe to <em>The Morning Core</em></div>
       <div class="mc-form-sub">Free weekday market intelligence, delivered before the open.</div>
-      <form action="https://pinevalleyinvestments.us17.list-manage.com/subscribe/post?u=dcc014e77dbec25b039fbec79&amp;id=f81a9a8d75" method="post" target="_self">
+      <div id="mc-form-wrap">
         <div class="mc-form-group">
           <label for="mce-FNAME">First Name</label>
-          <input type="text" name="FNAME" id="mce-FNAME" placeholder="First name" />
+          <input type="text" id="mce-FNAME" placeholder="First name" />
         </div>
         <div class="mc-form-group">
           <label for="mce-LNAME">Last Name</label>
-          <input type="text" name="LNAME" id="mce-LNAME" placeholder="Last name" />
+          <input type="text" id="mce-LNAME" placeholder="Last name" />
         </div>
         <div class="mc-form-group">
           <label for="mce-EMAIL">Email Address <span style="color:#c9a96e;">*</span></label>
-          <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="your@email.com" required />
+          <input type="email" id="mce-EMAIL" placeholder="your@email.com" />
         </div>
-        <!-- Mailchimp honeypot anti-bot field — do not remove -->
-        <div style="position:absolute;left:-5000px;" aria-hidden="true">
-          <input type="text" name="b_dcc014e77dbec25b039fbec79_f81a9a8d75" tabindex="-1" value="" />
-        </div>
-        <button type="submit" class="mc-form-submit">Subscribe — It's Free</button>
+        <div id="mc-message" style="display:none; font-family:var(--sans); font-size:11px; letter-spacing:0.08em; padding:12px 0; margin-top:4px;"></div>
+        <button class="mc-form-submit" id="mc-submit-btn" onclick="mcSubmit()">Subscribe — It's Free</button>
         <p class="mc-form-note">We respect your inbox. Unsubscribe anytime. No spam, ever.</p>
-      </form>
+      </div>
+      <script>
+        function mcSubmit() {
+          var email = document.getElementById('mce-EMAIL').value.trim();
+          var fname = document.getElementById('mce-FNAME').value.trim();
+          var lname = document.getElementById('mce-LNAME').value.trim();
+          var msg = document.getElementById('mc-message');
+          var btn = document.getElementById('mc-submit-btn');
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            msg.style.display = 'block';
+            msg.style.color = '#c9a96e';
+            msg.textContent = 'Please enter a valid email address.';
+            return;
+          }
+          btn.textContent = 'Subscribing...';
+          btn.disabled = true;
+          msg.style.display = 'none';
+          var url = 'https://pinevalleyinvestments.us17.list-manage.com/subscribe/post-json?u=dcc014e77dbec25b039fbec79&id=f81a9a8d75&EMAIL=' + encodeURIComponent(email) + '&FNAME=' + encodeURIComponent(fname) + '&LNAME=' + encodeURIComponent(lname) + '&b_dcc014e77dbec25b039fbec79_f81a9a8d75=&c=mcCallback_' + Date.now();
+          var cbName = 'mcCallback_' + Date.now();
+          window[cbName] = function(data) {
+            msg.style.display = 'block';
+            if (data.result === 'success') {
+              msg.style.color = '#c9a96e';
+              msg.textContent = '✓ You\'re subscribed! Check your inbox to confirm.';
+              document.getElementById('mce-EMAIL').value = '';
+              document.getElementById('mce-FNAME').value = '';
+              document.getElementById('mce-LNAME').value = '';
+              btn.textContent = 'Subscribed!';
+            } else {
+              msg.style.color = '#babab9';
+              msg.textContent = data.msg ? data.msg.replace(/<[^>]*>/g, '') : 'Something went wrong. Please try again.';
+              btn.textContent = 'Subscribe — It\'s Free';
+              btn.disabled = false;
+            }
+            delete window[cbName];
+            document.body.removeChild(document.getElementById('mc-jsonp'));
+          };
+          var url2 = 'https://pinevalleyinvestments.us17.list-manage.com/subscribe/post-json?u=dcc014e77dbec25b039fbec79&id=f81a9a8d75&EMAIL=' + encodeURIComponent(email) + '&FNAME=' + encodeURIComponent(fname) + '&LNAME=' + encodeURIComponent(lname) + '&b_dcc014e77dbec25b039fbec79_f81a9a8d75=&c=' + cbName;
+          var script = document.createElement('script');
+          script.id = 'mc-jsonp';
+          script.src = url2;
+          document.body.appendChild(script);
+        }
+      </script>
     </div>
   </div>
 </div>
