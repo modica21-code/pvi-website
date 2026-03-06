@@ -324,7 +324,6 @@
           btn.textContent = 'Subscribing...';
           btn.disabled = true;
           msg.style.display = 'none';
-          var url = 'https://pinevalleyinvestments.us17.list-manage.com/subscribe/post-json?u=dcc014e77dbec25b039fbec79&id=f81a9a8d75&EMAIL=' + encodeURIComponent(email) + '&FNAME=' + encodeURIComponent(fname) + '&LNAME=' + encodeURIComponent(lname) + '&b_dcc014e77dbec25b039fbec79_f81a9a8d75=&c=mcCallback_' + Date.now();
           var cbName = 'mcCallback_' + Date.now();
           window[cbName] = function(data) {
             msg.style.display = 'block';
