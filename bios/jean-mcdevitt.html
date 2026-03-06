@@ -9,12 +9,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy: #03213d;
-      --blue: #294d6b;
-      --gold: #c9a96e;
-      --white: #ffffff;
-      --gray: #babab9;
-      --light-bg: #f5f5f3;
+      --navy: #03213d; --blue: #294d6b; --gold: #c9a96e;
+      --white: #ffffff; --gray: #babab9; --light-bg: #f5f5f3;
     }
     body { font-family: 'Cormorant Garamond', Georgia, serif; color: var(--navy); background: var(--white); }
 
@@ -55,11 +51,10 @@
     .bio-contact-btn { display: inline-block; padding: 0.9rem 2.5rem; background: var(--gold); color: var(--navy); font-family: 'Montserrat', Arial, sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; cursor: pointer; border: none; }
     .bio-contact-btn:hover { background: var(--white); color: var(--navy); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
 
-
     /* CONTACT MODAL */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(3,33,61,0.85); z-index: 1000; align-items: center; justify-content: center; padding: 1rem; }
     .modal-overlay.open { display: flex; }
-    .modal { background: var(--blue); border-radius: 4px; width: 100%; max-width: 560px; padding: 2.5rem; position: relative; }
+    .modal { background: var(--blue); border-radius: 4px; width: 100%; max-width: 560px; padding: 2.5rem; position: relative; max-height: 90vh; overflow-y: auto; }
     .modal-close { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: rgba(255,255,255,0.5); font-size: 1.4rem; cursor: pointer; line-height: 1; }
     .modal-close:hover { color: white; }
     .modal-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.6rem; font-weight: 600; color: white; margin-bottom: 1.5rem; }
@@ -90,6 +85,12 @@
     .back-to-team::before { content: '←'; font-size: 1rem; }
     .bio-content p { font-size: 1.15rem; line-height: 1.85; color: #2a2a2a; margin-bottom: 1.5rem; }
     .bio-content p:last-child { margin-bottom: 0; }
+    @media (max-width: 768px) {
+      .bio-hero-inner, .bio-body { grid-template-columns: 1fr; gap: 2rem; }
+      .bio-portrait-wrap { max-width: 220px; margin: 0 auto; }
+      .bio-hero-text { text-align: center; }
+      .bio-sidebar { position: static; }
+    }
 
     /* FOOTER */
     footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 3rem 2rem; text-align: center; font-family: 'Montserrat', Arial, sans-serif; font-size: 0.75rem; letter-spacing: 0.05em; }
@@ -103,157 +104,144 @@
 <body>
 
 <nav>
-      <div class="nav-container">
-        <a href="/pvi-website/index.html" class="nav-logo">
-          <img src="/pvi-website/images/pvi-logo-white.png" alt="Pine Valley Investments" />
-        </a>
-        <ul class="nav-links">
-          <li><a href="/pvi-website/index.html">Home</a></li>
-          <li><a href="/pvi-website/about.html">About PVI</a></li>
-          <li><a href="/pvi-website/team.html" class="active">Meet Your Team</a></li>
-          <li><a href="/pvi-website/services.html">Our Services</a></li>
-          <li class="has-dropdown">
-            <a href="#">Tools and Resources ▾</a>
-            <ul class="dropdown">
-              <li><a href="/pvi-website/morning-core.html">Morning Core</a></li>
-              <li><a href="/pvi-website/client-portal.html">Client Portal</a></li>
-            </ul>
-          </li>
-          <li><a href="/pvi-website/announcements.html">Company Announcements</a></li>
-        </ul>
-        <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('nav-open')">☰</button>
-      </div>
-    </nav>
-
-  <!-- BREADCRUMB -->
-  <div class="breadcrumb">
-    <a href="/pvi-website/index.html">Home</a>
-    <span>›</span>
-    <a href="/pvi-website/team.html">Meet Your Team</a>
-    <span>›</span>
-    Jean McDevitt
-  </div>
-
-  <!-- HERO -->
-  <section class="bio-hero">
-    <div class="bio-hero-inner">
-      <div class="bio-portrait-wrap">
-        <img src="/pvi-website/Headshots/jean mcdevitt.avif" alt="Jean McDevitt" class="bio-portrait" />
-      </div>
-      <div class="bio-hero-text">
-        <div class="bio-name">Jean McDevitt</div>
-        <div class="bio-title">Senior Executive Administrator</div>
-        <button class="bio-contact-btn" onclick="document.getElementById('contactModal').classList.add('open')">Contact Jean</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- BIO BODY -->
-  <section class="bio-body">
-    <aside class="bio-sidebar">
-      <div class="bio-sidebar-label">Contact</div>
-      <a href="#" onclick="document.getElementById('contactModal').classList.add('open');return false;" class="bio-email-link">✉ jmcdevitt@pinevalleyinvestments.com</a>
-      <div class="bio-divider"></div>
-      <a href="/pvi-website/team.html" class="back-to-team">Meet the Full Team</a>
-    </aside>
-    <div class="bio-content">
-      <p>Jean has been in the financial industry since 1984, when she started at Janney Montgomery Scott, Inc as an Administrative Assistant and later in the Mortgage-Backed Securities department. After leaving Janney, Jean joined Walnut Asset Management and worked closely in all areas relating to client services for various managers.</p>
-<p>With the knowledge and professionalism gained, Jean went to work at Tower Bridge Advisors from November of 2007 through May of 2023 when she joined Pine Valley Investments as a Senior Executive Administrator, bringing with her the relationships and knowledge gained over the past 39 years.</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">
+  <div class="nav-container">
+    <a href="/pvi-website/index.html" class="nav-logo">
       <img src="/pvi-website/images/pvi-logo-white.png" alt="Pine Valley Investments" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="/pvi-website/index.html">Home</a></li>
+      <li><a href="/pvi-website/about.html">About PVI</a></li>
+      <li><a href="/pvi-website/team.html" class="active">Meet Your Team</a></li>
+      <li><a href="/pvi-website/services.html">Our Services</a></li>
+      <li class="has-dropdown">
+        <a href="#">Tools &amp; Resources ▾</a>
+        <ul class="dropdown">
+          <li><a href="/pvi-website/morning-core.html">Morning Core</a></li>
+          <li><a href="/pvi-website/client-portal.html">Client Portal</a></li>
+        </ul>
+      </li>
+      <li><a href="/pvi-website/announcements.html">Company Announcements</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="this.parentElement.parentElement.classList.toggle('nav-open')">☰</button>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="/pvi-website/index.html">Home</a>
+  <span>›</span>
+  <a href="/pvi-website/team.html">Meet Your Team</a>
+  <span>›</span>
+  Jean McDevitt
+</div>
+
+<section class="bio-hero">
+  <div class="bio-hero-inner">
+    <div class="bio-portrait-wrap">
+      <img src="/pvi-website/Headshots/jean mcdevitt.avif" alt="Jean McDevitt" class="bio-portrait" />
     </div>
-    <div class="footer-links">
-      <a href="/pvi-website/index.html">Home</a>
-      <a href="/pvi-website/about.html">About</a>
-      <a href="/pvi-website/team.html">Team</a>
-      <a href="/pvi-website/services.html">Services</a>
-      <a href="/pvi-website/contact.html">Contact</a>
-    </div>
-    <div>© 2025 Pine Valley Investments. All rights reserved.</div>
-    <div class="footer-disc">Pine Valley Investments is an SEC-registered investment advisory firm. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results.</div>
-  </footer>
-
-
-  <!-- CONTACT MODAL -->
-  <div class="modal-overlay" id="contactModal" onclick="if(event.target===this)this.classList.remove('open')">
-    <div class="modal">
-      <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">×</button>
-      <div class="modal-title">Contact Jean</div>
-
-      <form id="contactForm" action="https://formspree.io/f/mjgavepv" method="POST">
-        <input type="hidden" name="_subject" value="New message for Jean McDevitt via PVI website" />
-        <input type="hidden" name="advisor" value="Jean McDevitt" />
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="jane@example.com" required />
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Phone (Optional)</label>
-          <input type="tel" id="phone" name="phone" placeholder="(856) 555-0000" />
-        </div>
-
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="How can Jean help you?"></textarea>
-        </div>
-
-        <input type="text" name="_gotcha" style="display:none" />
-        <button type="submit" class="form-submit">Send Message →</button>
-      </form>
-
-      <div class="form-success" id="formSuccess" style="display:none">
-        <div class="check">✓</div>
-        <h3>Message Sent</h3>
-        <p>Thank you — Jean will be in touch shortly.</p>
-      </div>
+    <div class="bio-hero-text">
+      <div class="bio-name">Jean McDevitt</div>
+      <div class="bio-title">Senior Executive Administrator</div>
+      <button class="bio-contact-btn" onclick="document.getElementById('contactModal').classList.add('open')">Contact Jean</button>
     </div>
   </div>
+</section>
 
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const btn = form.querySelector('.form-submit');
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
+<section class="bio-body">
+  <aside class="bio-sidebar">
+    <div class="bio-sidebar-label">Contact</div>
+    <a href="#" onclick="document.getElementById('contactModal').classList.add('open');return false;" class="bio-email-link">✉ jmcdevitt@pinevalleyinvestments.com</a>
+    <div class="bio-divider"></div>
+    <a href="/pvi-website/team.html" class="back-to-team">Meet the Full Team</a>
+  </aside>
+  <div class="bio-content">
+    <p>Jean has been in the financial industry since 1984, when she started at Janney Montgomery Scott, Inc as an Administrative Assistant and later in the Mortgage-Backed Securities department. After leaving Janney, Jean joined Walnut Asset Management and worked closely in all areas relating to client services for various managers.</p>
+      <p>With the knowledge and professionalism gained, Jean went to work at Tower Bridge Advisors from November of 2007 through May of 2023 when she joined Pine Valley Investments as a Senior Executive Administrator, bringing with her the relationships and knowledge gained over the past 39 years.</p>
+  </div>
+</section>
 
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          form.style.display = 'none';
-          document.getElementById('formSuccess').style.display = 'block';
-        } else {
-          btn.textContent = 'Error — try again';
-          btn.disabled = false;
-        }
-      } catch {
+<footer>
+  <div class="footer-logo">
+    <img src="/pvi-website/images/pvi-logo-white.png" alt="Pine Valley Investments" />
+  </div>
+  <div class="footer-links">
+    <a href="/pvi-website/index.html">Home</a>
+    <a href="/pvi-website/about.html">About</a>
+    <a href="/pvi-website/team.html">Team</a>
+    <a href="/pvi-website/services.html">Services</a>
+    <a href="/pvi-website/contact.html">Contact</a>
+  </div>
+  <div>© 2025 Pine Valley Investments. All rights reserved.</div>
+  <div class="footer-disc">Pine Valley Investments is an SEC-registered investment advisory firm. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results.</div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">×</button>
+    <div class="modal-title">Contact Jean</div>
+    <form id="contactForm" action="https://formspree.io/f/mjgavepv" method="POST">
+      <input type="hidden" name="_subject" value="New message for Jean McDevitt via PVI website" />
+      <input type="hidden" name="advisor" value="Jean McDevitt" />
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone (Optional)</label>
+        <input type="tel" id="phone" name="phone" placeholder="(856) 555-0000" />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="How can Jean help you?"></textarea>
+      </div>
+      <input type="text" name="_gotcha" style="display:none" />
+      <button type="submit" class="form-submit">Send Message →</button>
+    </form>
+    <div class="form-success" id="formSuccess" style="display:none">
+      <div class="check">✓</div>
+      <h3>Message Sent</h3>
+      <p>Thank you — Jean will be in touch shortly.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
         btn.textContent = 'Error — try again';
         btn.disabled = false;
       }
-    });
-  </script>
+    } catch {
+      btn.textContent = 'Error — try again';
+      btn.disabled = false;
+    }
+  });
+</script>
 
 </body>
 </html>
