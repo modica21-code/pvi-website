@@ -263,7 +263,7 @@
         <p>Thank you — Corey will be in touch shortly.</p>
       </div>
       <form id="contactForm" action="https://formspree.io/f/mjgavepv" method="POST" onsubmit="handleSubmit(event)">
-        <input type="hidden" name="_subject" value="New message for Corey Fisher via PVI website" />
+        <input type="hidden" name="_subject" value="[PVI Contact] Corey Fisher" />
         <input type="hidden" name="advisor" value="Corey Fisher" />
         <div class="form-row">
           <div class="form-group">
@@ -277,7 +277,8 @@
         </div>
         <div class="form-group">
           <label>Email Address</label>
-          <input type="email" name="email" placeholder="jane@example.com" required />
+          <input type="hidden" name="_replyto" id="replyto" />
+        <input type="email" name="email" id="emailInput" oninput="document.getElementById('replyto').value=this.value" placeholder="jane@example.com" required />
         </div>
         <div class="form-group">
           <label>Phone (Optional)</label>
