@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pinevalleyinvestments.com/sitemap.xml
+
+# Block any staging or test paths
+Disallow: /test/
+Disallow: /staging/
+Disallow: /draft/
