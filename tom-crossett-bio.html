@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tom Crossett | Investment Advisor Representative | Pine Valley Investments</title>
+  <meta name="description" content="Tom Crossett is an Investment Advisor Representative with The Fay Group at Pine Valley Investments." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy: #03213d; --blue: #294d6b; --gold: #c9a96e; --white: #ffffff; --gray: #babab9; }
+    body { background: var(--navy); color: var(--white); font-family: 'Cormorant Garamond', Georgia, serif; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(3,33,61,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,0.07); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 20px; font-family: 'Montserrat', Arial, sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--gold); color: var(--navy); }
+    .bio-hero { padding: 140px 48px 80px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 360px 1fr; gap: 80px; align-items: start; }
+    .bio-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; border-radius: 4px; }
+    .bio-photo-placeholder { width: 100%; aspect-ratio: 3/4; background: var(--blue); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-family: 'Montserrat', Arial, sans-serif; font-size: 0.8rem; }
+    .bio-info { padding-top: 16px; }
+    .bio-label { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .bio-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+    .bio-name { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
+    .bio-title { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+    .bio-group { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 36px; }
+    .bio-divider { width: 48px; height: 1px; background: var(--gold); margin-bottom: 32px; }
+    .bio-text { font-size: 1.15rem; line-height: 1.85; color: rgba(255,255,255,0.85); font-weight: 300; }
+    .bio-text p + p { margin-top: 20px; }
+    .bio-cta { margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: var(--navy); padding: 14px 28px; font-family: 'Montserrat', Arial, sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 3px; }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.25); color: var(--white); padding: 14px 28px; font-family: 'Montserrat', Arial, sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 3px; }
+    .specialties { background: var(--blue); padding: 80px 48px; }
+    .specialties-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .section-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+    .section-title { font-size: 2.2rem; font-weight: 300; margin-bottom: 48px; }
+    .spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .spec-item { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 24px; }
+    .spec-item h3 { font-size: 1.1rem; font-weight: 400; margin-bottom: 10px; }
+    .spec-item p { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.78rem; line-height: 1.7; color: var(--gray); }
+    footer { background: #020f1d; padding: 40px 48px; text-align: center; }
+    footer p { font-family: 'Montserrat', Arial, sans-serif; font-size: 0.72rem; color: var(--gray); letter-spacing: 0.05em; line-height: 1.8; }
+    footer a { color: var(--gray); text-decoration: none; }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .bio-hero { grid-template-columns: 1fr; padding: 110px 24px 60px; gap: 40px; }
+      .specialties { padding: 60px 24px; }
+      .spec-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="pvi-logo.png" alt="Pine Valley Investments" style="height:36px;" onerror="this.style.display='none'">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.05em;color:#fff;">Pine Valley <span style="color:#c9a96e;">Investments</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About PVI</a></li>
+      <li><a href="meet-the-team.html">Meet Your Team</a></li>
+      <li><a href="services.html">Our Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Schedule a Consultation</a>
+  </nav>
+
+  <section class="bio-hero">
+    <div>
+      <div class="bio-photo-placeholder">Photo Coming Soon</div>
+    </div>
+    <div class="bio-info">
+      <div class="bio-label">The Fay Group</div>
+      <h1 class="bio-name">Tom Crossett</h1>
+      <div class="bio-title">Investment Advisor Representative</div>
+      <div class="bio-group">Pine Valley Investments</div>
+      <div class="bio-divider"></div>
+      <div class="bio-text">
+        <p>Tom Crossett brings a disciplined, client-first approach to financial planning and wealth management. As an Investment Advisor Representative with The Fay Group at Pine Valley Investments, Tom works alongside a team of experienced advisors to deliver comprehensive, personalized financial strategies.</p>
+        <p>Tom is committed to understanding each client's unique financial picture — from goals and risk tolerance to family dynamics and long-term legacy planning. He leverages Pine Valley's in-house investment expertise and broad platform to provide guidance with the resources of a large firm and the personal attention of a trusted advisor.</p>
+        <p>Built on a foundation of integrity and transparency, Tom's approach centers on long-term relationships and measurable outcomes that give clients clarity and confidence in their financial future.</p>
+      </div>
+      <div class="bio-cta">
+        <a href="contact.html" class="btn-primary">Schedule a Consultation</a>
+        <a href="meet-the-team.html" class="btn-outline">Meet the Full Team</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="specialties">
+    <div class="specialties-inner">
+      <div class="section-label">Areas of Focus</div>
+      <h2 class="section-title">How Tom Can Help You</h2>
+      <div class="spec-grid">
+        <div class="spec-item">
+          <h3>Wealth Management</h3>
+          <p>Comprehensive strategies to grow, protect, and transfer wealth across generations.</p>
+        </div>
+        <div class="spec-item">
+          <h3>Retirement Planning</h3>
+          <p>Helping clients build and preserve the retirement income they deserve.</p>
+        </div>
+        <div class="spec-item">
+          <h3>Investment Management</h3>
+          <p>Disciplined, personalized portfolio management aligned to your goals and risk profile.</p>
+        </div>
+        <d
