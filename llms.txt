@@ -1,0 +1,69 @@
+# Pine Valley Investments
+
+> Pine Valley Investments (PVI) is an independent Registered Investment Advisor (RIA) based in Marlton, New Jersey, managing $2.65 billion in assets under management for over 1,800 clients across the U.S. Founded in 2015 by Harry Morad and Joe Duncan, PVI provides fiduciary, client-first financial advice with in-house investment management.
+
+## About PVI
+
+Pine Valley Investments is a fee-only, independent RIA with 40+ financial advisors. The firm offers wealth management, investment advisory services, trust administration & estate planning, qualified retirement plans, investment banking, and networking opportunities. PVI is not affiliated with any broker-dealer and acts solely in a fiduciary capacity for its clients.
+
+- Founded: 2015, Marlton, NJ
+- AUM: $2.65 billion (as of 2026)
+- Clients: 1,800+
+- Advisors: 40+
+- Recognition: USA Today Best Financial Advisory Firms 2025
+
+## Services
+
+- Wealth Management
+- Investment Advisory Services
+- Trust Administration & Estate Planning
+- Qualified Retirement Plans
+- Investment Banking
+- Networking Opportunities
+
+## Leadership
+
+- Harry Morad — CEO & Co-Founder
+- Joseph Duncan — COO & Co-Founder
+- Mike Modica — CFO & Partner
+- Chris O'Neill — CIO, CFA & Partner
+- Nick Lampone — CSO & Partner
+
+## Advisory Groups
+
+- PVI Core Advisors
+- BWA (Braatz Walden): Jason Braatz, Jerry Braatz, Corey Fisher, Scott Walden, Chris Bryan
+- The Markoe Group: Jonathan Markoe, Jake Markoe, Joshua Feldschneider, Scott Lermack, Victoria Allen
+- The Fay Group: Kate Fay, Tom Crossett, Anthony Vasile, Tanya Schneider
+
+## Site Structure
+
+- Homepage: /
+- About PVI: /about.html
+- Meet Your Team: /team.html
+- Our Services: /services.html
+- Contact: /contact.html
+- Company Announcements: /announcements.html
+- Morning Core Newsletter: /morning-core.html
+- Client Login Hub: /client-login.html
+- Financial Calculators: /tools.html
+- Advisor Bios: /bios/[first-last].html (40 pages)
+
+## Client Portals
+
+- RightCapital (financial planning): /rightcapital.html
+- Monarch Money (data aggregation): /monarch.html
+- Charles Schwab (custodian): /schwab.html
+- Altruist (custodian): /altruist.html
+- eMoney (financial planning): /emoney.html
+- Tamarac WealthView (performance reporting): /tamarac.html
+
+## Contact
+
+- Phone: 856-334-8260
+- Website: https://pinevalleyinvestments.com
+- Location: Marlton, New Jersey
+
+## Sitemap
+
+Full sitemap available at: /sitemap.xml
