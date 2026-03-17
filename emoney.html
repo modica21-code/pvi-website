@@ -145,6 +145,10 @@
     .footer-legal a:hover { color: var(--gray); }
     @media (max-width: 900px) { .hero-inner, .two-col, .em-inner { grid-template-columns: 1fr; } .two-col.reverse { direction: ltr; } }
     @media (max-width: 768px) { nav { padding: 16px 24px; } .nav-links { display: none; } .nav-toggle { display: flex; } .section { padding: 72px 24px; } .breadcrumb { padding: 100px 24px 0; } .features-grid { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr; gap: 36px; } .em-inner { padding: 60px 24px; } .help-inner { flex-direction: column; align-items: flex-start; padding: 24px; } }
+  
+    /* Keyboard focus styles */
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   </style>
 
   <script type="application/ld+json">{
