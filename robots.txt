@@ -1,6 +1,19 @@
 User-agent: *
 Allow: /
 
+# Explicitly allow AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
 Sitemap: https://pinevalleyinvestments.com/sitemap.xml
 
 # Block any staging or test paths
