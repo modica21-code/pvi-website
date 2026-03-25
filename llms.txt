@@ -1,69 +1,51 @@
 # Pine Valley Investments
+# https://pinevalleyinvestments.com
+# llms.txt — Site structure for AI crawlers
 
-> Pine Valley Investments (PVI) is an independent Registered Investment Advisor (RIA) based in Marlton, New Jersey, managing $2.65 billion in assets under management for over 1,800 clients across the U.S. Founded in 2015 by Harry Morad and Joe Duncan, PVI provides fiduciary, client-first financial advice with in-house investment management.
+> Pine Valley Investments is an independent Registered Investment Advisor (RIA) based in Marlton, NJ, managing $2.65B in assets for families and business owners across the United States. Founded in 2015 by Harry Morad and Joseph Duncan, PVI has grown to 40+ advisors across multiple advisory groups. Pine Valley Investments was recognized as one of USA Today's Best Financial Advisory Firms 2025.
 
-## About PVI
+## Main Pages
 
-Pine Valley Investments is a fee-only, independent RIA with 40+ financial advisors. The firm offers wealth management, investment advisory services, trust administration & estate planning, qualified retirement plans, investment banking, and networking opportunities. PVI is not affiliated with any broker-dealer and acts solely in a fiduciary capacity for its clients.
-
-- Founded: 2015, Marlton, NJ
-- AUM: $2.65 billion (as of 2026)
-- Clients: 1,800+
-- Advisors: 40+
-- Recognition: USA Today Best Financial Advisory Firms 2025
-
-## Services
-
-- Wealth Management
-- Investment Advisory Services
-- Trust Administration & Estate Planning
-- Qualified Retirement Plans
-- Investment Banking
-- Networking Opportunities
-
-## Leadership
-
-- Harry Morad — CEO & Co-Founder
-- Joseph Duncan — COO & Co-Founder
-- Mike Modica — CFO & Partner
-- Chris O'Neill — CIO, CFA & Partner
-- Nick Lampone — CSO & Partner
-
-## Advisory Groups
-
-- PVI Core Advisors
-- BWA (Braatz Walden): Jason Braatz, Jerry Braatz, Corey Fisher, Scott Walden, Chris Bryan
-- The Markoe Group: Jonathan Markoe, Jake Markoe, Joshua Feldschneider, Scott Lermack, Victoria Allen
-- The Fay Group: Kate Fay, Tom Crossett, Anthony Vasile, Tanya Schneider
-
-## Site Structure
-
-- Homepage: /
-- About PVI: /about.html
-- Meet Your Team: /team.html
-- Our Services: /services.html
-- Contact: /contact.html
-- Company Announcements: /announcements.html
-- Morning Core Newsletter: /morning-core.html
-- Client Login Hub: /client-login.html
-- Financial Calculators: /tools.html
-- Advisor Bios: /bios/[first-last].html (40 pages)
+- [Home](https://pinevalleyinvestments.com/): Overview of Pine Valley Investments, AUM timeline, services summary, team preview
+- [About PVI](https://pinevalleyinvestments.com/about.html): Company history, AUM growth timeline (2015–present), founding story, firm values
+- [Meet Your Team](https://pinevalleyinvestments.com/team.html): Full directory of all 40+ advisors across PVI, BWA, The Markoe Group, and The Fay Group
+- [Our Services](https://pinevalleyinvestments.com/services.html): Wealth Management, Investment Advisory, Trust & Estate Planning, Qualified Retirement Plans, Investment Banking, Networking Opportunities
+- [Contact Us](https://pinevalleyinvestments.com/contact.html): Contact form, office address, phone number
+- [Company Announcements](https://pinevalleyinvestments.com/announcements.html): Firm news and updates
+- [Morning Core](https://pinevalleyinvestments.com/morning-core.html): PVI's daily morning newsletter for clients and subscribers
+- [Client Login](https://pinevalleyinvestments.com/client-login.html): Hub linking to all 6 client portals
 
 ## Client Portals
 
-- RightCapital (financial planning): /rightcapital.html
-- Monarch Money (data aggregation): /monarch.html
-- Charles Schwab (custodian): /schwab.html
-- Altruist (custodian): /altruist.html
-- eMoney (financial planning): /emoney.html
-- Tamarac WealthView (performance reporting): /tamarac.html
+- [RightCapital](https://pinevalleyinvestments.com/rightcapital.html): Financial planning portal — retirement projections, tax strategies, education funding
+- [Monarch Money](https://pinevalleyinvestments.com/monarch.html): Account aggregation and net worth tracking
+- [Charles Schwab](https://pinevalleyinvestments.com/schwab.html): Primary custodian — account balances, statements, tax documents
+- [Altruist](https://pinevalleyinvestments.com/altruist.html): Secondary custodian — modern RIA-focused platform
+- [eMoney](https://pinevalleyinvestments.com/emoney.html): Comprehensive financial planning portal
+- [Tamarac WealthView](https://pinevalleyinvestments.com/tamarac.html): Performance reporting and portfolio analytics
 
-## Contact
+## Advisor Bio Pages
 
-- Phone: 856-334-8260
-- Website: https://pinevalleyinvestments.com
-- Location: Marlton, New Jersey
+All 40+ advisor bios are available at /bios/[first-last].html. Key advisors:
 
-## Sitemap
+- [Harry Morad](https://pinevalleyinvestments.com/bios/harry-morad.html): CEO & Co-Founder
+- [Joseph Duncan](https://pinevalleyinvestments.com/bios/joseph-duncan.html): COO & Co-Founder
+- [Mike Modica](https://pinevalleyinvestments.com/bios/mike-modica.html): CFO & Partner
+- [Chris O'Neill](https://pinevalleyinvestments.com/bios/chris-oneill.html): CIO, CFA & Partner
+- [Nick Lampone](https://pinevalleyinvestments.com/bios/nick-lampone.html): CSO & Partner
+- [Jason Braatz](https://pinevalleyinvestments.com/bios/jason-braatz.html): Partner, BWA Group
+- [Jonathan Markoe](https://pinevalleyinvestments.com/bios/jonathan-markoe.html): Partner, The Markoe Group
+- [Kate Fay](https://pinevalleyinvestments.com/bios/kate-fay.html): Partner, The Fay Group
 
-Full sitemap available at: /sitemap.xml
+## Legal & Compliance
+
+- [Privacy Policy](https://pinevalleyinvestments.com/privacy.html)
+- [Terms of Use](https://pinevalleyinvestments.com/terms.html)
+- [SEC Investment Advisor Review](https://adviserinfo.sec.gov)
+- [Form ADV 2A](https://adviserinfo.sec.gov/firm/summary/316052)
+
+## Technical
+
+- [Sitemap](https://pinevalleyinvestments.com/sitemap.xml)
+- Contact: info@pinevalleyinvestments.com | 856-334-8260
+- Address: 10 E Stow Rd, Suite 200, Marlton, NJ 08053

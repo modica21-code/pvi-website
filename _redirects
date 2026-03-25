@@ -1,0 +1,52 @@
+# Pine Valley Investments — 301 Redirects
+# Wix URLs → New site (common Wix URL patterns)
+
+# Main pages — Wix typically uses no extension or different paths
+/about                    /about.html               301
+/team                     /team.html                301
+/meet-your-team           /team.html                301
+/services                 /services.html            301
+/our-services             /services.html            301
+/contact                  /contact.html             301
+/contact-us               /contact.html             301
+/announcements            /announcements.html       301
+/company-announcements    /announcements.html       301
+/morning-core             /morning-core.html        301
+/the-morning-core         /morning-core.html        301
+/client-login             /client-login.html        301
+/login                    /client-login.html        301
+/portals                  /client-login.html        301
+/tools                    /tools.html               301
+/financial-calculators    /tools.html               301
+/calculators              /tools.html               301
+
+# Portal pages
+/rightcapital             /rightcapital.html        301
+/right-capital            /rightcapital.html        301
+/monarch                  /monarch.html             301
+/monarch-money            /monarch.html             301
+/schwab                   /schwab.html              301
+/charles-schwab           /schwab.html              301
+/altruist                 /altruist.html            301
+/emoney                   /emoney.html              301
+/e-money                  /emoney.html              301
+/tamarac                  /tamarac.html             301
+/wealthview               /tamarac.html             301
+
+# Bio pages — Wix often used /advisor/name or /team/name patterns
+/advisor/harry-morad      /bios/harry-morad.html    301
+/advisor/joseph-duncan    /bios/joseph-duncan.html  301
+/advisor/mike-modica      /bios/mike-modica.html    301
+/advisor/nick-lampone     /bios/nick-lampone.html   301
+/advisor/chris-oneill     /bios/chris-oneill.html   301
+/advisor/jason-braatz     /bios/jason-braatz.html   301
+/advisor/jonathan-markoe  /bios/jonathan-markoe.html 301
+/advisor/kate-fay         /bios/kate-fay.html       301
+/team/harry-morad         /bios/harry-morad.html    301
+/team/joseph-duncan       /bios/joseph-duncan.html  301
+/team/mike-modica         /bios/mike-modica.html    301
+/team/nick-lampone        /bios/nick-lampone.html   301
+/team/chris-oneill        /bios/chris-oneill.html   301
+/team/jason-braatz        /bios/jason-braatz.html   301
+/team/jonathan-markoe     /bios/jonathan-markoe.html 301
+/team/kate-fay            /bios/kate-fay.html       301
