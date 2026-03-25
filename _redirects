@@ -50,3 +50,9 @@
 /team/jason-braatz        /bios/jason-braatz.html   301
 /team/jonathan-markoe     /bios/jonathan-markoe.html 301
 /team/kate-fay            /bios/kate-fay.html       301
+
+# Privacy policy alias
+/privacy-policy.html      /privacy.html             301
+/privacy-policy           /privacy.html             301
+/adv.html                 https://adviserinfo.sec.gov/firm/summary/316052  301
+/adv                      https://adviserinfo.sec.gov/firm/summary/316052  301
