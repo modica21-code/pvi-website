@@ -1,5 +1,7 @@
+import crypto from 'crypto';
+
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'https://pinevalleyinvestments.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -10,9 +12,11 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.MAILCHIMP_API_KEY;
   const audienceId = process.env.MAILCHIMP_AUDIENCE_ID;
-  const dc = apiKey.split('-')[1];
+  if (!apiKey || !audienceId) {
+    return res.status(500).json({ error: 'Server configuration error' });
+  }
 
-  const crypto = require('crypto');
+  const dc = apiKey.split('-')[1];
   const subscriberHash = crypto.createHash('md5').update(EMAIL.toLowerCase()).digest('hex');
 
   try {
@@ -38,7 +42,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: err.detail || 'Mailchimp error' });
     }
 
-    await fetch(
+    const tagRes = await fetch(
       'https://' + dc + '.api.mailchimp.com/3.0/lists/' + audienceId + '/members/' + subscriberHash + '/tags',
       {
         method: 'POST',
@@ -46,6 +50,11 @@ export default async function handler(req, res) {
         body: JSON.stringify({ tags: [{ name: 'Morning Core - Subscribed', status: 'active' }] })
       }
     );
+
+    if (!tagRes.ok) {
+      const tagErr = await tagRes.json();
+      console.error('Tag assignment failed:', tagErr.detail || tagErr);
+    }
 
     return res.status(200).json({ success: true });
   } catch (e) {

@@ -326,26 +326,10 @@
     We use cookies to improve your experience and analyze site traffic. By clicking <strong style="color:#fff;">Accept</strong>, you consent to our use of cookies. See our <a href="privacy.html" style="color:#c9a96e;text-decoration:underline;">Privacy Policy</a> for details.
   </p>
   <div style="display:flex;gap:12px;flex-shrink:0;">
-    <button onclick="pviCookieChoice('decline')" style="font-family:'Montserrat',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;background:none;border:1px solid rgba(186,186,185,0.3);color:rgba(186,186,185,0.7);padding:10px 22px;cursor:pointer;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(186,186,185,0.6)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(186,186,185,0.3)';this.style.color='rgba(186,186,185,0.7)'">Decline</button>
-    <button onclick="pviCookieChoice('accept')" style="font-family:'Montserrat',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;background:#c9a96e;border:none;color:#03213d;padding:10px 22px;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Accept</button>
+    <button id="pvi-cookie-decline" style="font-family:'Montserrat',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;background:none;border:1px solid rgba(186,186,185,0.3);color:rgba(186,186,185,0.7);padding:10px 22px;cursor:pointer;transition:border-color 0.2s,color 0.2s;">Decline</button>
+    <button id="pvi-cookie-accept" style="font-family:'Montserrat',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;background:#c9a96e;border:none;color:#03213d;padding:10px 22px;cursor:pointer;transition:opacity 0.2s;">Accept</button>
   </div>
 </div>
-<script>
-(function(){
-  function pviCookieChoice(choice){
-    localStorage.setItem('pvi_cookie_consent', choice);
-    var b = document.getElementById('cookie-banner');
-    if(b){ b.style.transition='opacity 0.3s'; b.style.opacity='0'; setTimeout(function(){ b.style.display='none'; }, 300); }
-  }
-  window.pviCookieChoice = pviCookieChoice;
-  document.addEventListener('DOMContentLoaded', function(){
-    var consent = localStorage.getItem('pvi_cookie_consent');
-    if(!consent){
-      var b = document.getElementById('cookie-banner');
-      if(b){ b.style.display='flex'; b.style.opacity='0'; setTimeout(function(){ b.style.transition='opacity 0.4s'; b.style.opacity='1'; }, 100); }
-    }
-  });
-})();
-</script>
+<script src="/cookie-consent.js"></script>
 </body>
 </html>
