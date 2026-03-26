@@ -275,5 +275,68 @@
   });
 })();
 </script>
+
+<script>
+// GA4 Conversion Event Tracking
+document.addEventListener('DOMContentLoaded', function() {
+
+  // 1. Schedule a Consultation clicks
+  document.querySelectorAll('a[href*="schedule.html"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      gtag('event', 'schedule_consultation_click', {
+        event_category: 'CTA',
+        event_label: el.innerText.trim() || 'Schedule a Consultation'
+      });
+    });
+  });
+
+  // 2. Client Login clicks (portal links)
+  var portalLinks = ['schwab.html','altruist.html','emoney.html','rightcapital.html','tamarac.html','monarch.html','client-login.html'];
+  document.querySelectorAll('a').forEach(function(el) {
+    var href = el.getAttribute('href') || '';
+    var isPortal = portalLinks.some(function(p){ return href.indexOf(p) > -1; });
+    var isExternalPortal = href.indexOf('schwab.com') > -1 || href.indexOf('altruist.com') > -1 || href.indexOf('emoney') > -1 || href.indexOf('rightcapital') > -1 || href.indexOf('tamarac') > -1 || href.indexOf('monarch') > -1;
+    if (isPortal || isExternalPortal) {
+      el.addEventListener('click', function() {
+        gtag('event', 'client_login_click', {
+          event_category: 'Client Access',
+          event_label: el.innerText.trim() || href
+        });
+      });
+    }
+  });
+
+  // 3. Form submissions — Formspree forms
+  document.querySelectorAll('form[action*="formspree"]').forEach(function(form) {
+    form.addEventListener('submit', function() {
+      gtag('event', 'form_submit', {
+        event_category: 'Lead',
+        event_label: document.title
+      });
+    });
+  });
+
+  // 4. Mailchimp Morning Core signup
+  document.querySelectorAll('form[action*="list-manage"], form[id*="mc-embedded"]').forEach(function(form) {
+    form.addEventListener('submit', function() {
+      gtag('event', 'morning_core_signup', {
+        event_category: 'Newsletter',
+        event_label: 'Morning Core Subscribe'
+      });
+    });
+  });
+
+  // 5. Phone number clicks
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      gtag('event', 'phone_click', {
+        event_category: 'Contact',
+        event_label: el.getAttribute('href')
+      });
+    });
+  });
+
+});
+</script>
 </body>
 </html>
