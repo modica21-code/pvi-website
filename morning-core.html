@@ -211,7 +211,7 @@
           <p style="font-family:'Montserrat',Arial,sans-serif;font-size:0.82rem;color:#babab9;margin:0 0 32px;letter-spacing:0.04em;">Free weekday market intelligence, delivered before the open.</p>
 
           <!-- Mailchimp signup form -->
-          <form action="https://pinevalleyinvestments.us17.list-manage.com/subscribe/post?u=dcc014e77dbec25b039fbec79&amp;id=f81a9a8d75&amp;f_id=0081fbe2f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_self">
+          <form action="https://pinevalleyinvestments.us17.list-manage.com/subscribe/post?u=dcc014e77dbec25b039fbec79&amp;id=f81a9a8d75&amp;f_id=0081fbe2f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_self" onsubmit="mcSubmitRedirect(event)">
 
             <div style="margin-bottom:20px;">
               <label style="display:block;font-family:'Montserrat',Arial,sans-serif;font-size:0.72rem;letter-spacing:0.1em;color:#babab9;margin-bottom:8px;text-transform:uppercase;">First Name</label>
@@ -436,6 +436,16 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 });
+</script>
+<script>
+function mcSubmitRedirect(e) {
+  var email = document.getElementById('mce-EMAIL');
+  if (email && email.value) {
+    setTimeout(function() {
+      window.location.href = 'thank-you.html';
+    }, 1000);
+  }
+}
 </script>
 </body>
 </html>
