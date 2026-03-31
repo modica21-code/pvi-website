@@ -57,7 +57,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--light-bg);min-height:1
 .badge{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap;font-family:'Montserrat',sans-serif;}
 .badge-foundation{background:#e8f0fe;color:#1a56a0;border:0.5px solid #b3cef5;}
 .badge-print{background:#fff3e0;color:#8a5010;border:0.5px solid #f0c878;}
-.badge-internal{background:#edf7ed;color:#2a6b2a;border:0.5px solid #a0d8a0;}
+.badge-social{background:#f0eafa;color:#5b2d8a;border:0.5px solid #d0b0f0;}
 .badge-owner{background:#f5f5f3;color:#666;border:0.5px solid #e0e0de;}
 .done-by-line{font-size:11px;color:#aaa;margin-top:6px;font-style:italic;}
 
@@ -110,7 +110,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--light-bg);min-height:1
     <div class="ftab-sep"></div>
     <div class="ftab" onclick="setFilter(this,'foundation')">Brand Foundation</div>
     <div class="ftab" onclick="setFilter(this,'print')">Print &amp; Physical</div>
-    <div class="ftab" onclick="setFilter(this,'internal')">Internal</div>
+    <div class="ftab" onclick="setFilter(this,'social')">Social Media</div>
     <div class="ftab-sep"></div>
     <div class="ftab" onclick="setFilter(this,'mc')">Mike Carter</div>
     <button class="reset-btn" onclick="resetAll()">Reset All</button>
@@ -151,24 +151,22 @@ const TASKS=[
   {id:16,text:"Event signage & banners",note:"Step-and-repeat, retractable banners, table runners",cat:"print",owner:"mm"},
   {id:17,text:"Conference / trade show booth materials",note:"Booth backdrop, display panels, handouts",cat:"print",owner:"mm"},
   {id:18,text:"Promotional items (swag)",note:"Pens, portfolios, apparel — vendor to be selected",cat:"print",owner:"mm"},
-  {id:19,text:"Client gift packaging",note:"Holiday card, gift box, tissue, ribbon with updated branding",cat:"print",owner:"mm"},
-  {id:20,text:"Mailing labels & return address",note:"For physical mail and packages",cat:"print",owner:"mc"},
-  {id:21,text:"Email signature template",note:"Standardized for all 40+ staff — deployed firm-wide",cat:"internal",owner:"mc"},
-  {id:22,text:"PowerPoint / Keynote master template",note:"Cover, content, divider, and closing slide layouts",cat:"internal",owner:"mc"},
-  {id:23,text:"Word document templates",note:"Memo, letter, report, proposal — pre-styled headers & footers",cat:"internal",owner:"mc"},
-  {id:24,text:"Employee handbook redesign",note:"Cover + interior page layout updated",cat:"internal",owner:"mm"},
-  {id:25,text:"New hire onboarding packet",note:"Welcome letter, org chart, benefits overview — all rebranded",cat:"internal",owner:"mm"},
-  {id:26,text:"Org chart template",note:"Updated design with new brand fonts and colors",cat:"internal",owner:"mc"},
-  {id:27,text:"Name badges & ID cards",note:"Front-desk and event badge designs",cat:"internal",owner:"mc"},
-  {id:28,text:"Internal newsletter template",note:"Monthly or quarterly firm update layout",cat:"internal",owner:"mc"},
-  {id:29,text:"Office signage & wayfinding",note:"Reception, conference rooms, exterior — updated to new brand",cat:"internal",owner:"mm"},
-  {id:30,text:"Virtual meeting backgrounds",note:"Zoom / Teams branded backdrop for all advisors",cat:"internal",owner:"mc"},
-  {id:31,text:"Staff profile photo guidelines",note:"Style direction for headshots used on website and LinkedIn",cat:"internal",owner:"mm"},
-  {id:32,text:"Internal brand training session",note:"Walk all staff through new guidelines before launch",cat:"internal",owner:"mm"},
+  {id:19,text:"LinkedIn profile banner / cover image",note:"Branded header for firm and advisor LinkedIn pages",cat:"social",owner:"mc"},
+  {id:20,text:"LinkedIn post templates",note:"Thought leadership, market updates, advisor spotlights",cat:"social",owner:"mc"},
+  {id:21,text:"LinkedIn company page graphics",note:"Logo, cover photo, and featured section images",cat:"social",owner:"mc"},
+  {id:22,text:"Instagram post templates",note:"Square and portrait formats — branded grid aesthetic",cat:"social",owner:"mc"},
+  {id:23,text:"Instagram story templates",note:"Vertical format — announcements, tips, team highlights",cat:"social",owner:"mc"},
+  {id:24,text:"Facebook cover photo",note:"Firm page header — 820x312px branded image",cat:"social",owner:"mc"},
+  {id:25,text:"Facebook post templates",note:"Consistent with Instagram and LinkedIn visual style",cat:"social",owner:"mc"},
+  {id:26,text:"Twitter / X header image",note:"1500x500px branded banner for firm account",cat:"social",owner:"mc"},
+  {id:27,text:"Social media profile photo / avatar",note:"Consistent logo mark across all platforms",cat:"social",owner:"mc"},
+  {id:28,text:"Branded video intro & outro",note:"Short animation for Reels, YouTube Shorts, webinar clips",cat:"social",owner:"mc"},
+  {id:29,text:"YouTube channel art",note:"Channel banner + thumbnail template",cat:"social",owner:"mc"},
+  {id:30,text:"Social media style guide",note:"Tone, caption format, hashtag strategy, posting cadence",cat:"social",owner:"mc"},
 ];
 
-const CAT_LABELS={foundation:'Brand Identity Foundation',print:'Print & Physical',internal:'Internal & Employee-Facing'};
-const CAT_BADGE={foundation:'badge-foundation',print:'badge-print',internal:'badge-internal'};
+const CAT_LABELS={foundation:'Brand Identity Foundation',print:'Print & Physical',social:'Social Media Graphics'};
+const CAT_BADGE={foundation:'badge-foundation',print:'badge-print',social:'badge-social'};
 
 const STORAGE_KEY='pvi_rebrand_tracker_v1';
 let state={};
@@ -194,7 +192,7 @@ function filteredTasks(){
     if(activeFilter==='done') return state[t.id].done;
     if(activeFilter==='foundation') return t.cat==='foundation';
     if(activeFilter==='print') return t.cat==='print';
-    if(activeFilter==='internal') return t.cat==='internal';
+    if(activeFilter==='social') return t.cat==='social';
     if(activeFilter==='mc') return t.owner==='mc'&&!state[t.id].done;
     return true;
   });
@@ -235,7 +233,7 @@ function render(){
     const groups={foundation:[],print:[],internal:[]};
     tasks.forEach(t=>groups[t.cat].push(t));
     let html='';
-    ['foundation','print','internal'].forEach(cat=>{
+    ['foundation','print','social'].forEach(cat=>{
       const g=groups[cat];if(!g.length)return;
       html+=`<div class="section-label">${CAT_LABELS[cat]}</div>`;
       html+=g.map(t=>cardHtml(t)).join('');
