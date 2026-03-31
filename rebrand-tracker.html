@@ -92,7 +92,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--light-bg);min-height:1
     <div>
       <div class="logo-mark">Pine Valley Investments</div>
       <div class="hdr-title">Rebrand <em>Tracker</em></div>
-      <div class="hdr-sub">Mike Modica &amp; Mike Carter &nbsp;·&nbsp; Full company rebrand</div>
+      <div class="hdr-sub">Mike Carter &nbsp;·&nbsp; Full company rebrand</div>
     </div>
     <div class="prog-block">
       <div class="prog-num" id="prog-num">0/32</div>
@@ -112,7 +112,6 @@ body{font-family:'Montserrat',sans-serif;background:var(--light-bg);min-height:1
     <div class="ftab" onclick="setFilter(this,'print')">Print &amp; Physical</div>
     <div class="ftab" onclick="setFilter(this,'internal')">Internal</div>
     <div class="ftab-sep"></div>
-    <div class="ftab" onclick="setFilter(this,'mm')">Mike Modica</div>
     <div class="ftab" onclick="setFilter(this,'mc')">Mike Carter</div>
     <button class="reset-btn" onclick="resetAll()">Reset All</button>
   </div>
@@ -124,10 +123,6 @@ body{font-family:'Montserrat',sans-serif;background:var(--light-bg);min-height:1
   <div class="modal">
     <div class="modal-title">Mark as <em>Complete</em></div>
     <div class="modal-sub">Who's completing this item?</div>
-    <button class="owner-btn" onclick="completedBy('Mike Modica')">
-      <div class="owner-av">MM</div>
-      <div><div class="owner-name">Mike Modica</div><div class="owner-role">Project Lead</div></div>
-    </button>
     <button class="owner-btn" onclick="completedBy('Mike Carter')">
       <div class="owner-av">MC</div>
       <div><div class="owner-name">Mike Carter</div><div class="owner-role">Marketing Director</div></div>
@@ -200,7 +195,6 @@ function filteredTasks(){
     if(activeFilter==='foundation') return t.cat==='foundation';
     if(activeFilter==='print') return t.cat==='print';
     if(activeFilter==='internal') return t.cat==='internal';
-    if(activeFilter==='mm') return t.owner==='mm'&&!state[t.id].done;
     if(activeFilter==='mc') return t.owner==='mc'&&!state[t.id].done;
     return true;
   });
@@ -215,7 +209,6 @@ function updateProgress(){
 
 function cardHtml(t){
   const s=state[t.id];
-  const owner=t.owner==='mm'?'Mike Modica':'Mike Carter';
   const doneBy=s.done&&s.by?`<div class="done-by-line">Completed by ${s.by}</div>`:'';
   return `<div class="task-card${s.done?' is-done':''}" onclick="handleClick(${t.id})">
     <div class="tc-top">
@@ -225,7 +218,6 @@ function cardHtml(t){
         <div class="tc-note">${t.note}</div>
         <div class="tc-meta">
           <span class="badge ${CAT_BADGE[t.cat]}">${CAT_LABELS[t.cat]}</span>
-          <span class="badge badge-owner">${owner}</span>
         </div>
         ${doneBy}
       </div>
