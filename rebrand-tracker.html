@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rebrand Tracker — Pine Valley Investments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#03213d;--gold:#c9a96e;--blue:#294d6b;--cream:#f0e6d3;--light-bg:#f5f5f3;}
+body{font-family:'Montserrat',sans-serif;background:var(--light-bg);min-height:100vh;color:#1a1a1a;}
+
+/* HEADER */
+.hdr{background:var(--navy);padding:28px 32px 20px;position:sticky;top:0;z-index:50;}
+.hdr-inner{max-width:860px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+.logo-mark{font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:600;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;}
+.hdr-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:white;line-height:1.1;}
+.hdr-title em{color:var(--gold);font-style:italic;}
+.hdr-sub{font-size:11px;color:rgba(255,255,255,0.45);margin-top:6px;letter-spacing:0.04em;}
+.prog-block{background:rgba(255,255,255,0.07);border-radius:10px;padding:14px 18px;min-width:140px;text-align:right;flex-shrink:0;}
+.prog-num{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--gold);line-height:1;}
+.prog-label{font-size:10px;color:rgba(255,255,255,0.45);margin-top:3px;text-transform:uppercase;letter-spacing:0.07em;}
+.prog-bar-o{height:3px;background:rgba(255,255,255,0.15);border-radius:2px;margin-top:10px;}
+.prog-bar-i{height:100%;background:var(--gold);border-radius:2px;transition:width .35s ease;}
+
+/* FILTERS */
+.filters-wrap{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);position:sticky;top:102px;z-index:49;}
+.filters{max-width:860px;margin:0 auto;padding:0 32px;display:flex;gap:2px;align-items:center;overflow-x:auto;scrollbar-width:none;}
+.filters::-webkit-scrollbar{display:none;}
+.ftab{font-size:11px;font-weight:500;padding:11px 13px;color:rgba(255,255,255,0.4);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;flex-shrink:0;user-select:none;}
+.ftab:hover{color:rgba(255,255,255,0.7);}
+.ftab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.ftab-sep{width:1px;height:16px;background:rgba(255,255,255,0.12);flex-shrink:0;margin:0 6px;}
+.reset-btn{margin-left:auto;font-size:11px;font-family:'Montserrat',sans-serif;color:rgba(255,255,255,0.3);background:none;border:0.5px solid rgba(255,255,255,0.15);border-radius:6px;padding:6px 12px;cursor:pointer;flex-shrink:0;transition:all .15s;}
+.reset-btn:hover{color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.3);}
+
+/* BODY */
+.body{max-width:860px;margin:0 auto;padding:24px 32px 60px;}
+.section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#888;padding:16px 0 10px;}
+.section-label:first-child{padding-top:0;}
+.empty{text-align:center;padding:60px 20px;font-size:13px;color:#999;}
+
+/* TASK CARDS */
+.task-card{background:white;border:0.5px solid #e0e0de;border-radius:10px;padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:border-color .15s,opacity .2s;}
+.task-card:hover{border-color:#ccc;}
+.task-card.is-done{opacity:.45;}
+.tc-top{display:flex;align-items:flex-start;gap:12px;}
+.tc-cb{width:19px;height:19px;border-radius:5px;border:1.5px solid #d0d0ce;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.tc-cb.done{background:var(--gold);border-color:var(--gold);}
+.tc-cb.done::after{content:'';width:4px;height:8px;border:1.5px solid white;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px);display:block;}
+.tc-main{flex:1;}
+.tc-text{font-size:13px;color:#1a1a1a;line-height:1.45;font-weight:500;}
+.tc-text.done{text-decoration:line-through;color:#aaa;}
+.tc-note{font-size:11px;color:#888;margin-top:3px;line-height:1.45;}
+.tc-meta{display:flex;align-items:center;gap:6px;margin-top:9px;flex-wrap:wrap;}
+.badge{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap;font-family:'Montserrat',sans-serif;}
+.badge-foundation{background:#e8f0fe;color:#1a56a0;border:0.5px solid #b3cef5;}
+.badge-print{background:#fff3e0;color:#8a5010;border:0.5px solid #f0c878;}
+.badge-internal{background:#edf7ed;color:#2a6b2a;border:0.5px solid #a0d8a0;}
+.badge-owner{background:#f5f5f3;color:#666;border:0.5px solid #e0e0de;}
+.done-by-line{font-size:11px;color:#aaa;margin-top:6px;font-style:italic;}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(3,33,61,0.6);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
+.modal-bg.hidden{display:none;}
+.modal{background:white;border-radius:14px;padding:28px;max-width:340px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#1a1a1a;margin-bottom:4px;}
+.modal-title em{color:var(--gold);font-style:italic;}
+.modal-sub{font-size:12px;color:#888;margin-bottom:20px;}
+.owner-btn{display:flex;align-items:center;gap:14px;width:100%;padding:13px 16px;border:0.5px solid #e0e0de;border-radius:10px;background:white;cursor:pointer;margin-bottom:10px;transition:border-color .15s;font-family:'Montserrat',sans-serif;text-align:left;}
+.owner-btn:hover{border-color:var(--gold);}
+.owner-av{width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Montserrat',sans-serif;}
+.owner-name{font-size:13px;font-weight:600;color:#1a1a1a;}
+.owner-role{font-size:11px;color:#888;margin-top:1px;}
+.modal-cancel{display:block;width:100%;padding:10px;border:none;background:none;font-size:12px;color:#aaa;cursor:pointer;font-family:'Montserrat',sans-serif;margin-top:2px;}
+.modal-cancel:hover{color:#555;}
+
+@media(max-width:600px){
+  .hdr{padding:20px 16px 16px;}
+  .hdr-title{font-size:24px;}
+  .filters{padding:0 16px;}
+  .body{padding:16px 16px 60px;}
+  .prog-block{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-inner">
+    <div>
+      <div class="logo-mark">Pine Valley Investments</div>
+      <div class="hdr-title">Rebrand <em>Tracker</em></div>
+      <div class="hdr-sub">Mike Modica &amp; Mike Carter &nbsp;·&nbsp; Full company rebrand</div>
+    </div>
+    <div class="prog-block">
+      <div class="prog-num" id="prog-num">0/32</div>
+      <div class="prog-label">completed</div>
+      <div class="prog-bar-o"><div class="prog-bar-i" id="prog-bar" style="width:0%"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="filters-wrap">
+  <div class="filters">
+    <div class="ftab active" onclick="setFilter(this,'all')">All</div>
+    <div class="ftab" onclick="setFilter(this,'todo')">To Do</div>
+    <div class="ftab" onclick="setFilter(this,'done')">Completed</div>
+    <div class="ftab-sep"></div>
+    <div class="ftab" onclick="setFilter(this,'foundation')">Brand Foundation</div>
+    <div class="ftab" onclick="setFilter(this,'print')">Print &amp; Physical</div>
+    <div class="ftab" onclick="setFilter(this,'internal')">Internal</div>
+    <div class="ftab-sep"></div>
+    <div class="ftab" onclick="setFilter(this,'mm')">Mike Modica</div>
+    <div class="ftab" onclick="setFilter(this,'mc')">Mike Carter</div>
+    <button class="reset-btn" onclick="resetAll()">Reset All</button>
+  </div>
+</div>
+
+<div class="body" id="task-body"></div>
+
+<div class="modal-bg hidden" id="modal-bg">
+  <div class="modal">
+    <div class="modal-title">Mark as <em>Complete</em></div>
+    <div class="modal-sub">Who's completing this item?</div>
+    <button class="owner-btn" onclick="completedBy('Mike Modica')">
+      <div class="owner-av">MM</div>
+      <div><div class="owner-name">Mike Modica</div><div class="owner-role">Project Lead</div></div>
+    </button>
+    <button class="owner-btn" onclick="completedBy('Mike Carter')">
+      <div class="owner-av">MC</div>
+      <div><div class="owner-name">Mike Carter</div><div class="owner-role">Marketing Director</div></div>
+    </button>
+    <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+const TASKS=[
+  {id:1,text:"Finalize new logo files",note:"SVG, PNG, EPS, PDF — horizontal, stacked, and icon-only lockups",cat:"foundation",owner:"mm"},
+  {id:2,text:"Document color palette",note:"Include hex, RGB, CMYK, and Pantone equivalents",cat:"foundation",owner:"mm"},
+  {id:3,text:"Acquire / confirm typography licenses",note:"Cormorant Garamond + Montserrat or any replacements",cat:"foundation",owner:"mm"},
+  {id:4,text:"Write logo usage guidelines",note:"Clear space, minimum size, approved backgrounds, misuse examples",cat:"foundation",owner:"mm"},
+  {id:5,text:"Establish photography & imagery style",note:"Mood board approved by leadership",cat:"foundation",owner:"mm"},
+  {id:6,text:"Build icon & graphic element library",note:"Dividers, decorative elements, section markers",cat:"foundation",owner:"mc"},
+  {id:7,text:"Produce final brand style guide PDF",note:"Distribute to all designers, vendors, and staff",cat:"foundation",owner:"mc"},
+  {id:8,text:"Business cards",note:"All 40 advisors + leadership — verify titles, emails, phone numbers",cat:"print",owner:"mm"},
+  {id:9,text:"Firm letterhead",note:"Digital + print-ready versions; advisor and firm variants",cat:"print",owner:"mc"},
+  {id:10,text:"Branded envelopes",note:"Standard #10 and 9×12 catalog sizes",cat:"print",owner:"mc"},
+  {id:11,text:"Presentation / pitch folders",note:"Pocket folders for client meetings",cat:"print",owner:"mc"},
+  {id:12,text:"Branded notepads & padfolio",note:"For advisor client meetings",cat:"print",owner:"mc"},
+  {id:13,text:"Service overview brochure",note:"Trifold or booklet covering core offerings",cat:"print",owner:"mc"},
+  {id:14,text:"Advisor one-pagers / bio sheets",note:"Print version of bio pages for prospecting",cat:"print",owner:"mc"},
+  {id:15,text:"Investment fact sheets",note:"Templates for individual strategy / portfolio summaries",cat:"print",owner:"mc"},
+  {id:16,text:"Event signage & banners",note:"Step-and-repeat, retractable banners, table runners",cat:"print",owner:"mm"},
+  {id:17,text:"Conference / trade show booth materials",note:"Booth backdrop, display panels, handouts",cat:"print",owner:"mm"},
+  {id:18,text:"Promotional items (swag)",note:"Pens, portfolios, apparel — vendor to be selected",cat:"print",owner:"mm"},
+  {id:19,text:"Client gift packaging",note:"Holiday card, gift box, tissue, ribbon with updated branding",cat:"print",owner:"mm"},
+  {id:20,text:"Mailing labels & return address",note:"For physical mail and packages",cat:"print",owner:"mc"},
+  {id:21,text:"Email signature template",note:"Standardized for all 40+ staff — deployed firm-wide",cat:"internal",owner:"mc"},
+  {id:22,text:"PowerPoint / Keynote master template",note:"Cover, content, divider, and closing slide layouts",cat:"internal",owner:"mc"},
+  {id:23,text:"Word document templates",note:"Memo, letter, report, proposal — pre-styled headers & footers",cat:"internal",owner:"mc"},
+  {id:24,text:"Employee handbook redesign",note:"Cover + interior page layout updated",cat:"internal",owner:"mm"},
+  {id:25,text:"New hire onboarding packet",note:"Welcome letter, org chart, benefits overview — all rebranded",cat:"internal",owner:"mm"},
+  {id:26,text:"Org chart template",note:"Updated design with new brand fonts and colors",cat:"internal",owner:"mc"},
+  {id:27,text:"Name badges & ID cards",note:"Front-desk and event badge designs",cat:"internal",owner:"mc"},
+  {id:28,text:"Internal newsletter template",note:"Monthly or quarterly firm update layout",cat:"internal",owner:"mc"},
+  {id:29,text:"Office signage & wayfinding",note:"Reception, conference rooms, exterior — updated to new brand",cat:"internal",owner:"mm"},
+  {id:30,text:"Virtual meeting backgrounds",note:"Zoom / Teams branded backdrop for all advisors",cat:"internal",owner:"mc"},
+  {id:31,text:"Staff profile photo guidelines",note:"Style direction for headshots used on website and LinkedIn",cat:"internal",owner:"mm"},
+  {id:32,text:"Internal brand training session",note:"Walk all staff through new guidelines before launch",cat:"internal",owner:"mm"},
+];
+
+const CAT_LABELS={foundation:'Brand Identity Foundation',print:'Print & Physical',internal:'Internal & Employee-Facing'};
+const CAT_BADGE={foundation:'badge-foundation',print:'badge-print',internal:'badge-internal'};
+
+const STORAGE_KEY='pvi_rebrand_tracker_v1';
+let state={};
+let activeFilter='all';
+let pendingId=null;
+
+function loadState(){
+  try{const s=localStorage.getItem(STORAGE_KEY);if(s)state=JSON.parse(s);}catch(e){}
+  TASKS.forEach(t=>{if(!state[t.id])state[t.id]={done:false,by:null};});
+}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
+
+function setFilter(el,f){
+  activeFilter=f;
+  document.querySelectorAll('.ftab').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+
+function filteredTasks(){
+  return TASKS.filter(t=>{
+    if(activeFilter==='todo') return !state[t.id].done;
+    if(activeFilter==='done') return state[t.id].done;
+    if(activeFilter==='foundation') return t.cat==='foundation';
+    if(activeFilter==='print') return t.cat==='print';
+    if(activeFilter==='internal') return t.cat==='internal';
+    if(activeFilter==='mm') return t.owner==='mm'&&!state[t.id].done;
+    if(activeFilter==='mc') return t.owner==='mc'&&!state[t.id].done;
+    return true;
+  });
+}
+
+function updateProgress(){
+  const total=TASKS.length,done=TASKS.filter(t=>state[t.id].done).length;
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById('prog-num').textContent=done+'/'+total;
+  document.getElementById('prog-bar').style.width=pct+'%';
+}
+
+function cardHtml(t){
+  const s=state[t.id];
+  const owner=t.owner==='mm'?'Mike Modica':'Mike Carter';
+  const doneBy=s.done&&s.by?`<div class="done-by-line">Completed by ${s.by}</div>`:'';
+  return `<div class="task-card${s.done?' is-done':''}" onclick="handleClick(${t.id})">
+    <div class="tc-top">
+      <div class="tc-cb${s.done?' done':''}"></div>
+      <div class="tc-main">
+        <div class="tc-text${s.done?' done':''}">${t.text}</div>
+        <div class="tc-note">${t.note}</div>
+        <div class="tc-meta">
+          <span class="badge ${CAT_BADGE[t.cat]}">${CAT_LABELS[t.cat]}</span>
+          <span class="badge badge-owner">${owner}</span>
+        </div>
+        ${doneBy}
+      </div>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const tasks=filteredTasks();
+  const body=document.getElementById('task-body');
+  updateProgress();
+  if(!tasks.length){body.innerHTML='<div class="empty">No tasks here.</div>';return;}
+  const showSections=['all','todo','done'].includes(activeFilter);
+  if(showSections){
+    const groups={foundation:[],print:[],internal:[]};
+    tasks.forEach(t=>groups[t.cat].push(t));
+    let html='';
+    ['foundation','print','internal'].forEach(cat=>{
+      const g=groups[cat];if(!g.length)return;
+      html+=`<div class="section-label">${CAT_LABELS[cat]}</div>`;
+      html+=g.map(t=>cardHtml(t)).join('');
+    });
+    body.innerHTML=html;
+  } else {
+    body.innerHTML=tasks.map(t=>cardHtml(t)).join('');
+  }
+}
+
+function handleClick(id){
+  if(state[id].done){state[id]={done:false,by:null};saveState();render();return;}
+  pendingId=id;
+  document.getElementById('modal-bg').classList.remove('hidden');
+}
+
+function completedBy(name){
+  if(pendingId!==null){state[pendingId]={done:true,by:name};pendingId=null;}
+  saveState();closeModal();render();
+}
+
+function closeModal(){document.getElementById('modal-bg').classList.add('hidden');}
+
+function resetAll(){
+  if(!confirm('Reset all items?'))return;
+  TASKS.forEach(t=>state[t.id]={done:false,by:null});
+  saveState();render();
+}
+
+document.getElementById('modal-bg').addEventListener('click',function(e){
+  if(e.target===this)closeModal();
+});
+
+loadState();render();
+</script>
+</body>
+</html>
