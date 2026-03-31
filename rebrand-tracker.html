@@ -230,8 +230,8 @@ function render(){
   if(!tasks.length){body.innerHTML='<div class="empty">No tasks here.</div>';return;}
   const showSections=['all','todo','done'].includes(activeFilter);
   if(showSections){
-    const groups={foundation:[],print:[],internal:[]};
-    tasks.forEach(t=>groups[t.cat].push(t));
+    const groups={foundation:[],print:[],social:[]};
+    tasks.forEach(t=>{ if(groups[t.cat]) groups[t.cat].push(t); });
     let html='';
     ['foundation','print','social'].forEach(cat=>{
       const g=groups[cat];if(!g.length)return;
