@@ -187,7 +187,7 @@
         <p>Thank you — Isaac will be in touch shortly.</p>
       </div>
       <form id="contactForm" action="https://formspree.io/f/mjgavepv" method="POST" onsubmit="handleSubmit(event)">
-        <input type="hidden" name="_next" value="https://pinevalleyinvestments.com/thank-you.html" />
+        <input type="hidden" name="_next" value="https://pvi-website.vercel.app/thank-you.html" />
         <input type="hidden" name="_subject" value="[PVI Contact] Isaac Jones" />
         <input type="hidden" name="advisor" value="Isaac Jones" />
         <div class="form-row">
@@ -245,7 +245,7 @@
       </div>
 </footer>
 
-<script>const nav = document.getElementById('nav'); window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40)); const toggle = document.getElementById('navToggle'); const menu = document.getElementById('mobileMenu'); toggle.addEventListener('click', () => { toggle.classList.toggle('open'); menu.classList.toggle('open'); }); async function handleSubmit(e) { e.preventDefault(); const form = e.target; const data = new FormData(form); try { const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } }); if (res.ok) { form.style.display = 'none'; document.getElementById('formSuccess').style.display = 'block'; } } catch(err) { form.submit(); } }</script>
+<script>const nav = document.getElementById('nav'); window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40)); const toggle = document.getElementById('navToggle'); const menu = document.getElementById('mobileMenu'); toggle.addEventListener('click', () => { toggle.classList.toggle('open'); menu.classList.toggle('open'); }); async function handleSubmit(e) { e.preventDefault(); const form = e.target; const data = new FormData(form); try { const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } }); if (res.ok) { window.location.href = '../thank-you.html'; } } catch(err) { form.submit(); } }</script>
 
 <!-- Cookie Consent Banner -->
 <div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(3,33,61,0.97);border-top:1px solid rgba(201,169,110,0.25);backdrop-filter:blur(12px);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
