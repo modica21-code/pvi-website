@@ -1,8 +1,16 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_vercel/
 
-# Explicitly allow AI crawlers
+# Explicitly allow all AI crawlers
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: ClaudeBot
@@ -11,12 +19,16 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
 User-agent: GoogleOther
 Allow: /
 
-Sitemap: https://pinevalleyinvestments.com/sitemap.xml
+User-agent: Applebot-Extended
+Allow: /
 
-# Block any staging or test paths
-Disallow: /test/
-Disallow: /staging/
-Disallow: /draft/
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://pinevalleyinvestments.com/sitemap.xml

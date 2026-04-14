@@ -2,7 +2,37 @@
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" }
   ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "pvi-website.vercel.app" }],
+      "destination": "https://pinevalleyinvestments.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.pinevalleyinvestments.com" }],
+      "destination": "https://pinevalleyinvestments.com/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "pvi-website.vercel.app" }],
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+      ]
+    },
     {
       "source": "/Headshots/(.*)",
       "headers": [
