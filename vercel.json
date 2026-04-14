@@ -5,12 +5,6 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "pvi-website.vercel.app" }],
-      "destination": "https://pinevalleyinvestments.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
       "has": [{ "type": "host", "value": "www.pinevalleyinvestments.com" }],
       "destination": "https://pinevalleyinvestments.com/:path*",
       "permanent": true
