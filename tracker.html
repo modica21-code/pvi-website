@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PVI Site Maintenance Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #03213d;
+      --navy-light: #062d52;
+      --gold: #c9a96e;
+      --gold-light: #dfc28e;
+      --blue: #294d6b;
+      --blue-light: #3a6689;
+      --cream: #f0e6d3;
+      --white: #ffffff;
+      --gray: #babab9;
+      --light-bg: #f5f5f3;
+      --red: #c0392b;
+      --yellow: #e67e22;
+      --green: #27ae60;
+      --border: rgba(201,169,110,0.2);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--light-bg);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: var(--white);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+    }
+
+    .logo-sub {
+      font-size: 9px;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .last-saved {
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    .btn-reset {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid rgba(201,169,110,0.4);
+      color: var(--gold);
+      padding: 6px 14px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-reset:hover {
+      background: rgba(201,169,110,0.1);
+    }
+
+    /* ── HERO BAR ── */
+    .hero-bar {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      padding: 36px 40px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .hero-title span { color: var(--gold); font-style: italic; }
+
+    .hero-sub {
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    /* Progress summary */
+    .progress-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .progress-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .progress-card .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .progress-card .label {
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .progress-bar-wrap {
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px;
+      height: 4px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 70px - 160px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--navy);
+      padding: 28px 20px;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 70px;
+      align-self: start;
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+    }
+
+    .sidebar-heading {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 9px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 3px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray);
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(201,169,110,0.12);
+      color: var(--gold);
+    }
+
+    .filter-btn .count {
+      font-size: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 1px 7px;
+    }
+
+    .filter-btn.active .count {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 16px 0;
+    }
+
+    .priority-legend { margin-top: 4px; }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      padding: 32px 40px;
+    }
+
+    .section-block {
+      margin-bottom: 36px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--navy);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .section-progress {
+      margin-left: auto;
+      font-size: 10px;
+      color: var(--gray);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── TASK CARD ── */
+    .task-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-left: 3px solid transparent;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .task-card:hover {
+      box-shadow: 0 2px 12px rgba(3,33,61,0.08);
+      transform: translateX(2px);
+    }
+
+    .task-card.done {
+      opacity: 0.5;
+      background: var(--light-bg);
+    }
+
+    .task-card.done .task-title {
+      text-decoration: line-through;
+      color: var(--gray);
+    }
+
+    .task-card[data-priority="critical"] { border-left-color: var(--red); }
+    .task-card[data-priority="high"]     { border-left-color: var(--yellow); }
+    .task-card[data-priority="medium"]   { border-left-color: var(--green); }
+
+    .task-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .task-card.done .task-checkbox {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .task-checkbox::after {
+      content: '✓';
+      font-size: 12px;
+      color: var(--white);
+      display: none;
+      font-weight: 700;
+    }
+
+    .task-card.done .task-checkbox::after { display: block; }
+
+    .task-body { flex: 1; }
+
+    .task-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 3px;
+      flex-wrap: wrap;
+    }
+
+    .task-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .badge {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .badge-critical { background: rgba(192,57,43,0.12); color: var(--red); }
+    .badge-high     { background: rgba(230,126,34,0.12); color: var(--yellow); }
+    .badge-medium   { background: rgba(39,174,96,0.12);  color: var(--green); }
+
+    .badge-owner {
+      background: rgba(41,77,107,0.1);
+      color: var(--blue);
+      font-size: 9px;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .task-notes {
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    /* ── HIDDEN ── */
+    .hidden { display: none !important; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer span {
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .page-body { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; }
+      .progress-grid { grid-template-columns: repeat(2, 1fr); }
+      header, .hero-bar, .main, footer { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <div class="logo-mark">PV</div>
+    <div class="logo-text">
+      <span class="logo-title">Pine Valley Investments</span>
+      <span class="logo-sub">Website Maintenance Tracker</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="last-saved" id="lastSaved">Never saved</span>
+    <button class="btn-reset" onclick="resetAll()">Reset All</button>
+  </div>
+</header>
+
+<!-- HERO BAR -->
+<div class="hero-bar">
+  <h1 class="hero-title">Site <span>Maintenance</span> Dashboard</h1>
+  <p class="hero-sub">pinevalleyinvestments.com &nbsp;·&nbsp; Vercel + GitHub Pages</p>
+
+  <div class="progress-grid">
+    <div class="progress-card">
+      <div class="num" id="statTotal">0</div>
+      <div class="label">Total Tasks</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="barTotal" style="width:0%"></div></div>
+    </div>
+    <div class="progress-card">
+      <div class="num" id="statDone">0</div>
+      <div class="label">Completed</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="barDone" style="width:0%; background:#27ae60"></div></div>
+    </div>
+    <div class="progress-card">
+      <div class="num" id="statCritical">0</div>
+      <div class="label">Critical Open</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="barCritical" style="width:100%; background:#c0392b"></div></div>
+    </div>
+    <div class="progress-card">
+      <div class="num" id="statPct">0%</div>
+      <div class="label">Overall Progress</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="barPct" style="width:0%"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-heading">Filter by Category</div>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">
+      All Tasks <span class="count" id="cnt-all">0</span>
+    </button>
+    <button class="filter-btn" data-filter="prelaunch" onclick="setFilter('prelaunch', this)">
+      🔴 Pre-Launch <span class="count" id="cnt-prelaunch">0</span>
+    </button>
+    <button class="filter-btn" data-filter="recurring" onclick="setFilter('recurring', this)">
+      🗓️ Recurring <span class="count" id="cnt-recurring">0</span>
+    </button>
+    <button class="filter-btn" data-filter="personnel" onclick="setFilter('personnel', this)">
+      👥 Personnel <span class="count" id="cnt-personnel">0</span>
+    </button>
+    <button class="filter-btn" data-filter="forms" onclick="setFilter('forms', this)">
+      📬 Forms & Leads <span class="count" id="cnt-forms">0</span>
+    </button>
+    <button class="filter-btn" data-filter="compliance" onclick="setFilter('compliance', this)">
+      🔒 Compliance <span class="count" id="cnt-compliance">0</span>
+    </button>
+    <button class="filter-btn" data-filter="technical" onclick="setFilter('technical', this)">
+      🛠️ Technical <span class="count" id="cnt-technical">0</span>
+    </button>
+    <button class="filter-btn" data-filter="content" onclick="setFilter('content', this)">
+      ✏️ Content <span class="count" id="cnt-content">0</span>
+    </button>
+
+    <hr class="sidebar-divider" />
+
+    <div class="sidebar-heading">Priority Key</div>
+    <div class="priority-legend">
+      <div class="legend-item"><span style="color:#c0392b;font-size:14px">●</span> Critical — fix now</div>
+      <div class="legend-item"><span style="color:#e67e22;font-size:14px">●</span> High — fix soon</div>
+      <div class="legend-item"><span style="color:#27ae60;font-size:14px">●</span> Medium — can wait</div>
+    </div>
+
+    <hr class="sidebar-divider" />
+
+    <div class="sidebar-heading">Quick Links</div>
+    <a href="https://pvi-website.vercel.app" target="_blank" style="display:block;font-size:11px;color:var(--gold);margin-bottom:8px;text-decoration:none;">↗ Vercel Site</a>
+    <a href="https://modica21-code.github.io/pvi-website" target="_blank" style="display:block;font-size:11px;color:var(--gold);margin-bottom:8px;text-decoration:none;">↗ GitHub Pages</a>
+    <a href="https://github.com/modica21-code/pvi-website" target="_blank" style="display:block;font-size:11px;color:var(--gold);margin-bottom:8px;text-decoration:none;">↗ GitHub Repo</a>
+    <a href="https://formspree.io" target="_blank" style="display:block;font-size:11px;color:var(--gold);margin-bottom:8px;text-decoration:none;">↗ Formspree</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="main">
+    <!-- Sections rendered by JS -->
+  </main>
+
+</div>
+
+<footer>
+  <span>Pine Valley Investments &nbsp;·&nbsp; pinevalleyinvestments.com</span>
+  <a href="index.html">← Back to Site</a>
+</footer>
+
+<script>
+// ─── TASK DATA ───────────────────────────────────────────────────────────────
+const sections = [
+  {
+    id: 'prelaunch',
+    icon: '🔴',
+    title: 'Pre-Launch Blockers',
+    tasks: [
+      { id:'pl1', priority:'critical', owner:'Mike M. / IT', title:'Point pinevalleyinvestments.com DNS to Vercel', notes:'Switch from Wix — requires DNS record update at domain registrar.' },
+      { id:'pl2', priority:'critical', owner:'Dev / Mike M.', title:'Configure custom domain on Vercel project', notes:'Map vercel.app URL → pinevalleyinvestments.com in Vercel dashboard.' },
+      { id:'pl3', priority:'critical', owner:'Dev', title:'Verify HTTPS / SSL certificate on custom domain', notes:'Vercel handles automatically once domain is connected — just confirm it\'s active.' },
+      { id:'pl4', priority:'critical', owner:'Dev', title:'Wire up main Contact page form', notes:'Currently unclear if it submits anywhere. Must post to Formspree endpoint.' },
+      { id:'pl5', priority:'critical', owner:'Dev', title:'Wire up "Schedule a Consultation" CTA button', notes:'Most valuable CTA on the site — must be functional before launch.' },
+      { id:'pl6', priority:'critical', owner:'Legal / Mike M.', title:'Add Privacy Policy page', notes:'Required — covers form data and analytics cookies.' },
+      { id:'pl7', priority:'critical', owner:'Legal / Mike M.', title:'Add Terms of Use page', notes:'Standard requirement for financial advisory websites.' },
+      { id:'pl8', priority:'critical', owner:'Compliance', title:'Add ADV Part 2 / Disclosure link in footer', notes:'SEC requirement for registered investment advisor (RIA) websites.' },
+      { id:'pl9', priority:'critical', owner:'Compliance', title:'Add investment disclaimer to footer', notes:'"Past performance is not indicative of future results" — required language.' },
+      { id:'pl10', priority:'critical', owner:'Each Advisor', title:'Review all 40 bio pages for accuracy', notes:'Each advisor to confirm their name, title, and bio text are correct.' },
+      { id:'pl11', priority:'critical', owner:'Mike M.', title:'Confirm all headshots are final', notes:'4 advisors still using placeholder: mike-carter, mark-cole, danon-robinson, max-schatzow.' },
+      { id:'pl12', priority:'critical', owner:'Mike M.', title:'Fix $XXm placeholder in AUM timeline (2015)', notes:'Replace "$XXm" with "$30M" on both index.html and about.html.' },
+    ]
+  },
+  {
+    id: 'recurring',
+    icon: '🗓️',
+    title: 'Recurring Maintenance',
+    tasks: [
+      { id:'rec1', priority:'high', owner:'Mike C.', title:'Monthly: Review GA4 traffic & form submissions', notes:'Check sessions, top pages, form completions, and CTA clicks each month.' },
+      { id:'rec2', priority:'high', owner:'Mike C.', title:'Monthly: Check Google Search Console for errors', notes:'Review indexing status, crawl errors, and keyword rankings.' },
+      { id:'rec3', priority:'high', owner:'Mike C.', title:'Monthly: Confirm all 40 bio forms are working', notes:'Test 2–3 random bio page contact forms to verify Formspree delivery.' },
+      { id:'rec4', priority:'medium', owner:'Mike M.', title:'Quarterly: Run Google PageSpeed Insights', notes:'Target 90+ on mobile and desktop. Run from: pagespeed.web.dev.' },
+      { id:'rec5', priority:'medium', owner:'Mike M.', title:'As-needed: Update AUM figure across the site', notes:'Homepage hero and About timeline show current AUM — update as firm grows.' },
+      { id:'rec6', priority:'medium', owner:'Mike C.', title:'As-needed: Post to Company Announcements page', notes:'Page exists at announcements.html — populate with press releases, news, awards.' },
+      { id:'rec7', priority:'medium', owner:'Mike M.', title:'Set up UptimeRobot monitoring (free)', notes:'Get alerted instantly if site goes down. Free at uptimerobot.com.' },
+    ]
+  },
+  {
+    id: 'personnel',
+    icon: '👥',
+    title: 'Personnel Changes',
+    tasks: [
+      { id:'per1', priority:'high', owner:'Mike C. + Dev', title:'New advisor: generate bio page from template', notes:'Provide name, title, email, group, bio, and headshot. Claude generates bios/[slug].html and adds to team.html.' },
+      { id:'per2', priority:'high', owner:'Mike C. + Dev', title:'New advisor: add headshot to /Headshots/', notes:'Upload file as "first last.avif" (lowercase, space-separated). Exceptions noted in project docs.' },
+      { id:'per3', priority:'high', owner:'Mike C.', title:'Departed advisor: remove from team.html grid', notes:'Remove their advisor card from team.html. Decide if bio page stays (for SEO) or is redirected.' },
+      { id:'per4', priority:'medium', owner:'Mike C. + Dev', title:'Title/bio changes: update bio page and team card', notes:'Tell Claude what changed — they\'ll update bios/[slug].html and the team.html card.' },
+      { id:'per5', priority:'medium', owner:'Mike M.', title:'Compliance review of bios after any title change', notes:'Credential language and titles must be reviewed by compliance before publishing.' },
+    ]
+  },
+  {
+    id: 'forms',
+    icon: '📬',
+    title: 'Forms & Lead Management',
+    tasks: [
+      { id:'frm1', priority:'high', owner:'Mike M.', title:'Set up Outlook forwarding rules (8 priority advisors)', notes:'Route [PVI Contact] emails: Harry Morad, Joseph Duncan, Mike Modica, Chris O\'Neill, Nick Lampone, Jason Braatz, Jonathan Markoe, Kate Fay.' },
+      { id:'frm2', priority:'high', owner:'Mike M.', title:'Upgrade Formspree + connect HubSpot integration', notes:'Requires Formspree premium. Auto-creates HubSpot contacts from bio form submissions.' },
+      { id:'frm3', priority:'medium', owner:'Dev', title:'Add thank-you / confirmation page after form submit', notes:'Currently redirects to Formspree default page. Create a branded /thank-you.html.' },
+      { id:'frm4', priority:'medium', owner:'Mike M.', title:'Monthly: Review Formspree inbox for missed leads', notes:'Log in to formspree.io to ensure all submissions are being received and routed.' },
+      { id:'frm5', priority:'medium', owner:'Mike M.', title:'Verify HubSpot contacts are syncing correctly', notes:'Once integration is live, spot-check that form fills appear as HubSpot contacts.' },
+    ]
+  },
+  {
+    id: 'compliance',
+    icon: '🔒',
+    title: 'Compliance & Legal',
+    tasks: [
+      { id:'cmp1', priority:'critical', owner:'Compliance', title:'Annual: Review all bio pages for compliance language', notes:'Check titles, credentials, and performance claims against current SEC/FINRA standards.' },
+      { id:'cmp2', priority:'high', owner:'Compliance', title:'Update ADV Part 2 link when firm files updated ADV', notes:'Typically filed annually. Ensure footer link always points to the current filing.' },
+      { id:'cmp3', priority:'medium', owner:'Compliance', title:'Add CRD numbers to advisor bios (where applicable)', notes:'Links to FINRA BrokerCheck for transparency. Compliance to supply list of CRD numbers.' },
+      { id:'cmp4', priority:'high', owner:'Dev', title:'Add cookie consent banner', notes:'Required for GDPR compliance. Simple banner with accept/decline is sufficient.' },
+      { id:'cmp5', priority:'medium', owner:'Mike M. / Legal', title:'Annual: Review Privacy Policy for accuracy', notes:'Ensure it reflects all data collected (GA4, Formspree, HubSpot, any new tools).' },
+    ]
+  },
+  {
+    id: 'technical',
+    icon: '🛠️',
+    title: 'Technical & Performance',
+    tasks: [
+      { id:'tch1', priority:'high', owner:'Dev', title:'Install Google Analytics 4 (GA4) on all 60 pages', notes:'Add GA4 tracking script to every root page and all 40 bio pages.' },
+      { id:'tch2', priority:'high', owner:'Dev', title:'Set up GA4 conversion events', notes:'Track: Contact form submits, Schedule Consultation clicks, Client Login clicks.' },
+      { id:'tch3', priority:'high', owner:'Mike M.', title:'Register Google Search Console + submit sitemap', notes:'Submit pinevalleyinvestments.com/sitemap.xml once DNS is live.' },
+      { id:'tch4', priority:'high', owner:'Mike M.', title:'Connect GA4 to Google Search Console', notes:'Combines SEO data (impressions, clicks) with behavior data (sessions, conversions).' },
+      { id:'tch5', priority:'high', owner:'Dev', title:'Add loading="lazy" to all images across all pages', notes:'Run a global Python script on all 60 HTML files to add this attribute to every img tag.' },
+      { id:'tch6', priority:'high', owner:'Dev', title:'Add alt text to all images (ADA + SEO)', notes:'Every headshot, logo, and service image needs descriptive alt text.' },
+      { id:'tch7', priority:'high', owner:'Dev', title:'Test all pages on mobile (iOS + Android)', notes:'Check nav, bio pages, and forms on small screens. Fix any layout breaks.' },
+      { id:'tch8', priority:'medium', owner:'Mike M.', title:'Create og-image.jpg (1200×630px)', notes:'PVI logo on navy background. Push to repo root as og-image.jpg for social link previews.' },
+      { id:'tch9', priority:'medium', owner:'Dev', title:'Add favicon + Apple touch icon', notes:'Currently may be missing or using placeholder. Add to repo root and reference in all pages.' },
+      { id:'tch10', priority:'medium', owner:'Dev', title:'Set up 301 redirects from old Wix URLs', notes:'Preserve any existing SEO equity from old Wix site. Map old slugs to new pages.' },
+      { id:'tch11', priority:'medium', owner:'Dev', title:'Test all 40 bio page headshots load correctly', notes:'Spot check on both Vercel and GitHub Pages. Check filenames match exactly.' },
+      { id:'tch12', priority:'medium', owner:'Dev', title:'Audit color contrast ratios (WCAG AA)', notes:'Gold (#c9a96e) on navy (#03213d) — verify meets 4.5:1 contrast ratio for body text.' },
+      { id:'tch13', priority:'medium', owner:'Dev', title:'Create llms.txt for AI crawlers', notes:'Helps ChatGPT, Claude, and Perplexity understand the site structure. Like robots.txt for AI.' },
+      { id:'tch14', priority:'medium', owner:'Dev', title:'Configure Vercel caching headers for static assets', notes:'Improves repeat visit performance for images, CSS, and fonts.' },
+    ]
+  },
+  {
+    id: 'content',
+    icon: '✏️',
+    title: 'Content & Brand',
+    tasks: [
+      { id:'cnt1', priority:'high', owner:'Mike M.', title:'Final proofread of all main pages', notes:'Home, About, Services, Team, Announcements — review copy for errors and consistency.' },
+      { id:'cnt2', priority:'high', owner:'Mike M.', title:'Replace $XXm placeholder on About timeline (2015)', notes:'Correct value is $30M (PVI founding AUM). Fix on both index.html and about.html.' },
+      { id:'cnt3', priority:'medium', owner:'Mike M.', title:'Add initial Company Announcements content', notes:'Page exists but is empty. Add first 1–3 posts (e.g., awards, milestones, team news).' },
+      { id:'cnt4', priority:'medium', owner:'Mike M.', title:'Confirm Client Login portal links are correct', notes:'Verify all 6 portal URLs: RightCapital, Monarch, Schwab, Altruist, eMoney, Tamarac.' },
+      { id:'cnt5', priority:'medium', owner:'Mike M.', title:'Register Google Business Profile for PVI', notes:'Shows PVI in Google Maps + local search results. Free — maps.google.com/business.' },
+    ]
+  },
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let done = JSON.parse(localStorage.getItem('pvi_tracker_done') || '{}');
+let currentFilter = 'all';
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+function render() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+
+  sections.forEach(section => {
+    const block = document.createElement('div');
+    block.className = 'section-block';
+    block.dataset.section = section.id;
+
+    const completedInSection = section.tasks.filter(t => done[t.id]).length;
+
+    block.innerHTML = `
+      <div class="section-header">
+        <div class="section-icon">${section.icon}</div>
+        <h2 class="section-title">${section.title}</h2>
+        <span class="section-progress">${completedInSection}/${section.tasks.length}</span>
+      </div>
+      ${section.tasks.map(task => `
+        <div class="task-card ${done[task.id] ? 'done' : ''}"
+             data-id="${task.id}"
+             data-priority="${task.priority}"
+             data-section="${section.id}"
+             onclick="toggle('${task.id}')">
+          <div class="task-checkbox"></div>
+          <div class="task-body">
+            <div class="task-top">
+              <span class="task-title">${task.title}</span>
+              <span class="badge badge-${task.priority}">${task.priority}</span>
+              <span class="badge-owner">${task.owner}</span>
+            </div>
+            <div class="task-notes">${task.notes}</div>
+          </div>
+        </div>
+      `).join('')}
+    `;
+
+    main.appendChild(block);
+  });
+
+  applyFilter();
+  updateStats();
+  updateCounts();
+}
+
+// ─── FILTER ──────────────────────────────────────────────────────────────────
+function applyFilter() {
+  document.querySelectorAll('.section-block').forEach(block => {
+    const show = currentFilter === 'all' || block.dataset.section === currentFilter;
+    block.classList.toggle('hidden', !show);
+  });
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilter();
+}
+
+// ─── TOGGLE ──────────────────────────────────────────────────────────────────
+function toggle(id) {
+  done[id] = !done[id];
+  localStorage.setItem('pvi_tracker_done', JSON.stringify(done));
+  updateLastSaved();
+
+  const card = document.querySelector(`.task-card[data-id="${id}"]`);
+  if (card) card.classList.toggle('done', done[id]);
+
+  updateStats();
+
+  // update section progress
+  const section = card.closest('.section-block');
+  if (section) {
+    const sid = section.dataset.section;
+    const sec = sections.find(s => s.id === sid);
+    const completed = sec.tasks.filter(t => done[t.id]).length;
+    section.querySelector('.section-progress').textContent = `${completed}/${sec.tasks.length}`;
+  }
+}
+
+// ─── STATS ───────────────────────────────────────────────────────────────────
+function updateStats() {
+  const allTasks = sections.flatMap(s => s.tasks);
+  const total = allTasks.length;
+  const doneCount = allTasks.filter(t => done[t.id]).length;
+  const criticalOpen = allTasks.filter(t => t.priority === 'critical' && !done[t.id]).length;
+  const pct = total ? Math.round((doneCount / total) * 100) : 0;
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statDone').textContent = doneCount;
+  document.getElementById('statCritical').textContent = criticalOpen;
+  document.getElementById('statPct').textContent = pct + '%';
+
+  document.getElementById('barDone').style.width = pct + '%';
+  document.getElementById('barPct').style.width = pct + '%';
+
+  const critPct = sections.flatMap(s=>s.tasks).filter(t=>t.priority==='critical').length;
+  const critDone = sections.flatMap(s=>s.tasks).filter(t=>t.priority==='critical'&&done[t.id]).length;
+  document.getElementById('barCritical').style.width = (critPct ? Math.round((critDone/critPct)*100) : 0) + '%';
+}
+
+function updateCounts() {
+  const allTasks = sections.flatMap(s => s.tasks);
+  document.getElementById('cnt-all').textContent = allTasks.length;
+  sections.forEach(s => {
+    const el = document.getElementById('cnt-' + s.id);
+    if (el) el.textContent = s.tasks.length;
+  });
+}
+
+// ─── LAST SAVED ──────────────────────────────────────────────────────────────
+function updateLastSaved() {
+  const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const saved = document.getElementById('lastSaved');
+  if (saved) saved.textContent = 'Saved ' + now;
+}
+
+// ─── RESET ───────────────────────────────────────────────────────────────────
+function resetAll() {
+  if (!confirm('Reset all task progress? This cannot be undone.')) return;
+  done = {};
+  localStorage.removeItem('pvi_tracker_done');
+  document.getElementById('lastSaved').textContent = 'Reset';
+  render();
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+const savedTime = localStorage.getItem('pvi_tracker_saved_at');
+if (savedTime) document.getElementById('lastSaved').textContent = 'Last saved ' + savedTime;
+
+render();
+
+// Save a timestamp on page load if data exists
+if (Object.keys(done).length) {
+  const ts = new Date().toLocaleDateString([], { month:'short', day:'numeric' });
+  localStorage.setItem('pvi_tracker_saved_at', ts);
+}
+</script>
+</body>
+</html>
